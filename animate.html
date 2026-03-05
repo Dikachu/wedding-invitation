@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IfeAjuru'26</title>
+    <link rel="icon" type="image/jpeg" href="assets/card.jpeg">
+    <link rel="apple-touch-icon" href="assets/card.jpeg">
+    <meta name="description"
+        content="Join us as we celebrate our traditional Igbo wedding ceremony on 8 April 2026 in Orba, Nsukka, Enugu State. A beautiful day of culture, love, and legacy.">
+    <meta name="theme-color" content="#3B1F1F">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="IfeAjuru'26">
+    <meta property="og:title" content="IfeAjuru'26">
+    <meta property="og:description"
+        content="Join us as we celebrate our traditional Igbo wedding ceremony on 8 April 2026 in Orba, Nsukka, Enugu State. A beautiful day of culture, love, and legacy.">
+    <meta property="og:image" content="assets/card.jpeg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="IfeAjuru'26">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IfeAjuru'26">
+    <meta name="twitter:description"
+        content="Join us as we celebrate our traditional Igbo wedding ceremony on 8 April 2026 in Orba, Nsukka, Enugu State. A beautiful day of culture, love, and legacy.">
+    <meta name="twitter:image" content="assets/card.jpeg">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: #FAF7F2;
+            overflow: hidden;
+        }
+
+        body.revealed {
+            overflow: auto;
+        }
+
+        /* Utility */
+        .gold-line {
+            background: linear-gradient(90deg, transparent, #C9A84C, transparent);
+            height: 1px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .font-sans-light {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Scroll-triggered fade-in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #FAF7F2;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #C9A84C;
+            border-radius: 3px;
+        }
+
+        /* ===== NAV ===== */
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: rgba(250, 247, 242, 0.85);
+            backdrop-filter: blur(12px);
+            transition: all 0.5s;
+        }
+
+        .nav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.25rem;
+            letter-spacing: 0.2em;
+            color: #5A3E2B;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-logo:hover {
+            color: #C9A84C;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #5A3E2B;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #C9A84C;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #5A3E2B;
+        }
+
+        @media (max-width: 1023px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        /* ===== HERO ===== */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #0A0806;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/hero.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(6, 4, 2, 0.72);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 0 24px;
+            max-width: 768px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-content .label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.55em;
+            text-transform: uppercase;
+            color: #C5A85C;
+            margin-bottom: 3.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-content .name {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 600;
+            font-size: clamp(4.5rem, 14vw, 12rem);
+            color: #F5F1E8;
+            letter-spacing: 0.02em;
+            line-height: 0.95;
+            margin-bottom: 0.15em;
+        }
+
+        .hero-content .na {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 300;
+            font-size: clamp(2.7rem, 8.5vw, 7.5rem);
+            color: #C5A85C;
+            font-style: italic;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.15em;
+        }
+
+        .hero-content .name-second {
+            margin-bottom: 3rem;
+        }
+
+        .hero-vertical-line {
+            width: 1px;
+            height: 48px;
+            background: linear-gradient(transparent, rgba(197, 168, 92, 0.5), transparent);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-content .together {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            letter-spacing: 0.45em;
+            text-transform: uppercase;
+            color: rgba(245, 241, 232, 0.6);
+            margin-bottom: 1.1rem;
+        }
+
+        .hero-content .request {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: rgba(245, 241, 232, 0.75);
+            letter-spacing: 0.03em;
+            margin-bottom: 3rem;
+        }
+
+        .hero-content .date {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+            color: #F5F1E8;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.3rem;
+        }
+
+        .hero-content .time {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #D9C9A3;
+            margin-bottom: 2rem;
+        }
+
+        .hero-content .venue-name {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(245, 241, 232, 0.7);
+            margin-bottom: 0.3rem;
+        }
+
+        .hero-content .venue-loc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(217, 201, 163, 0.55);
+            margin-bottom: 3.5rem;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: #C5A85C;
+            color: #1F2E26;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 16px 44px;
+            border-radius: 3px;
+            font-weight: 500;
+            transition: 0.35s;
+            margin-bottom: 5rem;
+        }
+
+        .hero-cta:hover {
+            background: #b8982e;
+        }
+
+        /* Countdown */
+        .countdown {
+            display: flex;
+            align-items: flex-end;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .countdown {
+                gap: 3.5rem;
+            }
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-item .num {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 300;
+            font-size: clamp(2rem, 6vw, 4rem);
+            color: #C5A85C;
+            line-height: 1;
+            min-width: 2ch;
+            text-align: center;
+        }
+
+        .countdown-item .unit {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 8px;
+            letter-spacing: 0.3em;
+            color: rgba(197, 168, 92, 0.45);
+            text-transform: uppercase;
+            margin-top: 6px;
+        }
+
+        /* ===== WELCOME ===== */
+        .welcome-section {
+            padding: 7rem 1.5rem;
+            background: linear-gradient(#FAF7F2, #F5EFE4);
+        }
+
+        .welcome-inner {
+            max-width: 768px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #C9A84C;
+            margin-bottom: 1.5rem;
+        }
+
+        .welcome-taglines p {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 300;
+            font-style: italic;
+            color: #3B1F1F;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.25rem;
+        }
+
+        .welcome-taglines p.green {
+            color: #6B7A3E;
+        }
+
+        .welcome-body p {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: clamp(1.25rem, 3vw, 1.65rem);
+            line-height: 1.9;
+            color: #5A3E2B;
+            margin-bottom: 1.5rem;
+        }
+
+        .welcome-body p.italic {
+            font-style: italic;
+            color: #7A6652;
+            font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+            line-height: 2;
+        }
+
+        .welcome-closing {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 400;
+            font-style: italic;
+            font-size: clamp(1.3rem, 3vw, 1.85rem);
+            color: #6B7A3E;
+            letter-spacing: 0.03em;
+        }
+
+        .ornament-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 2rem 0;
+        }
+
+        .ornament-divider .line {
+            height: 1px;
+            width: 64px;
+            background: linear-gradient(90deg, transparent, #C9A84C);
+        }
+
+        .ornament-divider .line.rev {
+            background: linear-gradient(90deg, #C9A84C, transparent);
+        }
+
+        .ornament-divider .star {
+            color: #C9A84C;
+            font-size: 22px;
+        }
+
+        /* ===== OUR STORY ===== */
+        .story-section {
+            padding: 7rem 1.5rem;
+            background: #3B1F1F;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A84C' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .story-inner {
+            max-width: 768px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .story-heading {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 300;
+            color: #F5EFE4;
+            letter-spacing: 0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+            line-height: 2;
+            color: #C5B09A;
+            margin-bottom: 2rem;
+        }
+
+        .story-text.lead {
+            font-style: italic;
+            color: #F5EFE4;
+            font-size: clamp(1.3rem, 3vw, 1.75rem);
+            line-height: 1.9;
+        }
+
+        .story-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .story-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .story-card {
+            padding: 2rem;
+            border-radius: 2px;
+        }
+
+        .story-card.gold {
+            background: rgba(201, 168, 76, 0.08);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+        }
+
+        .story-card.green {
+            background: rgba(107, 122, 62, 0.12);
+            border: 1px solid rgba(107, 122, 62, 0.3);
+        }
+
+        .story-card .card-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #C9A84C;
+            margin-bottom: 1rem;
+        }
+
+        .story-card .card-text {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            line-height: 1.85;
+            color: #F5EFE4;
+        }
+
+        .story-date-block {
+            padding-top: 1.5rem;
+        }
+
+        .story-date-block .big-date {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: #C9A84C;
+            letter-spacing: 0.05em;
+        }
+
+        .story-date-block .sub {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(201, 168, 76, 0.6);
+            margin-top: 0.5rem;
+        }
+
+        /* ===== SCHEDULE ===== */
+        .schedule-section {
+            padding: 6rem 1.5rem;
+            background: #FAF7F2;
+        }
+
+        .schedule-inner {
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 300;
+            color: #3B1F1F;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-top: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(transparent, #C9A84C 10%, #C9A84C 90%, transparent);
+        }
+
+        @media (min-width: 768px) {
+            .timeline::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        .timeline-item {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 24px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid #C9A84C;
+            background: #FAF7F2;
+            z-index: 5;
+            transform: translateX(-50%);
+        }
+
+        @media (min-width: 768px) {
+            .timeline-dot {
+                left: 50%;
+            }
+        }
+
+        .timeline-content {
+            margin-left: 56px;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-item.left .timeline-content {
+                margin-left: 0;
+                width: 50%;
+                padding-right: 4rem;
+                text-align: right;
+            }
+
+            .timeline-item.right .timeline-content {
+                margin-left: auto;
+                width: 50%;
+                padding-left: 4rem;
+                text-align: left;
+            }
+        }
+
+        .timeline-content .time-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #C9A84C;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+            font-weight: 400;
+            color: #3B1F1F;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+            line-height: 1.85;
+            color: #7A6652;
+        }
+
+        /* ===== DRESS CODE ===== */
+        .dresscode-section {
+            padding: 7rem 1.5rem;
+            background: #FAF7F2;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dresscode-inner {
+            max-width: 768px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .color-swatches {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .color-swatches {
+                flex-direction: row;
+                justify-content: center;
+                gap: 2rem;
+            }
+        }
+
+        .swatch {
+            text-align: center;
+        }
+
+        .swatch-circle {
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .swatch-circle {
+                width: 160px;
+                height: 160px;
+            }
+        }
+
+        .swatch-circle.olive {
+            background: radial-gradient(circle at 35% 35%, #8A9A52, #6B7A3E 50%, #4A5828);
+            box-shadow: 0 20px 60px rgba(107, 122, 62, 0.4), inset 0 -10px 30px rgba(0, 0, 0, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .swatch-circle.maroon {
+            background: radial-gradient(circle at 35% 35%, #7A3535, #5B1C1C 50%, #3D1212);
+            box-shadow: 0 20px 60px rgba(91, 28, 28, 0.4), inset 0 -10px 30px rgba(0, 0, 0, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .swatch-circle::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, transparent 40%, rgba(0, 0, 0, 0.1) 100%);
+        }
+
+        .swatch-name {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.25rem;
+            color: #3B1F1F;
+            font-weight: 400;
+        }
+
+        .swatch-role {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #7A6652;
+            margin-top: 4px;
+        }
+
+        .swatch-divider {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .swatch-divider .h-line {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #C9A84C, transparent);
+        }
+
+        .swatch-divider .star {
+            color: #C9A84C;
+            font-size: 18px;
+        }
+
+        @media (max-width: 767px) {
+            .swatch-divider {
+                flex-direction: row;
+            }
+
+            .swatch-divider .h-line {
+                width: 1px;
+                height: 40px;
+                background: linear-gradient(transparent, #C9A84C, transparent);
+            }
+        }
+
+        .dresscode-text {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+            color: #5A3E2B;
+            margin-bottom: 1rem;
+        }
+
+        .dresscode-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 1rem;
+            color: #7A6652;
+            line-height: 1.8;
+        }
+
+        /* ===== TRAVEL ===== */
+        .travel-section {
+            padding: 7rem 1.5rem;
+            background: linear-gradient(#F5EFE4, #FAF7F2);
+        }
+
+        .travel-inner {
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        .venue-card {
+            display: inline-block;
+            padding: 1.5rem 2rem;
+            border-radius: 2px;
+            background: rgba(201, 168, 76, 0.08);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .venue-card .venue-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #C9A84C;
+            margin-bottom: 0.5rem;
+        }
+
+        .venue-card .venue-name {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.5rem;
+            color: #3B1F1F;
+            font-weight: 400;
+        }
+
+        .venue-card .venue-loc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.875rem;
+            color: #7A6652;
+            margin-top: 0.25rem;
+        }
+
+        .hotels-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .hotels-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .hotel-card {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            border-radius: 2px;
+            background: white;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .hotel-card .emoji {
+            font-size: 1.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .hotel-card h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.125rem;
+            color: #3B1F1F;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .hotel-card p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: #7A6652;
+            line-height: 1.7;
+        }
+
+        /* ===== DIRECTIONS ===== */
+        .directions-section {
+            padding: 7rem 1.5rem;
+            background: #FAF7F2;
+        }
+
+        .directions-inner {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .directions-venue {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 400;
+            color: #3B1F1F;
+            margin-bottom: 0.5rem;
+        }
+
+        .directions-loc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.875rem;
+            color: #7A6652;
+            letter-spacing: 0.15em;
+            margin-bottom: 2.5rem;
+        }
+
+        .directions-italic {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: #5A3E2B;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .directions-desc {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 1rem;
+            color: #7A6652;
+            margin-bottom: 3rem;
+        }
+
+        .btn-olive {
+            display: inline-block;
+            background: #6B7A3E;
+            color: #FAF7F2;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 18px 52px;
+            border-radius: 2px;
+            box-shadow: 0 4px 20px rgba(107, 122, 62, 0.2);
+            transition: background 0.3s;
+        }
+
+        .btn-olive:hover {
+            background: #5a6a33;
+        }
+
+        .plus-code {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .plus-code span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #C9A84C;
+        }
+
+        /* ===== FAQs ===== */
+        .faqs-section {
+            padding: 7rem 1.5rem;
+            background: linear-gradient(#FAF7F2, #F5EFE4);
+        }
+
+        .faqs-inner {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-radius: 2px;
+            overflow: hidden;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-weight: 400;
+            color: #3B1F1F;
+        }
+
+        .faq-question .chevron {
+            color: #C9A84C;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .faq-item.open .faq-question .chevron {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 200px;
+            opacity: 1;
+        }
+
+        .faq-answer-inner {
+            padding: 0 2rem 1.5rem;
+        }
+
+        .faq-answer-inner .divider {
+            height: 1px;
+            background: rgba(201, 168, 76, 0.2);
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer-inner p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            font-weight: 300;
+            line-height: 2;
+            color: #7A6652;
+        }
+
+        /* ===== FOOTER ===== */
+        .site-footer {
+            padding: 5rem 1.5rem;
+            text-align: center;
+            background: #3B1F1F;
+        }
+
+        .footer-names {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 300;
+            color: #F5EFE4;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .footer-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(201, 168, 76, 0.85);
+        }
+
+        .footer-loc {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(201, 168, 76, 0.5);
+            margin-top: 0.5rem;
+        }
+
+        .footer-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: rgba(201, 168, 76, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-diamond {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-diamond .line {
+            height: 1px;
+            width: 64px;
+            background: linear-gradient(90deg, transparent, #C9A84C);
+        }
+
+        .footer-diamond .line.rev {
+            background: linear-gradient(90deg, #C9A84C, transparent);
+        }
+
+        .footer-diamond .diamond {
+            color: #C9A84C;
+            font-size: 14px;
+        }
+
+        /* ===== MAIN CONTENT REVEAL ===== */
+        .main-content {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .main-content.reveal-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== VIDEO ENVELOPE OVERLAY ===== */
+        .envelope-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #15110c;
+            z-index: 100;
+            cursor: pointer;
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .envelope-overlay.fading {
+            opacity: 0;
+            transform: translateY(-60px);
+            pointer-events: none;
+        }
+
+        .envelope-overlay.hidden {
+            display: none;
+        }
+
+        /* ===== MOBILE NAV MENU ===== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 60;
+            background: rgba(250, 247, 242, 0.97);
+            backdrop-filter: blur(16px);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .mobile-menu a {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5A3E2B;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            color: #C9A84C;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #5A3E2B;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            /* max-height: 600px; */
+            overflow: hidden;
+            position: relative;
+            border-radius: 4px;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .click-prompt {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .click-prompt span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .click-prompt .tap-icon {
+            width: 36px;
+            height: 36px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulse 2s infinite;
+        }
+
+        .click-prompt .tap-icon::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+        }
+
+        .envelope-overlay.playing .click-prompt {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== NAV ===== -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">I &amp; A</a>
+            <div class="nav-links">
+                <a href="#welcome">Welcome</a>
+                <a href="#story">Our Story</a>
+                <a href="#schedule">Schedule</a>
+                <a href="#dresscode">Dress Code</a>
+                <a href="#travel">Travel</a>
+                <a href="#faqs">FAQs</a>
+                <a href="#directions">Directions</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" x2="20" y1="12" y2="12" />
+                    <line x1="4" x2="20" y1="6" y2="6" />
+                    <line x1="4" x2="20" y1="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== MOBILE MENU ===== -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+        </button>
+        <a href="#welcome" class="mobile-nav-link">Welcome</a>
+        <a href="#story" class="mobile-nav-link">Our Story</a>
+        <a href="#schedule" class="mobile-nav-link">Schedule</a>
+        <a href="#dresscode" class="mobile-nav-link">Dress Code</a>
+        <a href="#travel" class="mobile-nav-link">Travel</a>
+        <a href="#faqs" class="mobile-nav-link">FAQs</a>
+        <a href="#directions" class="mobile-nav-link">Directions</a>
+    </div>
+
+    <!-- ===== MAIN CONTENT WRAPPER ===== -->
+    <div class="main-content" id="mainContent">
+
+        <!-- ===== HERO ===== -->
+        <section class="hero-section" id="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <p class="label">Our Wedding</p>
+                <h1 class="name">Ifemedebe</h1>
+                <p class="na">Na</p>
+                <h1 class="name name-second">Ajuru</h1>
+                <div class="hero-vertical-line"></div>
+                <p class="together">Together With Their Families</p>
+                <p class="request">Request the pleasure of your company</p>
+                <p class="date">8 April 2026</p>
+                <p class="time">12:00 PM</p>
+                <p class="venue-name">Summit International School</p>
+                <p class="venue-loc">Orba, Nsukka, Enugu State</p>
+                <a href="#welcome" class="hero-cta">View Invitation</a>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item"><span class="num" id="cd-days">--</span><span class="unit">Days</span>
+                    </div>
+                    <div class="countdown-item"><span class="num" id="cd-hours">--</span><span class="unit">Hours</span>
+                    </div>
+                    <div class="countdown-item"><span class="num" id="cd-min">--</span><span class="unit">Min</span>
+                    </div>
+                    <div class="countdown-item"><span class="num" id="cd-sec">--</span><span class="unit">Sec</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== WELCOME ===== -->
+        <section class="welcome-section" id="welcome">
+            <div class="welcome-inner">
+                <div class="fade-in">
+                    <p class="section-label">Welcome</p>
+                    <div class="welcome-taglines" style="margin-bottom: 2.5rem;">
+                        <p>Two hearts.</p>
+                        <p>Two families.</p>
+                        <p class="green">One beautiful tradition.</p>
+                    </div>
+                    <div class="gold-line" style="width: 192px; margin-bottom: 2.5rem;"></div>
+                </div>
+                <div class="fade-in welcome-body">
+                    <p>With deep gratitude and joyful hearts, we warmly invite you to celebrate our traditional Igbo
+                        wedding
+                        ceremony.</p>
+                    <p class="italic">On 8 April 2026 at 12:00 PM, surrounded by culture, music, blessings, and love, we
+                        will unite our families and begin our forever.</p>
+                    <p class="italic">This day is more than a ceremony — it is heritage, honor, and the coming together
+                        of
+                        two legacies.</p>
+                </div>
+                <div class="fade-in" style="margin-top: 3rem;">
+                    <div class="gold-line" style="width: 192px; margin-bottom: 2rem;"></div>
+                    <p class="welcome-closing">Your presence will make our joy complete.</p>
+                </div>
+                <div class="fade-in ornament-divider" style="margin-top: 3.5rem;">
+                    <div class="line rev"></div>
+                    <span class="star">✦</span>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== OUR STORY ===== -->
+        <section class="story-section" id="story">
+            <div class="story-pattern"></div>
+            <div class="story-inner">
+                <div class="fade-in" style="text-align: center; margin-bottom: 4rem;">
+                    <p class="section-label">Our Story</p>
+                    <h2 class="story-heading">Divinely Written</h2>
+                    <div class="gold-line" style="width: 160px;"></div>
+                </div>
+                <div style="text-align: center;">
+                    <div class="fade-in">
+                        <p class="story-text lead">Every love story is beautiful — but ours feels divinely written.</p>
+                        <p class="story-text">What began as a simple connection grew into something steady, intentional,
+                            and
+                            deeply meaningful.</p>
+                        <div class="gold-line" style="width: 96px; margin: 2rem auto;"></div>
+                    </div>
+                    <div class="fade-in story-cards">
+                        <div class="story-card gold">
+                            <p class="card-label">Ajuru Found</p>
+                            <p class="card-text">"In Ifemedebe, a woman of grace, elegance, and strength."</p>
+                        </div>
+                        <div class="story-card green">
+                            <p class="card-label">Ifemedebe Found</p>
+                            <p class="card-text">"In Ajuru, a man of integrity, kindness, and unwavering devotion."</p>
+                        </div>
+                    </div>
+                    <div class="fade-in">
+                        <p class="story-text">Through laughter, shared dreams, and the blessings of our families, our
+                            bond
+                            became unbreakable.</p>
+                        <p class="story-text" style="margin-top: 1rem;">Now, guided by tradition and surrounded by love,
+                            we
+                            step into this new chapter — hand in hand.</p>
+                        <div class="story-date-block" style="margin-top: 2rem;">
+                            <p class="big-date">8 April 2026</p>
+                            <p class="sub">marks the beginning of our forever</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SCHEDULE ===== -->
+        <section class="schedule-section" id="schedule">
+            <div class="schedule-inner">
+                <div class="fade-in" style="text-align: center; margin-bottom: 4rem;">
+                    <p class="section-label">Schedule of Events</p>
+                    <h2 class="section-heading">The Ceremony</h2>
+                    <div class="gold-line" style="width: 160px;"></div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item left fade-in">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="time-label">12:00 PM</span>
+                            <h3>Guest Arrival &amp; Seating</h3>
+                            <p>Guests are welcomed into the beautifully adorned venue.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right fade-in">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Opening Prayers &amp; Family Introductions</h3>
+                            <p>Elders lead prayers as both families are formally presented.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left fade-in">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Presentation of Bride Price &amp; Traditional Gifts</h3>
+                            <p>Sacred exchange of gifts and bride price between families.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right fade-in">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Bride's Grand Entrance</h3>
+                            <p>Ifemedebe makes her radiant entrance accompanied by her maidens.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left fade-in">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Wine Carrying Ceremony</h3>
+                            <p>The most intimate and beloved moment of the ceremony.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right fade-in">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Elders' Blessings</h3>
+                            <p>Words of wisdom and blessings poured upon the couple.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left fade-in">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Cultural Dance &amp; Celebration</h3>
+                            <p>Music fills the air as the community celebrates together.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right fade-in">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Reception &amp; Feast</h3>
+                            <p>A grand feast of food, laughter, and lasting memories.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== DRESS CODE ===== -->
+        <section class="dresscode-section" id="dresscode">
+            <div class="dresscode-inner">
+                <div class="fade-in" style="margin-bottom: 3.5rem;">
+                    <p class="section-label">Dress Code</p>
+                    <h2 class="section-heading">Come As Royalty</h2>
+                    <div class="gold-line" style="width: 160px;"></div>
+                </div>
+                <div class="fade-in color-swatches">
+                    <div class="swatch">
+                        <div class="swatch-circle olive"></div>
+                        <p class="swatch-name">Olive Green</p>
+                        <p class="swatch-role">Primary</p>
+                    </div>
+                    <div class="swatch-divider">
+                        <div class="h-line"></div>
+                        <span class="star">✦</span>
+                        <div class="h-line"></div>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-circle maroon"></div>
+                        <p class="swatch-name">Deep Maroon</p>
+                        <p class="swatch-role">Secondary</p>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <div class="gold-line" style="width: 192px; margin-bottom: 2rem;"></div>
+                    <p class="dresscode-text">Traditional Igbo attire is strongly encouraged.</p>
+                    <p class="dresscode-sub">Honor the occasion by adorning yourself in the colors of our
+                        celebration.<br>Let us together paint a portrait of our culture's richness and beauty.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TRAVEL ===== -->
+        <section class="travel-section" id="travel">
+            <div class="travel-inner">
+                <div class="fade-in" style="text-align: center; margin-bottom: 4rem;">
+                    <p class="section-label">Travel &amp; Accommodation</p>
+                    <h2 class="section-heading">Getting Here</h2>
+                    <div class="gold-line" style="width: 160px; margin-bottom: 2rem;"></div>
+                    <div class="venue-card">
+                        <p class="venue-label">Venue</p>
+                        <p class="venue-name" style="font-style: normal; color: #3B1F1F;">Summit International School
+                        </p>
+                        <p class="venue-loc">Orba, Nsukka, Enugu State, Nigeria</p>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <p class="section-label" style="text-align: center; margin-bottom: 2rem;">Recommended Hotels</p>
+                    <div class="hotels-grid">
+                        <div class="hotel-card">
+                            <div class="emoji">🏨</div>
+                            <h3>Hilton Hotel, Orba</h3>
+                            <p>5 minutes drive from the venue</p>
+                        </div>
+                        <div class="hotel-card">
+                            <div class="emoji">🏩</div>
+                            <h3>Great Majesty Hotel</h3>
+                            <p>10 minutes drive from the venue</p>
+                        </div>
+                        <div class="hotel-card">
+                            <div class="emoji">🌿</div>
+                            <h3>Demartins Mirage Resort, Nsukka</h3>
+                            <p>10 minutes drive from the venue</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== DIRECTIONS ===== -->
+        <section class="directions-section" id="directions">
+            <div class="directions-inner">
+                <div class="fade-in" style="margin-bottom: 3.5rem;">
+                    <p class="section-label">Location &amp; Directions</p>
+                    <h2 class="section-heading">Find Us</h2>
+                    <div class="gold-line" style="width: 160px; margin-bottom: 2.5rem;"></div>
+                    <p class="directions-venue">Summit International School</p>
+                    <p class="directions-loc">Orba, Nsukka, Enugu State</p>
+                    <div class="gold-line" style="width: 128px; margin: 2.5rem auto;"></div>
+                    <p class="directions-italic">Our celebration will take place in the heart of Orba,</p>
+                    <p class="directions-italic">where tradition meets elegance.</p>
+                    <p class="directions-desc" style="margin-top: 2rem;">For seamless navigation, use the private Google
+                        Maps access below.</p>
+                </div>
+                <div class="fade-in">
+                    <a href="https://www.google.com/maps/search/?api=1&query=VF64%2BQR+Orba+Nsukka+Nigeria"
+                        target="_blank" rel="noopener noreferrer" class="btn-olive">View Location</a>
+                    <div class="plus-code">
+                        <div class="gold-line" style="width: 64px;"></div>
+                        <span>Plus Code: VF64+QR</span>
+                        <div class="gold-line" style="width: 64px;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FAQs ===== -->
+        <section class="faqs-section" id="faqs">
+            <div class="faqs-inner">
+                <div class="fade-in" style="text-align: center; margin-bottom: 4rem;">
+                    <p class="section-label">Questions</p>
+                    <h2 class="section-heading">FAQs</h2>
+                    <div class="gold-line" style="width: 160px;"></div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question">
+                        <span>What time does the ceremony start?</span>
+                        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <div class="divider"></div>
+                            <p>The ceremony begins promptly at 12:00 PM. We encourage guests to arrive by 11:45 AM to be
+                                settled before proceedings begin.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question">
+                        <span>Is there a reception after the traditional rites?</span>
+                        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <div class="divider"></div>
+                            <p>Yes, there will be a joyful celebration filled with food, music, and dance following the
+                                traditional ceremonies.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <button class="faq-question">
+                        <span>Is the dress code compulsory?</span>
+                        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <div class="divider"></div>
+                            <p>While not mandatory, we kindly encourage guests to honor the theme colors: Olive Green
+                                &amp;
+                                Maroon. Traditional Igbo attire is warmly welcomed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="site-footer">
+            <div class="gold-line" style="width: 100%; margin-bottom: 4rem;"></div>
+            <div class="ornament-divider" style="margin-bottom: 2rem;">
+                <div class="line rev"></div>
+                <span class="star">✦</span>
+                <div class="line"></div>
+            </div>
+            <p class="footer-label">With love and gratitude</p>
+            <h2 class="footer-names">Ifemedebe &amp; Ajuru</h2>
+            <div
+                style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 0.75rem;">
+                <div style="height: 1px; width: 40px; background: linear-gradient(90deg, transparent, #C9A84C);"></div>
+                <p class="footer-date">8 April 2026 &nbsp;|&nbsp; 12:00 PM</p>
+                <div style="height: 1px; width: 40px; background: linear-gradient(90deg, #C9A84C, transparent);"></div>
+            </div>
+            <p class="footer-loc">Orba, Nsukka, Enugu State</p>
+            <div class="footer-diamond">
+                <div class="line rev"></div>
+                <span class="diamond">&#9670;</span>
+                <div class="line"></div>
+            </div>
+        </footer>
+
+    </div><!-- /main-content -->
+
+    <!-- ===== ENVELOPE VIDEO OVERLAY ===== -->
+    <div class="envelope-overlay" id="envelopeOverlay">
+        <div class="video-wrapper">
+            <video id="envelopeVideo" src="assets/card-reveal-video.mp4" muted playsinline preload="auto"></video>
+            <div class="click-prompt" id="clickPrompt">
+                <div class="tap-icon"></div>
+                <span>Tap to Open</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // === Envelope reveal ===
+        const overlay = document.getElementById('envelopeOverlay');
+        const video = document.getElementById('envelopeVideo');
+        const mainContent = document.getElementById('mainContent');
+        let hasClicked = false;
+
+        overlay.addEventListener('click', () => {
+            if (hasClicked) return;
+            hasClicked = true;
+
+            overlay.classList.add('playing');
+            video.play();
+
+            // After video plays, fade overlay upward while main content fades in from below
+            setTimeout(() => {
+                overlay.classList.add('fading');
+                document.body.classList.add('revealed');
+                mainContent.classList.add('reveal-in');
+            }, 1000);
+
+            // After transitions complete, remove overlay entirely
+            setTimeout(() => {
+                video.pause();
+                overlay.classList.add('hidden');
+            }, 1700);
+        });
+
+        // === Mobile menu ===
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+
+            if (mobileMenu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+
+            if (mobileMenu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // === Countdown to 8 April 2026 12:00 PM WAT ===
+        const weddingDate = new Date('2026-04-08T12:00:00+01:00');
+        function updateCountdown() {
+            const now = new Date();
+            const diff = weddingDate - now;
+            if (diff <= 0) {
+                document.getElementById('cd-days').textContent = '0';
+                document.getElementById('cd-hours').textContent = '0';
+                document.getElementById('cd-min').textContent = '0';
+                document.getElementById('cd-sec').textContent = '0';
+                return;
+            }
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const min = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const sec = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('cd-days').textContent = days;
+            document.getElementById('cd-hours').textContent = hours;
+            document.getElementById('cd-min').textContent = min;
+            document.getElementById('cd-sec').textContent = sec;
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // === Scroll fade-in observer ===
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // === FAQ toggles ===
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+    </script>
+</body>
+
+</html>
