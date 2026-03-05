@@ -1694,6 +1694,9 @@
         let hasClicked = false;
 
         overlay.addEventListener('click', () => {
+            // Make sure the video file is loaded before allowing click to play
+            if (video.readyState < 3) return;
+
             if (hasClicked) return;
             hasClicked = true;
 
