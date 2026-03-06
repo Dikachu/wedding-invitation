@@ -1205,43 +1205,27 @@
 
         .click-prompt {
             position: absolute;
-            bottom: 15%;
+            top: 45%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 0.6rem;
+            justify-content: center;
             pointer-events: none;
             transition: opacity 0.3s ease;
         }
 
         .click-prompt span {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem;
-            letter-spacing: 0.2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: #fff;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
-        }
-
-        .click-prompt .tap-icon {
-            width: 36px;
-            height: 36px;
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: pulse 2s infinite;
-        }
-
-        .click-prompt .tap-icon::after {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
+            color: #D4C49A;
+            background: rgba(30, 28, 22, 0.7);
+            padding: 10px 28px;
+            border-radius: 24px;
+            backdrop-filter: blur(4px);
         }
 
         @keyframes pulse {
@@ -1681,7 +1665,6 @@
             <video id="envelopeVideo" src="assets/card-reveal-video.mp4" muted playsinline webkit-playsinline
                 preload="auto"></video>
             <div class="click-prompt" id="clickPrompt">
-                <div class="tap-icon"></div>
                 <span>Loading…</span>
             </div>
         </div>
