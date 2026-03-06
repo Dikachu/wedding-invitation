@@ -1660,6 +1660,9 @@
 
     </div><!-- /main-content -->
 
+    <!-- ===== BACKGROUND MUSIC ===== -->
+    <audio id="bgMusic" preload="auto" src="assets/music.mpeg"></audio>
+
     <!-- ===== ENVELOPE VIDEO OVERLAY ===== -->
     <div class="envelope-overlay" id="envelopeOverlay">
         <div class="video-wrapper">
@@ -1699,6 +1702,24 @@
             });
         }
 
+        // === Background music ===
+        const bgMusic = document.getElementById('bgMusic');
+        bgMusic.volume = 0.5;
+
+        function fadeOutMusic(duration) {
+            const step = 50;
+            const decrement = bgMusic.volume / (duration / step);
+            const fade = setInterval(() => {
+                if (bgMusic.volume - decrement <= 0) {
+                    bgMusic.volume = 0;
+                    bgMusic.pause();
+                    clearInterval(fade);
+                } else {
+                    bgMusic.volume -= decrement;
+                }
+            }, step);
+        }
+
         function playAndReveal() {
             video.play();
             // After video plays, fade overlay upward while main content fades in from below
@@ -1706,6 +1727,11 @@
                 overlay.classList.add('fading');
                 document.body.classList.add('revealed');
                 mainContent.classList.add('reveal-in');
+                // Start background music with the reveal
+                bgMusic.currentTime = 0;
+                bgMusic.play();
+                // Fade out music after 45 seconds
+                setTimeout(() => fadeOutMusic(3000), 25000);
             }, 1000);
             // After transitions complete, remove overlay entirely
             setTimeout(() => {
