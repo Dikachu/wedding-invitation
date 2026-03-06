@@ -1678,7 +1678,8 @@
     <!-- ===== ENVELOPE VIDEO OVERLAY ===== -->
     <div class="envelope-overlay" id="envelopeOverlay">
         <div class="video-wrapper">
-            <video id="envelopeVideo" src="assets/card-reveal-video.mp4" muted playsinline preload="auto"></video>
+            <video id="envelopeVideo" src="assets/card-reveal-video.mp4" muted playsinline webkit-playsinline
+                preload="auto"></video>
             <div class="click-prompt" id="clickPrompt">
                 <div class="tap-icon"></div>
                 <span>Tap to Open</span>
@@ -1691,30 +1692,50 @@
         const overlay = document.getElementById('envelopeOverlay');
         const video = document.getElementById('envelopeVideo');
         const mainContent = document.getElementById('mainContent');
+        const clickPrompt = document.getElementById('clickPrompt');
         let hasClicked = false;
 
-        overlay.addEventListener('click', () => {
-            // Make sure the video file is loaded before allowing click to play
-            if (video.readyState < 3) return;
+        // iOS ignores preload="auto" — force a load attempt on first touch anywhere
+        document.addEventListener('touchstart', function iosPreload() {
+            video.load();
+            document.removeEventListener('touchstart', iosPreload);
+        }, { once: true });
 
-            if (hasClicked) return;
-            hasClicked = true;
-
-            overlay.classList.add('playing');
+        function playAndReveal() {
             video.play();
-
             // After video plays, fade overlay upward while main content fades in from below
             setTimeout(() => {
                 overlay.classList.add('fading');
                 document.body.classList.add('revealed');
                 mainContent.classList.add('reveal-in');
             }, 1000);
-
             // After transitions complete, remove overlay entirely
             setTimeout(() => {
                 video.pause();
                 overlay.classList.add('hidden');
             }, 1700);
+        }
+
+        overlay.addEventListener('click', () => {
+            if (hasClicked) return;
+            hasClicked = true;
+
+            overlay.classList.add('playing');
+
+            if (video.readyState >= 3) {
+                // Video is buffered — play immediately
+                playAndReveal();
+            } else {
+                // Video not ready yet (common on iOS) — show loading hint, load & wait
+                clickPrompt.querySelector('span').textContent = 'Loading…';
+                clickPrompt.style.opacity = '1';
+                video.load();
+                video.addEventListener('canplay', function onReady() {
+                    video.removeEventListener('canplay', onReady);
+                    clickPrompt.style.opacity = '0';
+                    playAndReveal();
+                });
+            }
         });
 
         // === Mobile menu ===
