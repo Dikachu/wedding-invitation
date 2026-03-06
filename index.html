@@ -1682,7 +1682,7 @@
                 preload="auto"></video>
             <div class="click-prompt" id="clickPrompt">
                 <div class="tap-icon"></div>
-                <span>Tap to Open</span>
+                <span>Loading…</span>
             </div>
         </div>
     </div>
@@ -1693,13 +1693,27 @@
         const video = document.getElementById('envelopeVideo');
         const mainContent = document.getElementById('mainContent');
         const clickPrompt = document.getElementById('clickPrompt');
+        const promptLabel = clickPrompt.querySelector('span');
         let hasClicked = false;
+        let videoReady = false;
 
-        // iOS ignores preload="auto" — force a load attempt on first touch anywhere
-        document.addEventListener('touchstart', function iosPreload() {
-            video.load();
-            document.removeEventListener('touchstart', iosPreload);
-        }, { once: true });
+        // Force load immediately (covers iOS which ignores preload="auto")
+        video.load();
+
+        function onVideoReady() {
+            videoReady = true;
+            promptLabel.textContent = 'Tap to Open';
+        }
+
+        // If already buffered (e.g. cached), mark ready now
+        if (video.readyState >= 3) {
+            onVideoReady();
+        } else {
+            video.addEventListener('canplay', function handler() {
+                video.removeEventListener('canplay', handler);
+                onVideoReady();
+            });
+        }
 
         function playAndReveal() {
             video.play();
@@ -1717,25 +1731,12 @@
         }
 
         overlay.addEventListener('click', () => {
-            if (hasClicked) return;
+            // Ignore taps while loading or after already clicked
+            if (!videoReady || hasClicked) return;
             hasClicked = true;
 
             overlay.classList.add('playing');
-
-            if (video.readyState >= 3) {
-                // Video is buffered — play immediately
-                playAndReveal();
-            } else {
-                // Video not ready yet (common on iOS) — show loading hint, load & wait
-                clickPrompt.querySelector('span').textContent = 'Loading…';
-                clickPrompt.style.opacity = '1';
-                video.load();
-                video.addEventListener('canplay', function onReady() {
-                    video.removeEventListener('canplay', onReady);
-                    clickPrompt.style.opacity = '0';
-                    playAndReveal();
-                });
-            }
+            playAndReveal();
         });
 
         // === Mobile menu ===
