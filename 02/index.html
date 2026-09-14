@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <!--
+        Security: strict CSP (no inline scripts/styles). Verified to work when opened via file:// in Chromium.
+        Google Fonts is the only third-party origin. Inline `style=""` attributes are intentionally not used.
+    -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <title>Chimezie &amp; Richard · Traditional Marriage · 29.12.2026</title>
+    <meta name="description"
+        content="Together with their families, Chimezie Ekwe and Richard Chidi Chinaka invite you to their Traditional Marriage Ceremony — December 29th 2026, 1pm, Udechukwu Memorial School Compound.">
+    <meta name="theme-color" content="#2A0715">
+    <meta name="color-scheme" content="light">
+
+    <!-- Social previews (WhatsApp/iMessage need an ABSOLUTE og:image URL once deployed) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Chimezie &amp; Richard">
+    <meta property="og:title" content="Chimezie &amp; Richard · Traditional Marriage Ceremony">
+    <meta property="og:description"
+        content="December 29th 2026 · 1pm · Udechukwu Memorial School Compound. Your presence will make our day more special.">
+    <meta property="og:image" content="assets/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&amp;family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Great+Vibes&amp;display=swap">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/intro.css">
+    <noscript>
+        <link rel="stylesheet" href="css/noscript.css">
+    </noscript>
+
+    <!-- Classic deferred scripts (ES modules are blocked on file:// in Chromium). Order matters. -->
+    <script src="js/music.js" defer></script>
+    <script src="js/fx.js" defer></script>
+    <script src="js/site.js" defer></script>
+    <script src="js/intro.js" defer></script>
+</head>
+
+<body>
+
+    <!-- =====================================================================
+         SVG LIBRARY — gradients, patterns, filters and reusable art symbols.
+         Kept out of `display:none` so gradients resolve in every browser.
+         ===================================================================== -->
+    <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <radialGradient id="g-coral" cx=".36" cy=".3" r=".78">
+                <stop offset="0" stop-color="#F7A383" />
+                <stop offset=".45" stop-color="#D4623F" />
+                <stop offset="1" stop-color="#9A331E" />
+            </radialGradient>
+            <linearGradient id="g-brass" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#6E4F1F" />
+                <stop offset=".45" stop-color="#EBD08E" />
+                <stop offset=".7" stop-color="#B38A45" />
+                <stop offset="1" stop-color="#5E4219" />
+            </linearGradient>
+            <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#F6E2AC" />
+                <stop offset=".45" stop-color="#D2AC62" />
+                <stop offset=".75" stop-color="#A87F3D" />
+                <stop offset="1" stop-color="#E7C987" />
+            </linearGradient>
+            <linearGradient id="g-wine-fold" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#9A2A50" />
+                <stop offset=".45" stop-color="#6A1535" />
+                <stop offset="1" stop-color="#3E0A20" />
+            </linearGradient>
+            <linearGradient id="g-wine-sheen" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#C24D78" stop-opacity="0" />
+                <stop offset=".5" stop-color="#C24D78" stop-opacity=".55" />
+                <stop offset="1" stop-color="#C24D78" stop-opacity="0" />
+            </linearGradient>
+            <radialGradient id="g-petal" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="46">
+                <stop offset="0" stop-color="#D24F78" />
+                <stop offset=".26" stop-color="#EC96AF" />
+                <stop offset=".62" stop-color="#F7C9D5" />
+                <stop offset="1" stop-color="#FDECF1" />
+            </radialGradient>
+            <linearGradient id="g-leaf" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#2C4523" />
+                <stop offset=".55" stop-color="#4D6B35" />
+                <stop offset="1" stop-color="#739250" />
+            </linearGradient>
+            <linearGradient id="g-cup" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#2E3517" />
+                <stop offset=".45" stop-color="#6F7A3F" />
+                <stop offset="1" stop-color="#262C12" />
+            </linearGradient>
+            <radialGradient id="g-seal" cx=".4" cy=".36" r=".72">
+                <stop offset="0" stop-color="#B23A63" />
+                <stop offset=".55" stop-color="#7A1F3D" />
+                <stop offset="1" stop-color="#420B20" />
+            </radialGradient>
+            <radialGradient id="g-seal-inner" cx=".5" cy=".6" r=".6">
+                <stop offset="0" stop-color="#7A1F3D" />
+                <stop offset="1" stop-color="#5A1330" />
+            </radialGradient>
+            <radialGradient id="g-seal-gloss" cx=".32" cy=".26" r=".42">
+                <stop offset="0" stop-color="#FFFFFF" stop-opacity=".38" />
+                <stop offset="1" stop-color="#FFFFFF" stop-opacity="0" />
+            </radialGradient>
+            <linearGradient id="g-env-paper" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#FBF4EC" />
+                <stop offset="1" stop-color="#EFDFD3" />
+            </linearGradient>
+            <linearGradient id="g-env-flap" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#F4E8DD" />
+                <stop offset="1" stop-color="#FFFAF4" />
+            </linearGradient>
+            <linearGradient id="g-env-depth" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1B0A10" stop-opacity="0" />
+                <stop offset=".7" stop-color="#1B0A10" stop-opacity=".45" />
+            </linearGradient>
+
+            <pattern id="p-liner" patternUnits="userSpaceOnUse" width="36" height="36">
+                <rect width="36" height="36" fill="#46512A" />
+                <path d="M18 5 31 18 18 31 5 18Z" fill="none" stroke="#D4AF6A" stroke-width="1" opacity=".5" />
+                <path d="M18 12 24 18 18 24 12 18Z" fill="#D4AF6A" opacity=".32" />
+                <circle cx="0" cy="0" r="1.6" fill="#D4AF6A" opacity=".55" />
+                <circle cx="36" cy="0" r="1.6" fill="#D4AF6A" opacity=".55" />
+                <circle cx="0" cy="36" r="1.6" fill="#D4AF6A" opacity=".55" />
+                <circle cx="36" cy="36" r="1.6" fill="#D4AF6A" opacity=".55" />
+            </pattern>
+
+            <filter id="f-blur" x="-10%" y="-10%" width="120%" height="120%">
+                <feGaussianBlur stdDeviation="5" />
+            </filter>
+
+            <filter id="f-flap-shadow" x="-10%" y="-10%" width="120%" height="135%">
+                <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#3A0A1E" flood-opacity=".3" />
+            </filter>
+
+            <!-- Petal (notched tip) used by the blossom -->
+            <path id="shape-petal" d="M0 0C-15-9-22-33-10-45C-5-49-1-46 0-42C1-46 5-49 10-45C22-33 15-9 0 0Z" />
+
+            <!-- Draped akwete-style fabric (shared by both fabric corners) -->
+            <g id="shape-fabric">
+                <path d="M0 0H268C240 22 216 42 192 68C152 112 108 144 66 198C42 228 20 252 0 270Z"
+                    fill="url(#g-wine-fold)" />
+                <path d="M0 0H160C124 44 72 86 0 158Z" fill="url(#g-wine-sheen)" opacity=".7" />
+                <path d="M0 96C40 70 86 38 122 0" stroke="#3A0A1E" stroke-width="10" opacity=".25" fill="none" />
+                <path d="M0 212C58 160 120 110 176 40" stroke="#C24D78" stroke-width="6" opacity=".18" fill="none" />
+                <path d="M254 0C230 20 208 40 184 64C144 106 100 140 58 192C36 220 16 242 0 258" fill="none"
+                    stroke="#D9B872" stroke-width="18" />
+                <path d="M254 0C230 20 208 40 184 64C144 106 100 140 58 192C36 220 16 242 0 258" fill="none"
+                    stroke="#5A1330" stroke-width="14" />
+                <path d="M254 0C230 20 208 40 184 64C144 106 100 140 58 192C36 220 16 242 0 258" fill="none"
+                    stroke="#C9A15A" stroke-width="9" stroke-dasharray="3 2.6" />
+                <path d="M254 0C230 20 208 40 184 64C144 106 100 140 58 192C36 220 16 242 0 258" fill="none"
+                    stroke="#4F5A2E" stroke-width="2.4" />
+            </g>
+        </defs>
+
+        <!-- Ornaments & icons ------------------------------------------------ -->
+        <symbol id="i-knot" viewBox="0 0 48 48">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+                <path d="M24 5 33.5 14.5 24 24 14.5 14.5Z" />
+                <path d="M43 24 33.5 33.5 24 24 33.5 14.5Z" />
+                <path d="M24 43 14.5 33.5 24 24 33.5 33.5Z" />
+                <path d="M5 24 14.5 14.5 24 24 14.5 33.5Z" />
+                <path d="M24 17.5 30.5 24 24 30.5 17.5 24Z" />
+            </g>
+            <g fill="currentColor">
+                <circle cx="24" cy="1.8" r="1.6" />
+                <circle cx="46.2" cy="24" r="1.6" />
+                <circle cx="24" cy="46.2" r="1.6" />
+                <circle cx="1.8" cy="24" r="1.6" />
+            </g>
+        </symbol>
+
+        <symbol id="i-leafline" viewBox="0 0 120 16">
+            <path d="M0 8H98" stroke="currentColor" stroke-width="1" />
+            <path d="M98 8C104 1.5 113 1.5 120 8 113 14.5 104 14.5 98 8Z" fill="currentColor" />
+            <path d="M86 8C90 3.5 95 3 99 4.5M86 8C90 12.5 95 13 99 11.5" stroke="currentColor" stroke-width="1"
+                fill="none" />
+        </symbol>
+
+        <symbol id="i-flourish" viewBox="0 0 120 24">
+            <path d="M60 12C50 2 36 2 30 10 26 15 18 15 14 11M60 12C70 2 84 2 90 10 94 15 102 15 106 11" fill="none"
+                stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            <path d="M60 5 65 12 60 19 55 12Z" fill="currentColor" />
+            <circle cx="8" cy="11" r="1.8" fill="currentColor" />
+            <circle cx="112" cy="11" r="1.8" fill="currentColor" />
+        </symbol>
+
+        <symbol id="i-calendar" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                <rect x="3" y="5" width="18" height="16" rx="2.2" />
+                <path d="M3 10h18M8 3v4M16 3v4" />
+            </g>
+            <g fill="currentColor">
+                <circle cx="8" cy="14" r="1" />
+                <circle cx="12" cy="14" r="1" />
+                <circle cx="16" cy="14" r="1" />
+                <circle cx="8" cy="17.6" r="1" />
+                <circle cx="12" cy="17.6" r="1" />
+            </g>
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3.4 2.2" />
+            </g>
+        </symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+                <path d="M12 21.5s-7-6.3-7-11.8a7 7 0 0 1 14 0c0 5.5-7 11.8-7 11.8Z" />
+                <circle cx="12" cy="9.7" r="2.6" />
+            </g>
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+            <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="i-chevron-down" viewBox="0 0 24 24">
+            <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+
+        <!-- Florals ---------------------------------------------------------- -->
+        <symbol id="i-blossom" viewBox="-50 -50 100 100">
+            <g fill="url(#g-petal)" stroke="#E7A2B5" stroke-width=".6">
+                <use href="#shape-petal" />
+                <use href="#shape-petal" transform="rotate(72)" />
+                <use href="#shape-petal" transform="rotate(144)" />
+                <use href="#shape-petal" transform="rotate(216)" />
+                <use href="#shape-petal" transform="rotate(288)" />
+            </g>
+            <g stroke="#D9728F" stroke-width=".9" opacity=".45" fill="none" stroke-linecap="round">
+                <path d="M0-7V-30" />
+                <path d="M0-7V-30" transform="rotate(72)" />
+                <path d="M0-7V-30" transform="rotate(144)" />
+                <path d="M0-7V-30" transform="rotate(216)" />
+                <path d="M0-7V-30" transform="rotate(288)" />
+            </g>
+            <circle r="7.5" fill="#B7365F" />
+            <g fill="#F4D58A">
+                <circle cx="0" cy="-10" r="1.6" />
+                <circle cx="8.1" cy="-5.9" r="1.6" />
+                <circle cx="9.5" cy="3.1" r="1.6" />
+                <circle cx="3.1" cy="9.5" r="1.6" />
+                <circle cx="-5.9" cy="8.1" r="1.6" />
+                <circle cx="-9.5" cy="-3.1" r="1.6" />
+                <circle cx="-5.9" cy="-8.1" r="1.6" />
+            </g>
+        </symbol>
+
+        <symbol id="i-leaf" viewBox="0 0 100 40">
+            <path d="M2 20C24 2 66-1 98 20 66 41 24 38 2 20Z" fill="url(#g-leaf)" />
+            <path d="M6 20C40 18.5 70 18.5 96 20" stroke="#22361B" stroke-width="1.2" fill="none" opacity=".55" />
+        </symbol>
+
+        <symbol id="i-buds" viewBox="0 0 60 60">
+            <g stroke="#6E8C4B" stroke-width=".9" fill="none" stroke-linecap="round">
+                <path d="M30 60C29 40 22 28 18 15M30 60C30 40 31 22 30 9M30 60C32 42 38 30 42 17M30 50C24 44 16 36 12 31M30 48C38 42 44 38 48 35" />
+            </g>
+            <g fill="#FFFDF9" stroke="#E0D3C7" stroke-width=".6">
+                <circle cx="18" cy="14" r="4.2" />
+                <circle cx="30" cy="8" r="3.8" />
+                <circle cx="42" cy="16" r="4.2" />
+                <circle cx="12" cy="30" r="3" />
+                <circle cx="48" cy="34" r="3" />
+            </g>
+            <g fill="#EAD9A0">
+                <circle cx="18" cy="14" r="1" />
+                <circle cx="30" cy="8" r="1" />
+                <circle cx="42" cy="16" r="1" />
+            </g>
+        </symbol>
+
+        <!-- Corner cluster: blossoms, leaves & buds (anchored to top-right) -->
+        <symbol id="art-blossoms" viewBox="0 0 320 320">
+            <use href="#i-leaf" width="130" height="46" transform="translate(324 -2) rotate(178) translate(0 -23)" />
+            <use href="#i-leaf" width="156" height="52" transform="translate(324 -2) rotate(154) translate(0 -26)" />
+            <use href="#i-leaf" width="146" height="48" transform="translate(324 -2) rotate(126) translate(0 -24)" />
+            <use href="#i-leaf" width="124" height="42" transform="translate(324 -2) rotate(101) translate(0 -21)" />
+            <use href="#i-leaf" width="84" height="30" transform="translate(206 58) rotate(166) translate(0 -15)" />
+            <use href="#i-leaf" width="86" height="30" transform="translate(276 128) rotate(118) translate(0 -15)" />
+            <use href="#i-leaf" width="72" height="26" transform="translate(150 26) rotate(196) translate(0 -13)" />
+            <use href="#i-buds" x="98" y="44" width="54" height="54" transform="rotate(-24 125 71)" />
+            <use href="#i-buds" x="276" y="204" width="46" height="46" transform="rotate(150 299 227)" />
+            <use href="#i-buds" x="48" y="-6" width="40" height="40" transform="rotate(-70 68 14)" />
+            <use href="#i-blossom" x="152" y="-6" width="84" height="84" transform="rotate(-20 194 36)" />
+            <use href="#i-blossom" x="86" y="-10" width="50" height="50" transform="rotate(14 111 15)" />
+            <use href="#i-blossom" x="257" y="133" width="70" height="70" transform="rotate(30 292 168)" />
+            <use href="#i-blossom" x="191" y="105" width="46" height="46" transform="rotate(-8 214 128)" />
+            <use href="#i-blossom" x="199" y="5" width="118" height="118" transform="rotate(12 258 64)" />
+        </symbol>
+
+        <!-- Corner: burgundy akwete fabric with coral beads (anchored to top-left) -->
+        <symbol id="art-fabric-beads" viewBox="0 0 320 320">
+            <use href="#shape-fabric" />
+            <g>
+                <circle cx="-1.9" cy="161.1" r="5.6" fill="url(#g-coral)" />
+                <circle cx="8.0" cy="153.8" r="5.6" fill="url(#g-coral)" />
+                <circle cx="17.8" cy="146.3" r="5.6" fill="url(#g-coral)" />
+                <circle cx="27.3" cy="138.6" r="5.6" fill="url(#g-coral)" />
+                <rect x="32.6" y="126.7" width="8" height="7.8" rx="2" transform="rotate(49 36.6 130.6)"
+                    fill="url(#g-brass)" />
+                <circle cx="45.7" cy="122.4" r="5.6" fill="url(#g-coral)" />
+                <circle cx="54.5" cy="113.9" r="5.6" fill="url(#g-coral)" />
+                <circle cx="63.2" cy="105.2" r="5.6" fill="url(#g-coral)" />
+                <circle cx="71.6" cy="96.4" r="5.6" fill="url(#g-coral)" />
+                <rect x="75.8" y="83.4" width="8" height="7.8" rx="2" transform="rotate(41 79.8 87.3)"
+                    fill="url(#g-brass)" />
+                <circle cx="87.9" cy="78.0" r="5.6" fill="url(#g-coral)" />
+                <circle cx="95.7" cy="68.5" r="5.6" fill="url(#g-coral)" />
+                <circle cx="103.2" cy="58.8" r="5.6" fill="url(#g-coral)" />
+                <circle cx="110.6" cy="49.0" r="5.6" fill="url(#g-coral)" />
+                <rect x="113.8" y="35.1" width="8" height="7.8" rx="2" transform="rotate(35 117.8 39.0)"
+                    fill="url(#g-brass)" />
+                <circle cx="124.7" cy="28.9" r="5.6" fill="url(#g-coral)" />
+                <circle cx="131.4" cy="18.7" r="5.6" fill="url(#g-coral)" />
+                <circle cx="137.9" cy="8.3" r="5.6" fill="url(#g-coral)" />
+                <circle cx="144.3" cy="-2.1" r="5.6" fill="url(#g-coral)" />
+            </g>
+            <g>
+                <circle cx="1.2" cy="227.7" r="7.2" fill="url(#g-coral)" />
+                <circle cx="14.3" cy="219.0" r="7.2" fill="url(#g-coral)" />
+                <circle cx="27.2" cy="209.9" r="7.2" fill="url(#g-coral)" />
+                <circle cx="39.8" cy="200.7" r="7.2" fill="url(#g-coral)" />
+                <circle cx="52.2" cy="191.1" r="7.2" fill="url(#g-coral)" />
+                <rect x="60.4" y="176.2" width="8" height="10.1" rx="2" transform="rotate(50 64.4 181.2)"
+                    fill="url(#g-brass)" />
+                <circle cx="76.4" cy="171.1" r="7.2" fill="url(#g-coral)" />
+                <circle cx="88.1" cy="160.7" r="7.2" fill="url(#g-coral)" />
+                <circle cx="99.6" cy="150.0" r="7.2" fill="url(#g-coral)" />
+                <circle cx="110.9" cy="139.1" r="7.2" fill="url(#g-coral)" />
+                <circle cx="121.9" cy="128.0" r="7.2" fill="url(#g-coral)" />
+                <rect x="128.8" y="111.6" width="8" height="10.1" rx="2" transform="rotate(43 132.8 116.6)"
+                    fill="url(#g-brass)" />
+                <circle cx="143.4" cy="105.0" r="7.2" fill="url(#g-coral)" />
+                <circle cx="153.7" cy="93.3" r="7.2" fill="url(#g-coral)" />
+                <circle cx="163.9" cy="81.3" r="7.2" fill="url(#g-coral)" />
+                <circle cx="173.9" cy="69.1" r="7.2" fill="url(#g-coral)" />
+                <circle cx="183.6" cy="56.8" r="7.2" fill="url(#g-coral)" />
+                <rect x="189.1" y="39.3" width="8" height="10.1" rx="2" transform="rotate(37 193.1 44.3)"
+                    fill="url(#g-brass)" />
+                <circle cx="202.3" cy="31.7" r="7.2" fill="url(#g-coral)" />
+                <circle cx="211.4" cy="18.9" r="7.2" fill="url(#g-coral)" />
+                <circle cx="220.2" cy="5.9" r="7.2" fill="url(#g-coral)" />
+                <circle cx="228.9" cy="-7.2" r="7.2" fill="url(#g-coral)" />
+            </g>
+        </symbol>
+
+        <!-- Corner: fabric + carved palm-wine cup (rendered rotated into the bottom-right) -->
+        <symbol id="art-fabric-cup" viewBox="0 0 320 320">
+            <use href="#shape-fabric" />
+            <g transform="translate(132 22) rotate(180 60 75)">
+                <ellipse cx="60" cy="140" rx="46" ry="8" fill="#2A0715" opacity=".35" />
+                <path d="M14 30C14 90 24 128 60 136 96 128 106 90 106 30Z" fill="url(#g-cup)" />
+                <path d="M17 52Q60 66 103 52M22 98Q60 112 98 98" fill="none" stroke="url(#g-gold)"
+                    stroke-width="2.6" />
+                <path d="M20 75 30 67 40 77 50 67 60 77 70 67 80 77 90 67 100 75" fill="none"
+                    stroke="url(#g-gold)" stroke-width="1.6" stroke-linejoin="round" />
+                <path d="M30 42C30 90 36 114 50 126" stroke="#FFFFFF" stroke-opacity=".16" stroke-width="5"
+                    stroke-linecap="round" fill="none" />
+                <ellipse cx="60" cy="30" rx="46" ry="12" fill="#2A1810" stroke="url(#g-gold)" stroke-width="3" />
+            </g>
+        </symbol>
+
+        <!-- Wax seal (burgundy wax, gold monogram) -->
+        <symbol id="i-seal" viewBox="0 0 200 200">
+            <path
+                d="M188.3 95.5Q191.5 100.0 192.4 104.9Q193.2 109.8 190.2 114.2Q187.1 118.5 185.1 122.8Q183.1 127.0 182.1 131.6Q181.1 136.1 178.0 139.7Q175.0 143.3 171.8 146.6Q168.6 149.8 166.1 153.5Q163.6 157.2 160.4 160.4Q157.3 163.6 154.9 167.9Q152.5 172.3 150.0 177.2Q147.5 182.2 142.5 183.3Q137.5 184.3 132.1 183.1Q126.6 181.9 122.2 182.6Q117.7 183.3 113.3 184.0Q108.9 184.8 104.5 185.1Q100.0 185.4 95.4 186.6Q90.8 187.8 86.2 187.2Q81.6 186.7 77.2 185.0Q72.9 183.4 67.8 183.6Q62.7 183.8 58.0 182.4Q53.2 181.0 50.8 176.0Q48.4 171.0 46.2 166.6Q44.0 162.2 40.9 159.1Q37.8 156.0 34.7 152.9Q31.6 149.7 27.3 147.1Q22.9 144.5 19.1 141.1Q15.3 137.7 15.0 132.7Q14.7 127.7 14.3 123.0Q13.9 118.3 11.9 113.9Q9.9 109.5 10.6 104.7Q11.3 100.0 13.5 95.6Q15.8 91.1 16.7 86.8Q17.6 82.5 18.6 78.2Q19.6 73.9 19.9 69.2Q20.2 64.5 19.5 58.8Q18.9 53.2 21.6 49.1Q24.3 45.0 29.5 43.1Q34.8 41.3 38.5 38.6Q42.3 35.9 45.6 32.8Q48.9 29.7 53.1 27.9Q57.3 26.1 61.2 23.7Q65.0 21.3 69.0 19.2Q73.1 17.1 77.5 16.1Q82.0 15.2 86.2 12.4Q90.5 9.6 95.2 7.4Q100.0 5.2 104.7 7.7Q109.4 10.3 113.5 13.8Q117.6 17.2 121.8 18.6Q126.0 19.9 130.2 21.4Q134.3 22.9 138.9 23.9Q143.4 24.9 148.3 25.8Q153.3 26.7 156.6 30.1Q159.9 33.5 162.7 37.2Q165.5 41.0 169.8 43.6Q174.1 46.1 176.6 50.3Q179.0 54.4 178.7 59.7Q178.3 65.1 178.9 69.6Q179.5 74.2 180.7 78.4Q182.0 82.6 183.6 86.8Q185.2 91.0 188.3 95.5Z"
+                fill="url(#g-seal)" />
+            <circle cx="100" cy="100" r="66" fill="none" stroke="#3E0A1E" stroke-width="6" opacity=".45" />
+            <circle cx="100" cy="100" r="62" fill="url(#g-seal-inner)" />
+            <circle cx="100" cy="100" r="62.5" fill="none" stroke="#C35A80" stroke-width="1.4" opacity=".55" />
+            <circle cx="100" cy="100" r="54" fill="none" stroke="url(#g-gold)" stroke-width="1.6"
+                stroke-dasharray="1.5 4.2" opacity=".85" />
+            <text x="100" y="117" text-anchor="middle" font-family="'Great Vibes', cursive" font-size="50"
+                fill="url(#g-gold)">C&amp;R</text>
+            <ellipse cx="72" cy="58" rx="46" ry="30" fill="url(#g-seal-gloss)" transform="rotate(-28 72 58)" />
+        </symbol>
+    </svg>
+
+    <!-- =====================================================================
+         INTRO — code-built envelope with wax seal. Removed from the DOM once
+         opened. If JS never runs, css/intro.css fades it out automatically.
+         ===================================================================== -->
+    <div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-label">
+        <p class="sr-only" id="intro-label">Invitation to the Traditional Marriage Ceremony of Chimezie Ekwe and
+            Richard Chidi Chinaka. Press the button to open.</p>
+
+        <div class="intro__backdrop" aria-hidden="true">
+            <span class="intro__glow"></span>
+            <svg class="intro__corner intro__corner--tr">
+                <use href="#art-blossoms" />
+            </svg>
+            <svg class="intro__corner intro__corner--bl">
+                <use href="#art-blossoms" />
+            </svg>
+        </div>
+
+        <header class="intro__top" aria-hidden="true">
+            <span class="intro__eyebrow">Igba Nkwu</span>
+            <span class="intro__date">29 · 12 · 2026</span>
+        </header>
+
+        <div class="intro__scene" id="intro-scene" aria-hidden="true">
+            <div class="envelope" id="envelope">
+                <div class="envelope__float" id="envelope-float">
+
+                    <!-- 1. Inside of the envelope (liner visible through the opening) -->
+                    <svg class="envelope__back" viewBox="0 0 500 700" preserveAspectRatio="none">
+                        <rect width="500" height="700" rx="12" fill="url(#p-liner)" />
+                        <rect width="500" height="700" rx="12" fill="url(#g-env-depth)" />
+                    </svg>
+
+                    <!-- 2. Inner face of the flap (shown after the flap passes 90°) -->
+                    <div class="envelope__liner" id="envelope-liner">
+                        <svg viewBox="0 0 500 400" preserveAspectRatio="none">
+                            <path d="M0 388Q0 400 12 400H488Q500 400 500 388L264 12Q250-8 236 12Z" fill="#EFE0D4" />
+                            <path d="M26 392H474L250 34Z" fill="url(#p-liner)" />
+                            <path d="M26 392H474L250 34Z" fill="none" stroke="#D4AF6A" stroke-width="2"
+                                opacity=".7" />
+                        </svg>
+                        <span class="envelope__liner-shade" id="envelope-liner-shade"></span>
+                    </div>
+
+                    <!-- 3. The invitation card tucked inside -->
+                    <div class="envelope__card" id="envelope-card">
+                        <div class="mini-card">
+                            <svg class="mini-card__knot">
+                                <use href="#i-knot" />
+                            </svg>
+                            <p class="mini-card__caps">Together with their families</p>
+                            <p class="mini-card__name">Chimezie</p>
+                            <p class="mini-card__and">and</p>
+                            <p class="mini-card__name">Richard</p>
+                            <p class="mini-card__date">December 29th 2026</p>
+                        </div>
+                        <span class="envelope__card-sheen" id="envelope-card-sheen"></span>
+                    </div>
+
+                    <!-- 4. Front pocket with gold-foil inscription -->
+                    <div class="envelope__pocket">
+                        <svg viewBox="0 0 500 700" preserveAspectRatio="none">
+                            <!-- soft shadow the pocket edge casts onto the card (drawn first, half covered) -->
+                            <path d="M0 4 250 384 500 4" fill="none" stroke="#2A0715" stroke-width="16"
+                                opacity=".16" filter="url(#f-blur)" />
+                            <path d="M0 12Q0 0 12 2L250 380 488 2Q500 0 500 12V688Q500 700 488 700H12Q0 700 0 688Z"
+                                fill="url(#g-env-paper)" />
+                            <path d="M4 6 250 382 496 6" fill="none" stroke="#FFFFFF" stroke-width="2" opacity=".8" />
+                            <path d="M0 700 214 474Q250 440 286 474L500 700" fill="none" stroke="#8A5A4A"
+                                stroke-width="1.4" opacity=".16" />
+                            <path d="M0 698 214 472Q250 438 286 472L500 698" fill="none" stroke="#FFFFFF"
+                                stroke-width="1.2" opacity=".7" />
+                            <rect x="16" y="16" width="468" height="668" rx="6" fill="none" stroke="url(#g-gold)"
+                                stroke-width="1.4" opacity=".55" />
+                        </svg>
+                        <div class="envelope__inscription">
+                            <p class="envelope__caps">Igbankwu</p>
+                            <p class="envelope__caps envelope__caps--names">Chimezie na Richard</p>
+                            <p class="envelope__script">this invitation is exclusively for you</p>
+                        </div>
+                    </div>
+
+                    <!-- 5. Outer flap (carries the top half of the seal) -->
+                    <div class="envelope__flap" id="envelope-flap">
+                        <svg viewBox="0 0 500 700" preserveAspectRatio="none">
+                            <path d="M0 12Q0 0 12 0H488Q500 0 500 12L264 392Q250 410 236 392Z"
+                                fill="url(#g-env-flap)" filter="url(#f-flap-shadow)" />
+                            <path d="M38 22H462L250 362Z" fill="none" stroke="url(#g-gold)" stroke-width="1.6"
+                                opacity=".75" />
+                        </svg>
+                        <div class="seal seal--top" id="seal-top">
+                            <svg>
+                                <use href="#i-seal" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- 6. Bottom half of the seal + crack glint -->
+                    <div class="seal seal--bottom" id="seal-bottom">
+                        <svg>
+                            <use href="#i-seal" />
+                        </svg>
+                    </div>
+                    <div class="seal seal--crack" id="seal-crack">
+                        <svg viewBox="0 0 200 200">
+                            <polyline points="8,106 30,96 52,108 74,94 96,106 118,92 140,105 162,95 192,103"
+                                pathLength="1" />
+                        </svg>
+                    </div>
+                    <span class="seal-pulse" id="seal-pulse"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="intro__actions">
+            <button class="intro__open" id="intro-open" type="button" disabled>
+                <span class="intro__open-label" id="intro-open-label">Preparing your invitation…</span>
+            </button>
+            <button class="intro__skip" id="intro-skip" type="button">Skip animation</button>
+        </div>
+
+        <span class="intro__bloom" id="intro-bloom" aria-hidden="true"></span>
+    </div>
+
+    <!-- Card-inspired side bands framing the whole site -->
+    <div class="frame" aria-hidden="true">
+        <span class="frame__band frame__band--left"></span>
+        <span class="frame__band frame__band--right"></span>
+    </div>
+
+    <main id="main">
+
+        <!-- ===== HERO ===== -->
+        <section class="hero" id="top" aria-labelledby="hero-title">
+            <div class="hero__art" aria-hidden="true">
+                <svg class="hero__corner hero__corner--tl">
+                    <use href="#art-fabric-beads" />
+                </svg>
+                <svg class="hero__corner hero__corner--tr">
+                    <use href="#art-blossoms" />
+                </svg>
+                <svg class="hero__corner hero__corner--bl">
+                    <use href="#art-blossoms" />
+                </svg>
+                <svg class="hero__corner hero__corner--br">
+                    <use href="#art-fabric-cup" />
+                </svg>
+            </div>
+
+            <div class="hero__content">
+                <p class="caps caps--olive hero__eyebrow" data-hero>Traditional Marriage Ceremony</p>
+
+                <h1 class="hero__names" id="hero-title">
+                    <span class="script hero__name" data-hero data-write>Chimezie</span>
+                    <span class="and-divider hero__and" data-hero>
+                        <svg class="and-divider__line">
+                            <use href="#i-leafline" />
+                        </svg>
+                        <span class="and-divider__badge">and</span>
+                        <svg class="and-divider__line and-divider__line--flip">
+                            <use href="#i-leafline" />
+                        </svg>
+                    </span>
+                    <span class="script hero__name" data-hero data-write>Richard</span>
+                </h1>
+
+                <div class="knot-divider" data-hero aria-hidden="true">
+                    <span class="knot-divider__line"></span>
+                    <svg class="knot-divider__knot">
+                        <use href="#i-knot" />
+                    </svg>
+                    <span class="knot-divider__line"></span>
+                </div>
+
+                <p class="hero__date" data-hero>
+                    <span class="hero__date-main">December 29th 2026</span>
+                    <span class="hero__date-sub">Tuesday · 1pm</span>
+                </p>
+
+                <a class="hero__cue" href="#invitation" data-hero>
+                    <span>Read the invitation</span>
+                    <svg aria-hidden="true">
+                        <use href="#i-chevron-down" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== INVITATION (the card, verbatim) ===== -->
+        <section class="section invitation" id="invitation" aria-labelledby="invitation-title">
+            <article class="paper-card">
+                <svg class="paper-card__corner paper-card__corner--tr" aria-hidden="true">
+                    <use href="#art-blossoms" />
+                </svg>
+                <svg class="paper-card__corner paper-card__corner--bl" aria-hidden="true">
+                    <use href="#art-blossoms" />
+                </svg>
+
+                <div class="paper-card__inner">
+                    <p class="caps caps--olive" data-reveal>Together with their families</p>
+                    <p class="italic-line" data-reveal>You are cordially invited to the</p>
+                    <h2 class="invitation__title" id="invitation-title" data-reveal>
+                        <span class="invitation__title-main">Traditional Marriage</span>
+                        <span class="invitation__title-sub">Ceremony</span>
+                    </h2>
+
+                    <div class="knot-divider" data-reveal aria-hidden="true">
+                        <span class="knot-divider__line"></span>
+                        <svg class="knot-divider__knot">
+                            <use href="#i-knot" />
+                        </svg>
+                        <span class="knot-divider__line"></span>
+                    </div>
+
+                    <div class="person" data-reveal>
+                        <p class="script person__name">Chimezie Ekwe</p>
+                        <p class="person__lineage">Daughter of Late Chief &amp; Mrs Edwin&nbsp;Ekwe</p>
+                        <p class="person__lineage">of Iffite&nbsp;Mmaku in Awgu&nbsp;LGA Enugu&nbsp;State</p>
+                    </div>
+
+                    <div class="and-divider" data-reveal aria-hidden="true">
+                        <svg class="and-divider__line">
+                            <use href="#i-leafline" />
+                        </svg>
+                        <span class="and-divider__badge">and</span>
+                        <svg class="and-divider__line and-divider__line--flip">
+                            <use href="#i-leafline" />
+                        </svg>
+                    </div>
+                    <p class="sr-only">and</p>
+
+                    <div class="person" data-reveal>
+                        <p class="script person__name">Richard Chidi Chinaka</p>
+                        <p class="person__lineage">Son of Late C&nbsp;C&nbsp;Nweke &amp; Mrs Ngozi&nbsp;Nweke</p>
+                        <p class="person__lineage">of Obokwe&nbsp;Asa in Ukwa&nbsp;West L.G.A Abia&nbsp;state</p>
+                    </div>
+
+                    <p class="invitation__message" data-reveal>
+                        We would be honoured by your presence<br>
+                        as we celebrate the beginning of our new journey<br>
+                        together in the traditional way.
+                    </p>
+
+                    <div class="knot-divider" data-reveal aria-hidden="true">
+                        <span class="knot-divider__line"></span>
+                        <svg class="knot-divider__knot">
+                            <use href="#i-knot" />
+                        </svg>
+                        <span class="knot-divider__line"></span>
+                    </div>
+
+                    <dl class="details-strip" data-reveal>
+                        <div class="details-strip__item">
+                            <dt>
+                                <svg class="details-strip__icon" aria-hidden="true">
+                                    <use href="#i-calendar" />
+                                </svg>
+                                <span>Date</span>
+                            </dt>
+                            <dd>December 29th 2026</dd>
+                        </div>
+                        <div class="details-strip__item">
+                            <dt>
+                                <svg class="details-strip__icon" aria-hidden="true">
+                                    <use href="#i-clock" />
+                                </svg>
+                                <span>Time</span>
+                            </dt>
+                            <dd>1pm</dd>
+                        </div>
+                        <div class="details-strip__item details-strip__item--venue">
+                            <dt>
+                                <svg class="details-strip__icon" aria-hidden="true">
+                                    <use href="#i-pin" />
+                                </svg>
+                                <span>Venue</span>
+                            </dt>
+                            <dd>Udechukwu Memorial School Compound</dd>
+                        </div>
+                    </dl>
+                </div>
+            </article>
+        </section>
+
+        <!-- ===== SAVE THE DATE ===== -->
+        <section class="section save-date" id="save-the-date" aria-labelledby="save-date-title">
+            <p class="caps caps--olive" data-reveal>Counting down to</p>
+            <h2 class="script section-script" id="save-date-title" data-reveal>Save the Date</h2>
+
+            <div class="date-lockup" data-reveal>
+                <span class="date-lockup__side">Tuesday</span>
+                <span class="date-lockup__day">29</span>
+                <span class="date-lockup__side">December</span>
+            </div>
+            <p class="date-lockup__year" data-reveal>2026 · 1pm</p>
+
+            <div class="countdown" id="countdown" role="timer" aria-label="Time remaining until the ceremony"
+                data-reveal>
+                <div class="countdown__item"><span class="countdown__num" data-unit="days">--</span><span
+                        class="countdown__label">Days</span></div>
+                <div class="countdown__item"><span class="countdown__num" data-unit="hours">--</span><span
+                        class="countdown__label">Hours</span></div>
+                <div class="countdown__item"><span class="countdown__num" data-unit="minutes">--</span><span
+                        class="countdown__label">Minutes</span></div>
+                <div class="countdown__item"><span class="countdown__num" data-unit="seconds">--</span><span
+                        class="countdown__label">Seconds</span></div>
+            </div>
+            <p class="countdown__done" id="countdown-done" hidden></p>
+
+            <div class="btn-row" data-reveal>
+                <a class="btn btn--wine" href="assets/chimezie-richard-traditional-marriage.ics">
+                    <svg aria-hidden="true">
+                        <use href="#i-calendar" />
+                    </svg>
+                    <span>Add to Calendar</span>
+                </a>
+                <a class="btn btn--outline"
+                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Traditional%20Marriage%20Ceremony%20%E2%80%94%20Chimezie%20%26%20Richard&amp;dates=20261229T120000Z%2F20261229T170000Z&amp;details=Together%20with%20their%20families%2C%20Chimezie%20Ekwe%20and%20Richard%20Chidi%20Chinaka%20invite%20you%20to%20their%20Traditional%20Marriage%20Ceremony.&amp;location=Udechukwu%20Memorial%20School%20Compound%2C%20Mmaku%2C%20Awgu%2C%20Enugu%20State"
+                    target="_blank" rel="noopener noreferrer">
+                    <span>Google Calendar</span>
+                    <svg aria-hidden="true">
+                        <use href="#i-arrow" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== VENUE ===== -->
+        <section class="section venue" id="venue" aria-labelledby="venue-title">
+            <div class="venue__inner">
+                <div class="venue__pin" data-reveal aria-hidden="true">
+                    <span class="venue__ring"></span>
+                    <span class="venue__ring venue__ring--2"></span>
+                    <svg>
+                        <use href="#i-pin" />
+                    </svg>
+                </div>
+                <p class="caps caps--gold" data-reveal>The Venue</p>
+                <h2 class="venue__name" id="venue-title" data-reveal>Udechukwu Memorial School Compound</h2>
+                <p class="venue__area" data-reveal>Mmaku · Awgu L.G.A · Enugu State</p>
+                <div class="btn-row" data-reveal>
+                    <a class="btn btn--gold"
+                        href="https://www.google.com/maps/search/?api=1&amp;query=Udechukwu%20Memorial%20Primary%20School%2C%20Ifite%20Mmaku%2C%20Awgu%2C%20Enugu%20State%2C%20Nigeria"
+                        target="_blank" rel="noopener noreferrer">
+                        <svg aria-hidden="true">
+                            <use href="#i-pin" />
+                        </svg>
+                        <span>Get Directions</span>
+                    </a>
+                </div>
+                <p class="venue__note" data-reveal>Opens Google Maps</p>
+            </div>
+        </section>
+
+        <!-- ===== CLOSING ===== -->
+        <footer class="section closing" aria-label="Closing note">
+            <svg class="closing__corner closing__corner--tl" aria-hidden="true">
+                <use href="#art-blossoms" />
+            </svg>
+            <svg class="closing__corner closing__corner--br" aria-hidden="true">
+                <use href="#art-blossoms" />
+            </svg>
+            <div class="rule-diamond" data-reveal aria-hidden="true"><span></span></div>
+            <p class="closing__line" data-reveal>Your presence will make our day more special</p>
+            <p class="script closing__names" data-reveal>Chimezie <span class="closing__amp">&amp;</span> Richard</p>
+            <p class="closing__date" data-reveal>29 · 12 · 2026</p>
+            <svg class="closing__flourish" data-reveal aria-hidden="true">
+                <use href="#i-flourish" />
+            </svg>
+        </footer>
+    </main>
+
+    <!-- Floating music control (revealed by JS once the invitation opens) -->
+    <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false" aria-label="Play music" hidden>
+        <span class="music-toggle__bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    </button>
+
+    <audio id="bg-music" src="assets/music.mp3" preload="auto" loop></audio>
+
+    <!-- Gold dust & petals (above the intro, never intercepts taps) -->
+    <canvas class="fx-canvas" id="fx-canvas" aria-hidden="true"></canvas>
+</body>
+
+</html>
