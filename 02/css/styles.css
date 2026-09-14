@@ -840,12 +840,6 @@ button {
     box-shadow: 0 12px 24px -12px rgba(94, 21, 51, .75), inset 0 1px 0 rgba(255, 255, 255, .18);
 }
 
-.btn--outline {
-    color: var(--wine-600);
-    background: rgba(253, 248, 243, .6);
-    box-shadow: inset 0 0 0 1px rgba(122, 31, 61, .45);
-}
-
 .btn--gold {
     color: var(--wine-900);
     background: var(--foil);
@@ -1043,6 +1037,290 @@ button {
     height: 24px;
     margin: 1.6rem auto 0;
     color: var(--copper-500);
+}
+
+/* ---------- 5b. Calendar chooser (native <dialog>: focus trap, Esc, top layer) ---------- */
+html:has(.cal-sheet[open]) {
+    overflow: hidden;
+}
+
+.cal-sheet {
+    width: 100%;
+    max-width: 100%;
+    max-height: 92dvh;
+    margin: auto auto 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--olive-700);
+    overflow: visible;
+}
+
+.cal-sheet::backdrop {
+    background: rgba(42, 7, 21, .58);
+}
+
+.cal-sheet[open]::backdrop {
+    animation: sheet-fade-in .35s ease both;
+}
+
+.cal-sheet.is-closing::backdrop {
+    animation: sheet-fade-out .28s ease both;
+}
+
+.cal-sheet__panel {
+    position: relative;
+    max-height: 92dvh;
+    overflow-y: auto;
+    padding: 12px 18px calc(18px + env(safe-area-inset-bottom, 0px));
+    border-radius: 24px 24px 0 0;
+    text-align: center;
+    background: var(--grain), linear-gradient(180deg, #FFFCF8, var(--paper-50) 50%, var(--paper-100));
+    box-shadow: 0 -20px 50px -20px rgba(42, 7, 21, .55);
+    overscroll-behavior: contain;
+}
+
+.cal-sheet[open] .cal-sheet__panel {
+    animation: sheet-up .5s var(--ease-out) both;
+}
+
+.cal-sheet.is-closing .cal-sheet__panel {
+    animation: sheet-down .28s cubic-bezier(.4, 0, 1, 1) both;
+}
+
+.cal-sheet__grab {
+    display: block;
+    width: 44px;
+    height: 4px;
+    margin: 0 auto 14px;
+    border-radius: 4px;
+    background: rgba(122, 31, 61, .22);
+}
+
+.cal-sheet__title {
+    margin-top: .1rem;
+    font-size: clamp(2.3rem, 11vw, 2.9rem);
+}
+
+.cal-sheet__event {
+    margin-top: .2rem;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--olive-600);
+}
+
+.cal-sheet__list {
+    display: grid;
+    gap: 10px;
+    margin: 1.2rem 0 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+
+.cal-option {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) 18px;
+    grid-template-areas: "tile text arrow" "tile tag arrow";
+    align-items: center;
+    column-gap: 14px;
+    min-height: 68px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    text-decoration: none;
+    color: inherit;
+    background: #FFFDFA;
+    box-shadow: inset 0 0 0 1px rgba(122, 31, 61, .14), 0 8px 18px -14px rgba(74, 15, 36, .5);
+    transition: box-shadow .3s ease, transform .3s var(--ease-out);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.cal-option:active {
+    transform: scale(.985);
+}
+
+@media (hover: hover) {
+    .cal-option:hover {
+        box-shadow: inset 0 0 0 1px rgba(122, 31, 61, .45), 0 12px 22px -14px rgba(74, 15, 36, .55);
+        transform: translateY(-1px);
+    }
+}
+
+.cal-option__tile {
+    grid-area: tile;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-family: var(--font-caps);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--paper-50);
+}
+
+.cal-option__tile svg {
+    width: 22px;
+    height: 22px;
+}
+
+.cal-option__tile--wine {
+    background: radial-gradient(circle at 35% 30%, var(--wine-500), var(--wine-700));
+}
+
+.cal-option__tile--olive {
+    background: radial-gradient(circle at 35% 30%, var(--olive-500), var(--olive-700));
+}
+
+.cal-option__tile--gold {
+    color: var(--wine-900);
+    background: var(--foil);
+}
+
+.cal-option__tile--copper {
+    background: radial-gradient(circle at 35% 30%, #CF7D55, var(--copper-500) 60%, #8E4526);
+}
+
+.cal-option__text {
+    grid-area: text;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.cal-option__name {
+    font-family: var(--font-caps);
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: var(--wine-600);
+}
+
+.cal-option__hint {
+    font-size: .98rem;
+    line-height: 1.3;
+    color: var(--olive-600);
+}
+
+.cal-option__tag {
+    grid-area: tag;
+    display: none;
+    justify-self: start;
+    margin-top: 5px;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-family: var(--font-caps);
+    font-size: .56rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--wine-900);
+    background: var(--foil);
+}
+
+.cal-option__arrow {
+    grid-area: arrow;
+    width: 18px;
+    height: 18px;
+    color: var(--wine-600);
+    opacity: .7;
+}
+
+/* JS marks the best option for the guest's device */
+[data-recommended] .cal-option {
+    box-shadow: inset 0 0 0 1.5px rgba(184, 145, 79, .8), 0 12px 24px -14px rgba(74, 15, 36, .55);
+}
+
+[data-recommended] .cal-option__tag {
+    display: inline-block;
+}
+
+.cal-sheet__close {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 12px;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: var(--font-caps);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--wine-600);
+    background: rgba(122, 31, 61, .07);
+}
+
+@media (min-width: 600px) {
+    .cal-sheet {
+        width: min(460px, 92vw);
+        margin: auto;
+    }
+
+    .cal-sheet__panel {
+        padding: 26px 26px 22px;
+        border-radius: 24px;
+        box-shadow: 0 40px 80px -30px rgba(42, 7, 21, .7);
+    }
+
+    .cal-sheet__grab {
+        display: none;
+    }
+
+    .cal-sheet[open] .cal-sheet__panel {
+        animation-name: sheet-pop;
+    }
+
+    .cal-sheet.is-closing .cal-sheet__panel {
+        animation-name: sheet-unpop;
+    }
+}
+
+@keyframes sheet-up {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: none;
+    }
+}
+
+@keyframes sheet-down {
+    to {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes sheet-pop {
+    from {
+        opacity: 0;
+        transform: translateY(16px) scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes sheet-unpop {
+    to {
+        opacity: 0;
+        transform: translateY(10px) scale(.98);
+    }
+}
+
+@keyframes sheet-fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes sheet-fade-out {
+    to {
+        opacity: 0;
+    }
 }
 
 /* ---------- 6. Floating music toggle ---------- */

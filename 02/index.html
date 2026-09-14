@@ -44,6 +44,7 @@
     <script src="js/music.js" defer></script>
     <script src="js/fx.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/calendar.js" defer></script>
     <script src="js/intro.js" defer></script>
 </head>
 
@@ -222,6 +223,10 @@
         </symbol>
         <symbol id="i-arrow" viewBox="0 0 24 24">
             <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="i-download" viewBox="0 0 24 24">
+            <path d="M12 4v11m-5-5 5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.8"
                 stroke-linecap="round" stroke-linejoin="round" />
         </symbol>
         <symbol id="i-chevron-down" viewBox="0 0 24 24">
@@ -697,19 +702,13 @@
             <p class="countdown__done" id="countdown-done" hidden></p>
 
             <div class="btn-row" data-reveal>
-                <a class="btn btn--wine" href="assets/chimezie-richard-traditional-marriage.ics">
+                <!-- Without JS this falls back to the .ics file; js/calendar.js turns it into a calendar chooser -->
+                <a class="btn btn--wine" id="add-to-calendar" href="assets/chimezie-richard-traditional-marriage.ics"
+                    aria-haspopup="dialog" aria-controls="calendar-sheet">
                     <svg aria-hidden="true">
                         <use href="#i-calendar" />
                     </svg>
                     <span>Add to Calendar</span>
-                </a>
-                <a class="btn btn--outline"
-                    href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Traditional%20Marriage%20Ceremony%20%E2%80%94%20Chimezie%20%26%20Richard&amp;dates=20261229T120000Z%2F20261229T170000Z&amp;details=Together%20with%20their%20families%2C%20Chimezie%20Ekwe%20and%20Richard%20Chidi%20Chinaka%20invite%20you%20to%20their%20Traditional%20Marriage%20Ceremony.&amp;location=Udechukwu%20Memorial%20School%20Compound%2C%20Mmaku%2C%20Awgu%2C%20Enugu%20State"
-                    target="_blank" rel="noopener noreferrer">
-                    <span>Google Calendar</span>
-                    <svg aria-hidden="true">
-                        <use href="#i-arrow" />
-                    </svg>
                 </a>
             </div>
         </section>
@@ -758,6 +757,90 @@
             </svg>
         </footer>
     </main>
+
+    <!-- =====================================================================
+         CALENDAR CHOOSER — opened by #add-to-calendar (js/calendar.js).
+         Google/Outlook hrefs are generated from one EVENT config in JS.
+         The .ics file in assets/ must stay in sync with that config.
+         ===================================================================== -->
+    <dialog class="cal-sheet" id="calendar-sheet" aria-labelledby="calendar-sheet-title">
+        <div class="cal-sheet__panel">
+            <span class="cal-sheet__grab" aria-hidden="true"></span>
+            <p class="caps caps--olive">Save the date</p>
+            <h2 class="script cal-sheet__title" id="calendar-sheet-title">Add to your calendar</h2>
+            <p class="cal-sheet__event">Tuesday, December 29th 2026 · 1pm</p>
+
+            <ul class="cal-sheet__list" id="calendar-options">
+                <li data-calendar="google">
+                    <a class="cal-option" data-calendar-link="google" href="https://calendar.google.com/calendar"
+                        target="_blank" rel="noopener noreferrer">
+                        <span class="cal-option__tile cal-option__tile--olive" aria-hidden="true">G</span>
+                        <span class="cal-option__text">
+                            <span class="cal-option__name">Google Calendar</span>
+                            <span class="cal-option__hint">Android phones or any browser</span>
+                        </span>
+                        <span class="cal-option__tag">Best for this device</span>
+                        <svg class="cal-option__arrow" aria-hidden="true">
+                            <use href="#i-arrow" />
+                        </svg>
+                    </a>
+                </li>
+                <li data-calendar="apple">
+                    <a class="cal-option" data-calendar-link="apple"
+                        href="assets/chimezie-richard-traditional-marriage.ics">
+                        <span class="cal-option__tile cal-option__tile--wine" aria-hidden="true">
+                            <svg>
+                                <use href="#i-calendar" />
+                            </svg>
+                        </span>
+                        <span class="cal-option__text">
+                            <span class="cal-option__name">Apple Calendar</span>
+                            <span class="cal-option__hint">iPhone, iPad or Mac</span>
+                        </span>
+                        <span class="cal-option__tag">Best for this device</span>
+                        <svg class="cal-option__arrow" aria-hidden="true">
+                            <use href="#i-arrow" />
+                        </svg>
+                    </a>
+                </li>
+                <li data-calendar="outlook">
+                    <a class="cal-option" data-calendar-link="outlook" href="https://outlook.live.com/calendar/"
+                        target="_blank" rel="noopener noreferrer">
+                        <span class="cal-option__tile cal-option__tile--gold" aria-hidden="true">O</span>
+                        <span class="cal-option__text">
+                            <span class="cal-option__name">Outlook</span>
+                            <span class="cal-option__hint">Outlook.com or Hotmail</span>
+                        </span>
+                        <span class="cal-option__tag">Best for this device</span>
+                        <svg class="cal-option__arrow" aria-hidden="true">
+                            <use href="#i-arrow" />
+                        </svg>
+                    </a>
+                </li>
+                <li data-calendar="file">
+                    <a class="cal-option" data-calendar-link="file"
+                        href="assets/chimezie-richard-traditional-marriage.ics"
+                        download="chimezie-richard-traditional-marriage.ics">
+                        <span class="cal-option__tile cal-option__tile--copper" aria-hidden="true">
+                            <svg>
+                                <use href="#i-download" />
+                            </svg>
+                        </span>
+                        <span class="cal-option__text">
+                            <span class="cal-option__name">Other calendar app</span>
+                            <span class="cal-option__hint">Samsung Calendar &amp; others (.ics file)</span>
+                        </span>
+                        <span class="cal-option__tag">Best for this device</span>
+                        <svg class="cal-option__arrow" aria-hidden="true">
+                            <use href="#i-arrow" />
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+
+            <button class="cal-sheet__close" id="calendar-sheet-close" type="button">Close</button>
+        </div>
+    </dialog>
 
     <!-- Floating music control (revealed by JS once the invitation opens) -->
     <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false" aria-label="Play music" hidden>
