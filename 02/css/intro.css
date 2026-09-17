@@ -121,7 +121,7 @@
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    padding: calc(env(safe-area-inset-top, 0px) + clamp(22px, 5dvh, 44px)) 20px 0;
+    padding: calc(env(safe-area-inset-top, 0px) + clamp(14px, 3.4dvh, 32px)) 20px 0;
     opacity: 0;
     transition: opacity .9s ease .3s;
 }
@@ -160,12 +160,12 @@
 
 .envelope {
     position: relative;
-    width: min(76vw, 360px, calc((100vh - 270px) * .62));
-    width: min(76vw, 360px, calc((100dvh - 270px) * .62));
+    width: min(88vw, 400px, calc((100vh - 200px) * .62));
+    width: min(88vw, 400px, calc((100dvh - 200px) * .62));
     aspect-ratio: 5 / 7;
-    /* Leaves headroom for the card rising out. Viewport-height based: a % margin would follow the width. */
-    margin-top: clamp(20px, 9vh, 90px);
-    margin-top: clamp(20px, 9dvh, 90px);
+    /* Small nudge down; the camera pulls back as it opens, which is what frees room for the card. */
+    margin-top: clamp(10px, 4vh, 52px);
+    margin-top: clamp(10px, 4dvh, 52px);
     container-type: inline-size;
     opacity: 0;
 }
@@ -548,7 +548,7 @@
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    padding: 12px 20px calc(env(safe-area-inset-bottom, 0px) + clamp(18px, 4dvh, 40px));
+    padding: 10px 20px calc(env(safe-area-inset-bottom, 0px) + clamp(14px, 3dvh, 32px));
     opacity: 0;
     transition: opacity .8s ease .5s;
 }
@@ -645,7 +645,7 @@
     }
 
     .envelope {
-        margin-top: 4dvh;
+        margin-top: 2dvh;
     }
 }
 

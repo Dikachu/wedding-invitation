@@ -25,6 +25,9 @@
 
     const TAG = '✉️ [intro]';
     const FONT_TIMEOUT_MS = 2800;
+    /* The envelope fills most of the screen while closed, so the camera eases back
+       as the card rises — the same pull-back 01's video does. */
+    const PULL_BACK = 0.84;
 
     const T = {
         crack: 260,
@@ -251,9 +254,17 @@
             fx().emit({ x: r.left + r.width * 0.2, y: r.top - r.height * 0.05, width: r.width * 0.6, height: r.height * 0.3, rate: 48, duration: 1500, type: 'dust' });
         });
 
-        // 4 — card rises while the envelope sinks (camera follows)
+        // 4 — the camera eases back and down while the flap opens, keeping the whole envelope in frame
+        const cameraTiming = { delay: T.flap + 150, duration: 2050, easing: 'cubic-bezier(.33, 1, .68, 1)' };
+        animate(els.envelope, [{ scale: '1' }, { scale: String(PULL_BACK) }], cameraTiming);
+        animate(els.envelope, [
+            { translate: '0 0' },
+            { translate: '0 6%', offset: 0.45 },
+            { translate: '0 13%' },
+        ], cameraTiming);
+
+        // ...and the card rises out of the pocket
         animate(els.card, [{ transform: 'translateY(0)' }, { transform: 'translateY(-50%)' }], riseTiming);
-        animate(els.envelope, [{ translate: '0 0' }, { translate: '0 13%' }], riseTiming);
 
         // 5 — sheen across the card
         animate(els.cardSheen, [{ transform: 'translateX(-130%)' }, { transform: 'translateX(130%)' }],
