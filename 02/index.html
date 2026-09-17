@@ -45,6 +45,7 @@
     <script src="js/fx.js" defer></script>
     <script src="js/site.js" defer></script>
     <script src="js/calendar.js" defer></script>
+    <script src="js/ui.js" defer></script>
     <script src="js/intro.js" defer></script>
 </head>
 
@@ -277,6 +278,10 @@
         <symbol id="i-arrow" viewBox="0 0 24 24">
             <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"
                 stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24">
+            <path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" />
         </symbol>
         <symbol id="i-download" viewBox="0 0 24 24">
             <path d="M12 4v11m-5-5 5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.8"
@@ -629,6 +634,49 @@
         <span class="frame__band frame__band--right"></span>
     </div>
 
+    <!-- ===== NAV (revealed once the invitation is open) ===== -->
+    <header class="site-nav" id="site-nav" hidden>
+        <a class="site-nav__mark" href="#top" aria-label="Back to top">
+            <span class="script">C</span><span class="site-nav__amp">&amp;</span><span class="script">R</span>
+        </a>
+        <nav class="site-nav__links" aria-label="Sections">
+            <a href="#invitation">Invitation</a>
+            <a href="#story">Story</a>
+            <a href="#ceremony">Ceremony</a>
+            <a href="#dress-code">Dress Code</a>
+            <a href="#save-the-date">Save the Date</a>
+            <a href="#venue">Venue</a>
+            <a href="#faqs">FAQs</a>
+        </nav>
+        <button class="site-nav__toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu"
+            aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <dialog class="nav-menu" id="nav-menu" aria-label="Sections">
+        <div class="nav-menu__panel">
+            <button class="nav-menu__close" id="nav-close" type="button" aria-label="Close menu">
+                <svg aria-hidden="true">
+                    <use href="#i-close" />
+                </svg>
+            </button>
+            <svg class="nav-menu__knot" aria-hidden="true">
+                <use href="#i-knot" />
+            </svg>
+            <nav class="nav-menu__list" aria-label="Sections">
+                <a href="#invitation">Invitation</a>
+                <a href="#story">Our Story</a>
+                <a href="#ceremony">The Ceremony</a>
+                <a href="#dress-code">Dress Code</a>
+                <a href="#save-the-date">Save the Date</a>
+                <a href="#venue">Venue</a>
+                <a href="#faqs">Questions</a>
+            </nav>
+            <p class="nav-menu__date">29 · 12 · 2026</p>
+        </div>
+    </dialog>
+
     <main id="main">
 
         <!-- ===== HERO ===== -->
@@ -783,6 +831,132 @@
             </article>
         </section>
 
+        <!-- ===== OUR STORY ===== -->
+        <section class="section story" id="story" aria-labelledby="story-title">
+            <p class="caps caps--olive" data-reveal>Our Story</p>
+            <h2 class="script section-script" id="story-title" data-reveal>Two homes, one family</h2>
+
+            <div class="journey" data-reveal>
+                <div class="journey__place">
+                    <svg class="journey__pin" aria-hidden="true">
+                        <use href="#i-pin" />
+                    </svg>
+                    <p class="journey__name">Chimezie</p>
+                    <p class="journey__home">Iffite Mmaku<br>Awgu L.G.A · Enugu State</p>
+                </div>
+
+                <div class="journey__join" aria-hidden="true">
+                    <span class="journey__line"></span>
+                    <svg class="journey__knot">
+                        <use href="#i-knot" />
+                    </svg>
+                    <span class="journey__line"></span>
+                </div>
+
+                <div class="journey__place">
+                    <svg class="journey__pin" aria-hidden="true">
+                        <use href="#i-pin" />
+                    </svg>
+                    <p class="journey__name">Richard</p>
+                    <p class="journey__home">Obokwe Asa<br>Ukwa West L.G.A · Abia State</p>
+                </div>
+            </div>
+
+            <p class="story__closing" data-reveal>On the 29th of December, two families become one.</p>
+        </section>
+
+        <!-- ===== THE CEREMONY ===== -->
+        <section class="section ceremony" id="ceremony" aria-labelledby="ceremony-title">
+            <p class="caps caps--gold" data-reveal>The Ceremony</p>
+            <h2 class="script section-script section-script--light" id="ceremony-title" data-reveal>Igba Nkwu</h2>
+            <p class="ceremony__lead" data-reveal>The wine carrying · from 1pm</p>
+
+            <ol class="rites">
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">I</span>
+                    <div class="rite__body">
+                        <h3>Arrival &amp; Welcome</h3>
+                        <p>Guests are received and seated.</p>
+                    </div>
+                </li>
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">II</span>
+                    <div class="rite__body">
+                        <h3>Breaking of Kola <span class="rite__igbo">Iwa ọjị</span></h3>
+                        <p>The elders bless the gathering.</p>
+                    </div>
+                </li>
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">III</span>
+                    <div class="rite__body">
+                        <h3>Introduction of Families</h3>
+                        <p>Both families are formally presented.</p>
+                    </div>
+                </li>
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">IV</span>
+                    <div class="rite__body">
+                        <h3>Presentation of Wine &amp; Gifts</h3>
+                        <p>The customary items are brought forward.</p>
+                    </div>
+                </li>
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">V</span>
+                    <div class="rite__body">
+                        <h3>The Bride's Entrance</h3>
+                        <p>Chimezie is led in by her maidens.</p>
+                    </div>
+                </li>
+                <li class="rite rite--moment" data-reveal>
+                    <span class="rite__num" aria-hidden="true">VI</span>
+                    <div class="rite__body">
+                        <h3>The Wine Carrying <span class="rite__igbo">Igba Nkwu</span></h3>
+                        <p>She searches for Richard, and kneels to offer him the palm wine.</p>
+                    </div>
+                </li>
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">VII</span>
+                    <div class="rite__body">
+                        <h3>Blessing of the Couple</h3>
+                        <p>Elders pray over the new union.</p>
+                    </div>
+                </li>
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">VIII</span>
+                    <div class="rite__body">
+                        <h3>Feasting &amp; Celebration</h3>
+                        <p>Music, dancing and a shared meal.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <!-- ===== DRESS CODE ===== -->
+        <section class="section dress" id="dress-code" aria-labelledby="dress-title">
+            <p class="caps caps--olive" data-reveal>Dress Code</p>
+            <h2 class="script section-script" id="dress-title" data-reveal>Wear our colours</h2>
+
+            <div class="swatches" data-reveal>
+                <figure class="swatch">
+                    <span class="swatch__dot swatch__dot--wine"></span>
+                    <figcaption class="swatch__name">Wine</figcaption>
+                </figure>
+                <div class="swatch-join" aria-hidden="true">
+                    <span></span>
+                    <svg>
+                        <use href="#i-knot" />
+                    </svg>
+                    <span></span>
+                </div>
+                <figure class="swatch">
+                    <span class="swatch__dot swatch__dot--olive"></span>
+                    <figcaption class="swatch__name">Olive</figcaption>
+                </figure>
+            </div>
+
+            <p class="dress__note" data-reveal>Traditional Igbo attire, warmly encouraged.</p>
+        </section>
+
         <!-- ===== SAVE THE DATE ===== -->
         <section class="section save-date" id="save-the-date" aria-labelledby="save-date-title">
             <p class="caps caps--olive" data-reveal>Counting down to</p>
@@ -844,6 +1018,73 @@
                     </a>
                 </div>
                 <p class="venue__note" data-reveal>Opens Google Maps</p>
+            </div>
+        </section>
+
+        <!-- ===== QUESTIONS ===== -->
+        <section class="section faqs" id="faqs" aria-labelledby="faqs-title">
+            <p class="caps caps--olive" data-reveal>Questions</p>
+            <h2 class="script section-script" id="faqs-title" data-reveal>Good to know</h2>
+
+            <div class="faq-list">
+                <div class="faq" data-reveal>
+                    <h3>
+                        <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-1">
+                            <span>What time should I arrive?</span>
+                            <svg class="faq__chevron" aria-hidden="true">
+                                <use href="#i-chevron-down" />
+                            </svg>
+                        </button>
+                    </h3>
+                    <div class="faq__a" id="faq-1" hidden>
+                        <p>Proceedings begin at 1pm. Do come a little earlier so you are seated in good time.</p>
+                    </div>
+                </div>
+
+                <div class="faq" data-reveal>
+                    <h3>
+                        <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-2">
+                            <span>Where exactly is the venue?</span>
+                            <svg class="faq__chevron" aria-hidden="true">
+                                <use href="#i-chevron-down" />
+                            </svg>
+                        </button>
+                    </h3>
+                    <div class="faq__a" id="faq-2" hidden>
+                        <p>Udechukwu Memorial School Compound, Mmaku, Awgu L.G.A, Enugu State.
+                            <a href="#venue">Get directions</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq" data-reveal>
+                    <h3>
+                        <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-3">
+                            <span>What should I wear?</span>
+                            <svg class="faq__chevron" aria-hidden="true">
+                                <use href="#i-chevron-down" />
+                            </svg>
+                        </button>
+                    </h3>
+                    <div class="faq__a" id="faq-3" hidden>
+                        <p>Traditional Igbo attire in our colours — wine and olive. <a href="#dress-code">See the dress
+                                code</a>.</p>
+                    </div>
+                </div>
+
+                <div class="faq" data-reveal>
+                    <h3>
+                        <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-4">
+                            <span>What happens after the rites?</span>
+                            <svg class="faq__chevron" aria-hidden="true">
+                                <use href="#i-chevron-down" />
+                            </svg>
+                        </button>
+                    </h3>
+                    <div class="faq__a" id="faq-4" hidden>
+                        <p>The wine carrying is followed by feasting, music and dancing.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
