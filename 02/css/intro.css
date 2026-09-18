@@ -21,7 +21,7 @@
     overflow: hidden;
     color: var(--paper-50);
     background:
-        radial-gradient(ellipse 120% 80% at 50% 44%, #6E1A3B 0%, #4A112C 36%, #2A0715 70%, #17030B 100%);
+        radial-gradient(ellipse 120% 80% at 50% 44%, #5E2130 0%, #3B1B23 38%, #241014 72%, #150A0C 100%);
     -webkit-user-select: none;
     user-select: none;
     touch-action: manipulation;
@@ -219,8 +219,8 @@
     pointer-events: none;
     background-image:
         var(--grain),
-        radial-gradient(ellipse 72% 52% at 26% 14%, rgba(255, 253, 246, .7), rgba(255, 253, 246, 0) 62%),
-        radial-gradient(ellipse 115% 88% at 50% 52%, rgba(74, 20, 36, 0) 42%, rgba(74, 20, 36, .17) 100%);
+        radial-gradient(ellipse 72% 52% at 26% 14%, rgba(255, 253, 232, .3), rgba(255, 253, 232, 0) 62%),
+        radial-gradient(ellipse 115% 88% at 50% 52%, rgba(16, 20, 6, 0) 40%, rgba(16, 20, 6, .34) 100%);
     background-size: 90px 90px, auto, auto;
 }
 
@@ -414,14 +414,14 @@
     padding-left: .36em;
     text-transform: uppercase;
     color: var(--gold-500);
-    background: linear-gradient(110deg, #8A642C 0%, #8A642C 38%, #F0D596 48%, #8A642C 58%, #8A642C 100%);
+    background: linear-gradient(110deg, #C9AE72 0%, #C9AE72 38%, #F7EBC4 48%, #C9AE72 58%, #C9AE72 100%);
     background-size: 300% 100%;
     background-position: 100% 0;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     /* pressed-foil edge: dark below, light above */
-    filter: drop-shadow(0 1px 0 rgba(104, 72, 26, .55)) drop-shadow(0 -1px 0 rgba(255, 251, 240, .8));
+    filter: drop-shadow(0 1px 0 rgba(28, 32, 12, .6)) drop-shadow(0 -1px 0 rgba(246, 233, 196, .35));
     animation: foil-sweep 5.5s ease-in-out infinite;
 }
 
@@ -448,9 +448,9 @@
     font-family: var(--font-script);
     font-size: 6.8cqw;
     line-height: 1.15;
-    color: var(--wine-600);
+    color: #F4EAD2;
     /* letterpressed into the paper */
-    text-shadow: 0 1px 0 rgba(255, 252, 246, .85), 0 -1px 0 rgba(90, 24, 46, .28);
+    text-shadow: 0 1px 0 rgba(26, 30, 12, .55), 0 -1px 0 rgba(255, 252, 240, .18);
 }
 
 /* 5 — outer flap */
@@ -631,7 +631,7 @@
     z-index: 10;
     pointer-events: none;
     opacity: 0;
-    background: radial-gradient(circle at var(--bloom-x, 50%) var(--bloom-y, 45%), #FFFEFB 0%, var(--paper-50) 38%, var(--paper-100) 75%);
+    background: radial-gradient(circle at var(--bloom-x, 50%) var(--bloom-y, 45%), #FBF1D8 0%, #8A5A3A 26%, #3B1F1F 58%, #1B0E0C 100%);
 }
 
 .intro.is-closing {

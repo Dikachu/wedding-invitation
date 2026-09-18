@@ -24,9 +24,12 @@
     /* Blush, paper, foil */
     --blush-300: #F4C6D1;
     --blush-500: #D9728F;
-    --paper-50: #FDF8F3;
-    --paper-100: #F7EEE8;
-    --paper-200: #EFE1D8;
+    --paper-50: #FDFBF7;
+    --paper-100: #FAF7F2;
+    --paper-200: #F5EFE4;
+    /* dark section tone, taken from the first invitation site */
+    --dark: #3B1F1F;
+    --dark-deep: #2A1416;
     --gold-200: #F2E0B0;
     --gold-300: #E6CB8C;
     --gold-400: #D4AF6A;
@@ -52,6 +55,7 @@
     /* Subtle paper grain (tiny SVG turbulence, data URI → allowed by CSP img-src data:) */
     --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .33 0 0 0 0 .2 0 0 0 0 .18 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     /* Card side-band motif: stacked diamonds with dots */
+    --dark-motif: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A84C' fill-opacity='.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
     --diamond-chain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 44'%3E%3Cg fill='none' stroke='%23D4AF6A' stroke-width='1.1' opacity='.85'%3E%3Cpath d='M10 6 17 22 10 38 3 22Z'/%3E%3Cpath d='M10 14 13.5 22 10 30 6.5 22Z'/%3E%3C/g%3E%3Cg fill='%23D4AF6A' opacity='.85'%3E%3Ccircle cx='10' cy='2' r='1.3'/%3E%3Ccircle cx='10' cy='42' r='1.3'/%3E%3C/g%3E%3C/svg%3E");
 }
 
@@ -305,9 +309,57 @@ button {
     padding: clamp(150px, 46vw, 220px) var(--gutter) clamp(130px, 38vw, 190px);
     overflow: hidden;
     text-align: center;
+    color: var(--paper-50);
     background:
-        var(--grain),
-        radial-gradient(ellipse 80% 60% at 50% 45%, var(--paper-50) 0%, var(--paper-100) 60%, var(--paper-200) 100%);
+        radial-gradient(ellipse 75% 60% at 50% 45%, transparent 30%, rgba(6, 4, 2, .62) 100%),
+        linear-gradient(rgba(8, 5, 3, .5), rgba(8, 5, 3, .74)),
+        url('../assets/hero.jpg') center / cover no-repeat,
+        #0A0806;
+}
+
+/* Hero type reads light over the photograph */
+.hero__eyebrow {
+    color: var(--gold-300);
+}
+
+.hero .script {
+    color: #F6F1E7;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, .55);
+}
+
+.hero .knot-divider,
+.hero .and-divider {
+    color: var(--gold-400);
+}
+
+.hero .and-divider__badge {
+    box-shadow: 0 0 0 3px rgba(10, 8, 6, .55), 0 0 0 4px rgba(212, 175, 106, .45), 0 6px 16px -6px rgba(0, 0, 0, .8);
+}
+
+.hero .hero__date-main {
+    color: #F6F1E7;
+}
+
+.hero .hero__date-sub {
+    color: var(--gold-300);
+}
+
+.hero .hero__cue {
+    color: rgba(246, 241, 231, .82);
+}
+
+.hero .hero__cue svg {
+    color: var(--gold-400);
+}
+
+.hero__art {
+    opacity: .8;
+}
+
+/* the AND medallion reads as a dark jewel on the photograph */
+.hero .and-divider__badge {
+    background: radial-gradient(circle at 35% 30%, rgba(122, 31, 61, .95), rgba(30, 10, 14, .95));
+    color: var(--gold-200);
 }
 
 .hero__art {
@@ -849,10 +901,9 @@ button {
 
 /* ===== VENUE ===== */
 .venue {
-    color: var(--paper-50);
     background:
         var(--grain),
-        radial-gradient(ellipse 90% 70% at 50% 35%, var(--wine-600) 0%, var(--wine-800) 55%, var(--wine-900) 100%);
+        radial-gradient(ellipse 70% 50% at 50% 35%, var(--paper-50), var(--paper-100) 70%);
 }
 
 /* Akwete-style woven stripes along top & bottom edges */
@@ -867,7 +918,7 @@ button {
         linear-gradient(var(--gold-400), var(--gold-400)) top / 100% 1px no-repeat,
         linear-gradient(var(--gold-400), var(--gold-400)) bottom / 100% 1px no-repeat,
         repeating-linear-gradient(90deg, var(--gold-500) 0 3px, transparent 3px 6px, var(--olive-500) 6px 8px, transparent 8px 11px);
-    opacity: .85;
+    opacity: .6;
 }
 
 .venue::before {
@@ -890,7 +941,7 @@ button {
     width: 84px;
     height: 84px;
     margin: 0 auto 1.4rem;
-    color: var(--gold-300);
+    color: var(--wine-600);
 }
 
 .venue__pin svg {
@@ -903,7 +954,7 @@ button {
     position: absolute;
     inset: 0;
     border-radius: 50%;
-    border: 1px solid rgba(230, 203, 140, .55);
+    border: 1px solid rgba(184, 145, 79, .7);
     animation: ring-pulse 3.2s var(--ease-out) infinite;
 }
 
@@ -930,7 +981,7 @@ button {
     font-size: clamp(1.4rem, 6.6vw, 2.5rem);
     line-height: 1.32;
     letter-spacing: .05em;
-    color: var(--paper-50);
+    color: var(--wine-600);
     text-wrap: balance;
 }
 
@@ -938,7 +989,7 @@ button {
     margin-top: .7rem;
     font-style: italic;
     font-size: 1.15rem;
-    color: var(--gold-300);
+    color: var(--olive-600);
 }
 
 .venue__note {
@@ -947,16 +998,21 @@ button {
     font-size: .58rem;
     letter-spacing: .24em;
     text-transform: uppercase;
-    color: rgba(253, 248, 243, .6);
+    color: var(--olive-500);
 }
 
 /* ===== CLOSING ===== */
 .closing {
     overflow: hidden;
     padding-block: clamp(96px, 26vw, 150px) clamp(88px, 22vw, 130px);
+    color: var(--paper-50);
     background:
-        var(--grain),
-        radial-gradient(ellipse 80% 60% at 50% 50%, var(--paper-50), var(--paper-100) 70%);
+        var(--dark-motif),
+        radial-gradient(ellipse 85% 65% at 50% 45%, #4A2725 0%, var(--dark) 55%, var(--dark-deep) 100%);
+}
+
+.closing .closing__corner {
+    opacity: .85;
 }
 
 .closing__corner {
@@ -985,7 +1041,7 @@ button {
     width: min(16rem, 64%);
     height: 1px;
     margin: 0 auto 1.8rem;
-    background: linear-gradient(90deg, transparent, var(--wine-600), transparent);
+    background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
 }
 
 .rule-diamond span {
@@ -994,7 +1050,7 @@ button {
     top: 50%;
     width: 7px;
     height: 7px;
-    background: var(--wine-600);
+    background: var(--gold-400);
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
@@ -1008,7 +1064,7 @@ button {
     letter-spacing: .24em;
     padding-left: .24em;
     text-transform: uppercase;
-    color: var(--wine-600);
+    color: var(--gold-300);
     text-wrap: balance;
 }
 
@@ -1016,10 +1072,12 @@ button {
     margin-top: 1.3rem;
     padding-inline: .15em;
     font-size: clamp(2.3rem, 11.4vw, 4.6rem);
+    color: #F6F1E7;
+    text-shadow: 0 2px 26px rgba(0, 0, 0, .5);
 }
 
 .closing__amp {
-    color: var(--olive-600);
+    color: var(--gold-400);
 }
 
 .closing__date {
@@ -1029,21 +1087,52 @@ button {
     font-weight: 600;
     letter-spacing: .4em;
     padding-left: .4em;
-    color: var(--olive-600);
+    color: rgba(230, 203, 140, .85);
 }
 
 .closing__flourish {
     width: 120px;
     height: 24px;
     margin: 1.6rem auto 0;
-    color: var(--copper-500);
+    color: var(--gold-400);
 }
 
 /* ===== OUR STORY ===== */
 .story {
+    color: var(--paper-50);
     background:
-        var(--grain),
-        linear-gradient(180deg, var(--paper-100), var(--paper-50) 60%);
+        var(--dark-motif),
+        radial-gradient(ellipse 90% 70% at 50% 25%, #4A2725 0%, var(--dark) 55%, var(--dark-deep) 100%);
+}
+
+.story .journey__place {
+    background: rgba(255, 246, 236, .045);
+    box-shadow: inset 0 0 0 1px rgba(201, 168, 76, .3), 0 18px 34px -26px rgba(0, 0, 0, .9);
+}
+
+.story .journey__name {
+    color: #F6F1E7;
+}
+
+.story .journey__home {
+    color: rgba(246, 241, 231, .72);
+}
+
+.story .journey__pin,
+.story .journey__join {
+    color: var(--gold-400);
+}
+
+.story .journey__line {
+    background: linear-gradient(var(--gold-400), transparent);
+}
+
+.story .journey__line:last-child {
+    background: linear-gradient(transparent, var(--gold-400));
+}
+
+.story__closing {
+    color: rgba(246, 241, 231, .8);
 }
 
 .journey {
@@ -1140,10 +1229,9 @@ button {
 
 /* ===== THE CEREMONY (dark wine, like the fabric on the card) ===== */
 .ceremony {
-    color: var(--paper-50);
     background:
         var(--grain),
-        radial-gradient(ellipse 95% 70% at 50% 18%, var(--wine-700) 0%, var(--wine-800) 52%, var(--wine-900) 100%);
+        linear-gradient(180deg, var(--paper-200), var(--paper-100) 30%, var(--paper-50) 100%);
 }
 
 .ceremony::before,
@@ -1153,7 +1241,7 @@ button {
     left: var(--gutter);
     right: var(--gutter);
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 106, .55), transparent);
+    background: linear-gradient(90deg, transparent, rgba(184, 145, 79, .75), transparent);
 }
 
 .ceremony::before {
@@ -1173,7 +1261,7 @@ button {
     margin-top: .2rem;
     font-style: italic;
     font-size: 1.05rem;
-    color: rgba(253, 248, 243, .72);
+    color: var(--olive-600);
 }
 
 .rites {
@@ -1193,8 +1281,7 @@ button {
     top: 14px;
     bottom: 14px;
     width: 1px;
-    background: linear-gradient(transparent, rgba(212, 175, 106, .5) 6%, rgba(212, 175, 106, .5) 94%, transparent);
-    box-shadow: 0 0 14px rgba(212, 175, 106, .35);
+    background: linear-gradient(transparent, rgba(160, 120, 58, .8) 6%, rgba(160, 120, 58, .8) 94%, transparent);
 }
 
 .rite {
@@ -1208,10 +1295,10 @@ button {
     position: absolute;
     left: -27px;
     top: 27px;
-    width: 9px;
-    height: 9px;
-    background: linear-gradient(140deg, var(--gold-200), var(--gold-500));
-    box-shadow: 0 0 10px rgba(212, 175, 106, .55);
+    width: 10px;
+    height: 10px;
+    background: linear-gradient(140deg, var(--gold-400), #8A6526);
+    box-shadow: 0 0 0 3px var(--paper-100);
     transform: rotate(45deg);
 }
 
@@ -1220,8 +1307,8 @@ button {
     overflow: hidden;
     padding: 16px 48px 16px 18px;
     border-radius: 14px;
-    background: linear-gradient(135deg, rgba(255, 241, 226, .085), rgba(255, 241, 226, .02));
-    box-shadow: inset 0 0 0 1px rgba(212, 175, 106, .22);
+    background: linear-gradient(135deg, #FFFCF8, #FAF4EA);
+    box-shadow: inset 0 0 0 1px rgba(122, 31, 61, .13), 0 12px 26px -24px rgba(74, 15, 36, .7);
 }
 
 /* soft light catching the top-left corner of each panel */
@@ -1230,7 +1317,7 @@ button {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(ellipse 60% 70% at 12% 0%, rgba(255, 244, 225, .1), transparent 60%);
+    background: radial-gradient(ellipse 60% 70% at 12% 0%, rgba(255, 255, 255, .75), transparent 60%);
 }
 
 /* the ghosted roman numeral */
@@ -1243,18 +1330,18 @@ button {
     font-weight: 700;
     letter-spacing: .02em;
     line-height: 1;
-    color: rgba(212, 175, 106, .17);
+    color: rgba(122, 31, 61, .14);
     pointer-events: none;
 }
 
 /* the heart of Igba Nkwu gets the gold */
 .rite--moment .rite__body {
-    background: linear-gradient(135deg, rgba(212, 175, 106, .17), rgba(212, 175, 106, .045));
-    box-shadow: inset 0 0 0 1px rgba(212, 175, 106, .5), 0 20px 44px -30px rgba(0, 0, 0, .95);
+    background: linear-gradient(135deg, rgba(212, 175, 106, .22), rgba(212, 175, 106, .07));
+    box-shadow: inset 0 0 0 1.5px rgba(184, 145, 79, .6), 0 20px 40px -28px rgba(74, 15, 36, .8);
 }
 
 .rite--moment .rite__num {
-    color: rgba(240, 213, 150, .3);
+    color: rgba(168, 122, 51, .32);
 }
 
 .rite--moment::before {
@@ -1262,7 +1349,7 @@ button {
     height: 12px;
     top: 25px;
     left: -28.5px;
-    box-shadow: 0 0 16px rgba(240, 213, 150, .85);
+    box-shadow: 0 0 0 3px var(--paper-100), 0 0 14px rgba(184, 145, 79, .8);
 }
 
 .rite__body h3 {
@@ -1272,7 +1359,7 @@ button {
     font-weight: 600;
     letter-spacing: .08em;
     line-height: 1.35;
-    color: var(--paper-50);
+    color: var(--wine-600);
     text-wrap: balance;
 }
 
@@ -1283,14 +1370,14 @@ button {
     font-size: .95em;
     font-weight: 400;
     letter-spacing: 0;
-    color: var(--gold-300);
+    color: var(--olive-500);
 }
 
 .rite__body p {
     margin-top: .25rem;
     font-size: 1rem;
     line-height: 1.5;
-    color: rgba(253, 248, 243, .68);
+    color: var(--olive-600);
 }
 
 /* Wider screens: the rites alternate either side of the thread */
@@ -1372,7 +1459,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(14px, 5vw, 44px);
+    gap: clamp(8px, 2.6vw, 34px);
     margin-top: 2.2rem;
 }
 
@@ -1385,7 +1472,7 @@ button {
 }
 
 .swatch__dot {
-    width: clamp(92px, 29vw, 150px);
+    width: clamp(74px, 21vw, 140px);
     aspect-ratio: 1;
     border-radius: 50%;
     box-shadow:
@@ -1400,6 +1487,10 @@ button {
 
 .swatch__dot--olive {
     background: radial-gradient(circle at 34% 30%, #7E8B4E, var(--olive-600) 52%, var(--olive-800));
+}
+
+.swatch__dot--blush {
+    background: radial-gradient(circle at 34% 30%, #FBE0E7, var(--blush-300) 52%, #DFA3B4);
 }
 
 .swatch__name {
