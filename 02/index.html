@@ -15,7 +15,8 @@
     <title>Chimezie &amp; Richard · Traditional Marriage · 29.12.2026</title>
     <meta name="description"
         content="Together with their families, Chimezie Ekwe and Richard Chidi Chinaka invite you to their Traditional Marriage Ceremony — December 29th 2026, 1pm, Udechukwu Memorial School Compound.">
-    <meta name="theme-color" content="#2A0715">
+    <!-- Matches the top of the closed envelope (js/intro.js swaps it to the paper tone once open) -->
+    <meta name="theme-color" content="#5D6939">
     <meta name="color-scheme" content="light">
 
     <!-- Social previews (WhatsApp/iMessage need an ABSOLUTE og:image URL once deployed) -->
@@ -489,8 +490,10 @@
     </svg>
 
     <!-- =====================================================================
-         INTRO — code-built envelope with wax seal. Removed from the DOM once
-         opened. If JS never runs, css/intro.css fades it out automatically.
+         INTRO — code-built envelope with wax seal. The closed envelope fills
+         the whole screen (the backdrop only shows while it opens). Removed
+         from the DOM once opened. If JS never runs, css/intro.css fades it
+         out automatically.
          ===================================================================== -->
     <div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-label">
         <p class="sr-only" id="intro-label">Invitation to the Traditional Marriage Ceremony of Chimezie Ekwe and
@@ -506,14 +509,9 @@
             </svg>
         </div>
 
-        <header class="intro__top" aria-hidden="true">
-            <span class="intro__eyebrow">Igba Nkwu</span>
-            <span class="intro__date">29 · 12 · 2026</span>
-        </header>
-
-        <div class="intro__scene" id="intro-scene" aria-hidden="true">
+        <div class="intro__scene" id="intro-scene">
             <div class="envelope" id="envelope">
-                <div class="envelope__float" id="envelope-float">
+                <div class="envelope__float" id="envelope-float" aria-hidden="true">
 
                     <!-- 1. Inside of the envelope (liner visible through the opening) -->
                     <svg class="envelope__back" viewBox="0 0 500 700" preserveAspectRatio="none">
@@ -568,10 +566,11 @@
                             <use href="#foil-sprig" width="100" height="100" transform="translate(4 452) scale(.92)" />
                             <use href="#foil-sprig" width="100" height="100"
                                 transform="translate(496 452) scale(-.92 .92)" />
-                            <use href="#foil-daisy" x="30" y="626" width="52" height="52" />
-                            <use href="#foil-daisy" x="418" y="626" width="52" height="52" />
-                            <use href="#foil-dots" x="96" y="600" width="30" height="30" />
-                            <use href="#foil-dots" x="374" y="600" width="30" height="30" />
+                            <!-- bottom row kept below the inscription (which ends ~92% down) -->
+                            <use href="#foil-daisy" x="22" y="646" width="52" height="52" />
+                            <use href="#foil-daisy" x="426" y="646" width="52" height="52" />
+                            <use href="#foil-dots" x="96" y="652" width="30" height="30" />
+                            <use href="#foil-dots" x="374" y="652" width="30" height="30" />
                         </svg>
                         <span class="paper-skin paper-skin--pocket" aria-hidden="true"></span>
                         <div class="envelope__inscription">
@@ -615,15 +614,15 @@
                     </div>
                     <span class="seal-pulse" id="seal-pulse"></span>
                 </div>
+
+                <!-- Sits on the envelope just under the seal (the whole stage is tappable too) -->
+                <button class="intro__open" id="intro-open" type="button" disabled>
+                    <span class="intro__open-label" id="intro-open-label">Preparing your invitation…</span>
+                </button>
             </div>
         </div>
 
-        <div class="intro__actions">
-            <button class="intro__open" id="intro-open" type="button" disabled>
-                <span class="intro__open-label" id="intro-open-label">Preparing your invitation…</span>
-            </button>
-            <button class="intro__skip" id="intro-skip" type="button">Skip animation</button>
-        </div>
+        <button class="intro__skip" id="intro-skip" type="button">Skip animation</button>
 
         <span class="intro__bloom" id="intro-bloom" aria-hidden="true"></span>
     </div>

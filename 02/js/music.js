@@ -2,7 +2,11 @@
  * music.js — background music controller.
  *
  * Exposes `window.Wedding.music` with:
- *   play()    — MUST be called synchronously inside a user gesture the first time (autoplay policy).
+ *   unlock()  — MUST be called synchronously inside a user gesture (the "open" tap). Silently
+ *               starts-and-pauses the element so browsers that gate playback per element
+ *               (iOS/Safari, in-app browsers) will accept a later play() outside any gesture.
+ *   play()    — starts the track. Safe outside a gesture once unlock() has run; if it is ever
+ *               called first, it still works when invoked inside a gesture.
  *   pause()
  *   toggle()
  *   showToggle() — reveals the floating play/pause button.
@@ -27,11 +31,12 @@
 
     if (!audio) {
         console.error(`${TAG} ❌ <audio id="bg-music"> not found — music disabled.`);
-        window.Wedding.music = { play() { }, pause() { }, toggle() { }, showToggle() { } };
+        window.Wedding.music = { unlock() { }, play() { }, pause() { }, toggle() { }, showToggle() { } };
         return;
     }
 
     let hasStarted = false;
+    let isUnlocked = false;
     let pausedByVisibility = false;
 
     audio.volume = TARGET_VOLUME;
@@ -50,6 +55,29 @@
         toggleBtn.classList.toggle('is-playing', isPlaying);
         toggleBtn.setAttribute('aria-pressed', String(isPlaying));
         toggleBtn.setAttribute('aria-label', isPlaying ? 'Pause music' : 'Play music');
+    }
+
+    /**
+     * Pre-authorise playback from inside a user gesture without making a sound.
+     * play() + pause() in the same tick never outputs audio (and the element is muted for the
+     * duration as belt-and-braces); the play promise rejects with AbortError, which is expected.
+     */
+    function unlock() {
+        if (isUnlocked) return;
+        try {
+            audio.muted = true;
+            const attempt = audio.play();
+            audio.pause();
+            audio.muted = false;
+            if (attempt && typeof attempt.catch === 'function') {
+                attempt.catch(() => { /* AbortError: interrupted by the pause() above — intended */ });
+            }
+            isUnlocked = true;
+            console.info(`${TAG} 🔓 unlocked by the guest's tap — will start when the invitation is revealed`);
+        } catch (err) {
+            audio.muted = false;
+            console.warn(`${TAG} ⚠️ could not pre-unlock playback — will still try when revealed:`, err);
+        }
     }
 
     function play() {
@@ -110,6 +138,6 @@
         }
     });
 
-    window.Wedding.music = { play, pause, toggle, showToggle };
+    window.Wedding.music = { unlock, play, pause, toggle, showToggle };
     console.info(`${TAG} ✅ controller ready`);
 })();

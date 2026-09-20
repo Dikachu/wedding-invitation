@@ -4,17 +4,18 @@
  * Flow:  loading → ready (tap to open) → opening timeline → reveal site → cleanup (overlay removed)
  *
  * Timeline (ms after the tap)                         what happens
- *   0      seal pressed (scale)                        music starts (same gesture → autoplay-safe)
+ *   0      seal pressed (scale)                        music is silently unlocked (same gesture → autoplay-safe)
  *   260    gold crack glints across the seal           spark burst + tiny haptic tick
  *   640    bottom half of the seal drops away
  *   700    flap opens: outer face 0→90°, liner −90→0°  gold dust pours from the opening
- *   1650   card rises out of the pocket, envelope sinks
- *   2500   light sheen sweeps the card
- *   3050   camera pushes into the card
- *   3450   paper-coloured bloom fills the screen
- *   3900   site hero entrance starts, petals fall
- *   4050   overlay fades out
- *   4900   overlay removed, scroll unlocked
+ *   850    envelope slides down (full size kept) to make room above it for the card
+ *   1800   card rises out of the pocket (slow)
+ *   3150   light sheen sweeps the card
+ *   3900   camera pushes into the card (slow)
+ *   4550   warm bloom fills the screen
+ *   5200   site hero entrance starts underneath, petals fall
+ *   5400   overlay fades out — the home page appears, MUSIC STARTS here
+ *   6350   overlay removed, scroll unlocked
  *
  * Robustness: every step is wrapped; any error jumps straight to the site. "Skip animation" and
  * prefers-reduced-motion use a short crossfade. If this file never runs, css/intro.css fades the
@@ -25,26 +26,33 @@
 
     const TAG = '✉️ [intro]';
     const FONT_TIMEOUT_MS = 2800;
-    /* The envelope fills most of the screen while closed, so the camera eases back
-       as the card rises — the same pull-back 01's video does. */
-    const PULL_BACK = 0.84;
+
+    /* While it opens the envelope keeps its full (screen-covering) size and only slides down until
+       its top edge sits this far down the viewport — that gap is what the card rises into. */
+    const ENVELOPE_TOP = 0.26;
+    /* Card insert geometry as fractions of the envelope height (mirrors .envelope__card in intro.css)
+       and the range it may rise out of the pocket by (fraction of its own height). */
+    const CARD = { top: 0.04, height: 0.88, minRise: 0.12, maxRise: 0.5 };
+    /* The risen card's top edge lands here (fraction of the viewport height). */
+    const FRAME_TOP = 0.04;
 
     const T = {
         crack: 260,
         split: 640,
         flap: 700,
-        flapDur: 1150,
-        rise: 1650,
-        riseDur: 1250,
-        sheen: 2500,
-        push: 3050,
-        pushDur: 1150,
-        bloom: 3450,
-        bloomDur: 700,
-        reveal: 3900,
-        fade: 4050,
-        fadeDur: 800,
-        cleanup: 4900,
+        flapDur: 1300,
+        camera: 850,
+        rise: 1800,
+        riseDur: 1900,
+        sheen: 3150,
+        push: 3900,
+        pushDur: 1800,
+        bloom: 4550,
+        bloomDur: 1000,
+        reveal: 5200,
+        fade: 5400,
+        fadeDur: 900,
+        cleanup: 6350,
     };
 
     const Wedding = window.Wedding || (window.Wedding = {});
@@ -52,7 +60,7 @@
     const main = document.getElementById('main');
     const htmlEl = document.documentElement;
 
-    const music = () => Wedding.music || { play() { }, showToggle() { } };
+    const music = () => Wedding.music || { unlock() { }, play() { }, showToggle() { } };
     const fx = () => Wedding.fx || { burst() { }, emit() { }, ambient() { }, stop() { } };
     const enterHero = () => (Wedding.site ? Wedding.site.enterHero() : undefined);
 
@@ -92,6 +100,7 @@
     const canAnimate = typeof Element.prototype.animate === 'function';
 
     let state = 'loading'; // loading | ready | opening | done
+    let musicStarted = false;
     const timers = [];
     const running = [];
 
@@ -178,8 +187,9 @@
         if (state !== 'ready') return;
         state = 'opening';
 
-        // Must stay synchronous inside the gesture for iOS/Chrome autoplay rules.
-        music().play();
+        // Must stay synchronous inside the gesture for iOS/Chrome autoplay rules. Nothing is heard
+        // yet — the music itself starts when the home page appears (startMusic at T.fade).
+        music().unlock();
 
         intro.classList.add('is-opening');
         els.openBtn.disabled = true;
@@ -203,9 +213,33 @@
         return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
     }
 
+    /**
+     * How the scene moves while the envelope opens: the envelope keeps its size and slides down so
+     * its top edge sits at ENVELOPE_TOP, and the card rises just far enough for its top edge to
+     * reach FRAME_TOP — so the names on the card are on screen whatever the screen size.
+     * Uses layout sizes, not transformed rects, so a tap mid-entrance still measures the resting box.
+     */
+    function cameraTarget() {
+        const viewH = window.innerHeight;
+        const scene = els.scene.getBoundingClientRect();
+        const envH = els.envelope.offsetHeight;
+        const restingTop = scene.top + (scene.height - envH) / 2; // the envelope is centred in the scene
+
+        const shift = Math.round(ENVELOPE_TOP * viewH - restingTop);
+        const openedTop = restingTop + shift;
+        // Card top after rising = openedTop + (CARD.top − CARD.height·rise)·envH; solve for FRAME_TOP·viewH
+        const wanted = (CARD.top - (FRAME_TOP * viewH - openedTop) / envH) / CARD.height;
+        const rise = Math.min(CARD.maxRise, Math.max(CARD.minRise, wanted));
+
+        console.info(`${TAG} 🎥 envelope slides down ${shift}px, card rises ${(rise * 100).toFixed(0)}% of its height (envelope ${envH}px in ${viewH}px)`);
+        return { shift, rise };
+    }
+
     function runTimeline() {
         const flapTiming = { delay: T.flap, duration: T.flapDur, easing: 'cubic-bezier(.6, 0, .35, 1)' };
         const riseTiming = { delay: T.rise, duration: T.riseDur, easing: 'cubic-bezier(.22, 1, .36, 1)' };
+        // The envelope settles at the same moment the card finishes rising.
+        const cameraTiming = { delay: T.camera, duration: T.rise + T.riseDur - T.camera, easing: 'cubic-bezier(.33, 1, .68, 1)' };
 
         // 0 — press the seal (individual `scale` so later `translate/rotate` animations don't clash)
         [els.sealTop, els.sealBottom].forEach((el) => animate(el, [
@@ -254,21 +288,21 @@
             fx().emit({ x: r.left + r.width * 0.2, y: r.top - r.height * 0.05, width: r.width * 0.6, height: r.height * 0.3, rate: 48, duration: 1500, type: 'dust' });
         });
 
-        // 4 — the camera eases back and down while the flap opens, keeping the whole envelope in frame
-        const cameraTiming = { delay: T.flap + 150, duration: 2050, easing: 'cubic-bezier(.33, 1, .68, 1)' };
-        animate(els.envelope, [{ scale: '1' }, { scale: String(PULL_BACK) }], cameraTiming);
+        // 4 — the envelope slides down (same size, still full width) while the flap opens,
+        //     making room above it for the card
+        const camera = cameraTarget();
         animate(els.envelope, [
             { translate: '0 0' },
-            { translate: '0 6%', offset: 0.45 },
-            { translate: '0 13%' },
+            { translate: `0 ${Math.round(camera.shift * 0.46)}px`, offset: 0.45 },
+            { translate: `0 ${camera.shift}px` },
         ], cameraTiming);
 
         // ...and the card rises out of the pocket
-        animate(els.card, [{ transform: 'translateY(0)' }, { transform: 'translateY(-50%)' }], riseTiming);
+        animate(els.card, [{ transform: 'translateY(0)' }, { transform: `translateY(${(-camera.rise * 100).toFixed(1)}%)` }], riseTiming);
 
         // 5 — sheen across the card
         animate(els.cardSheen, [{ transform: 'translateX(-130%)' }, { transform: 'translateX(130%)' }],
-            { delay: T.sheen, duration: 950, easing: 'ease-in-out' });
+            { delay: T.sheen, duration: 1000, easing: 'ease-in-out' });
 
         // 6 — push into the card + bloom
         at(T.push, 'push-in', () => {
@@ -295,7 +329,11 @@
             fx().burst({ x: window.innerWidth / 2, y: window.innerHeight * 0.42, count: 26, type: 'dust' });
         });
 
-        at(T.fade, 'fade', () => intro.classList.add('is-closing'));
+        // 8 — the overlay fades and the home page comes through: this is when the music starts
+        at(T.fade, 'fade', () => {
+            intro.classList.add('is-closing');
+            startMusic();
+        });
         animate(intro, [{ opacity: 1 }, { opacity: 0 }], { delay: T.fade, duration: T.fadeDur, easing: 'ease' });
 
         at(T.cleanup, 'cleanup', finish);
@@ -307,6 +345,7 @@
         timers.length = 0;
         fx().ambient(false);
         reveal();
+        startMusic(); // still inside the tap for the skip path, so it plays even without unlock()
 
         if (canAnimate) {
             const fade = intro.animate([{ opacity: 1 }, { opacity: 0 }], { duration: reducedMotion ? 350 : 650, easing: 'ease', fill: 'forwards' });
@@ -322,6 +361,14 @@
         music().showToggle();
     }
 
+    /** Starts the track once, the moment the guest lands on the home page. */
+    function startMusic() {
+        if (musicStarted) return;
+        musicStarted = true;
+        console.info(`${TAG} 🎵 home page in view — starting the music`);
+        music().play();
+    }
+
     function finish() {
         if (state === 'done') return;
         state = 'done';
@@ -331,6 +378,7 @@
         fx().ambient(false);
 
         reveal(); // idempotent — guarantees the site is visible even if we got here via an error
+        startMusic();
         htmlEl.classList.remove('is-locked');
         setInert(main, false);
         intro.remove();

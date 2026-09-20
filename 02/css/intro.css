@@ -1,6 +1,11 @@
 /* ==========================================================================
    INTRO — envelope + wax seal opening (styles only; choreography in js/intro.js)
 
+   Stage: the closed envelope covers the whole viewport on phones (portrait),
+   like a printed envelope held up to the camera — the wine backdrop is only
+   seen while it opens and the camera pulls back. Wide screens fit the height.
+   "Tap to open" / "Skip" float over the bottom strip of the envelope.
+
    Layer stack inside .envelope__float (bottom → top):
      1 back (liner inside)   2 liner (inner face of flap, shown after 90°)
      3 card insert           4 front pocket + inscription
@@ -16,8 +21,6 @@
     position: fixed;
     inset: 0;
     z-index: 100;
-    display: grid;
-    grid-template-rows: auto minmax(0, 1fr) auto;
     overflow: hidden;
     color: var(--paper-50);
     background:
@@ -113,76 +116,55 @@
     }
 }
 
-/* ---------- Top label ---------- */
-.intro__top {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    padding: calc(env(safe-area-inset-top, 0px) + clamp(14px, 3.4dvh, 32px)) 20px 0;
-    opacity: 0;
-    transition: opacity .9s ease .3s;
-}
-
-.intro.is-ready .intro__top {
-    opacity: 1;
-}
-
-.intro__eyebrow {
-    font-family: var(--font-caps);
-    font-size: .74rem;
-    font-weight: 600;
-    letter-spacing: .5em;
-    padding-left: .5em;
-    text-transform: uppercase;
-    color: var(--gold-300);
-}
-
-.intro__date {
-    font-family: var(--font-caps);
-    font-size: .64rem;
-    letter-spacing: .42em;
-    padding-left: .42em;
-    color: rgba(253, 248, 243, .66);
-}
-
 /* ---------- Scene & envelope ---------- */
 .intro__scene {
-    position: relative;
+    position: absolute;
+    inset: 0;
     z-index: 3;
-    display: grid;
-    place-items: center;
-    min-height: 0;
     transform-origin: 50% 50%;
 }
 
 .envelope {
-    position: relative;
-    width: min(88vw, 400px, calc((100vh - 200px) * .62));
-    width: min(88vw, 400px, calc((100dvh - 200px) * .62));
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* Cover the viewport (5:7 kept): as wide as the screen, or as tall as it — whichever is bigger.
+       102% rather than 100% so the idle float never lets the backdrop peek in at an edge.
+       js/intro.js measures this box at open time and slides it down to make room for the rising card. */
+    width: max(102vw, calc(102vh * 5 / 7));
+    width: max(102vw, calc(102dvh * 5 / 7));
     aspect-ratio: 5 / 7;
-    /* Small nudge down; the camera pulls back as it opens, which is what frees room for the card. */
-    margin-top: clamp(10px, 4vh, 52px);
-    margin-top: clamp(10px, 4dvh, 52px);
+    /* Centred by hand: grid/flex `center` start-aligns an item wider than the screen in Safari,
+       which left the seal off-centre and the inscription cut off. (The camera uses the separate
+       `translate` property, so it composes with this instead of fighting it.) */
+    transform: translate(-50%, -50%);
     container-type: inline-size;
     opacity: 0;
 }
 
-.intro.is-ready .envelope {
-    animation: envelope-enter 1.3s var(--ease-out) both;
+/* Wide screens (tablet landscape, desktop): covering the width would push the seal below the
+   fold, so fit the height instead and let the backdrop frame the envelope on both sides. */
+@media (min-aspect-ratio: 4/5) {
+    .envelope {
+        width: calc(102vh * 5 / 7);
+        width: calc(102dvh * 5 / 7);
+    }
 }
 
+.intro.is-ready .envelope {
+    animation: envelope-enter 1.4s var(--ease-out) both;
+}
+
+/* Settles *down* onto the screen (never smaller than the viewport, so no backdrop flashes at the edges) */
 @keyframes envelope-enter {
     from {
         opacity: 0;
-        transform: translateY(28px) scale(.95);
+        transform: translate(-50%, -50%) scale(1.06);
     }
 
     to {
         opacity: 1;
-        transform: none;
+        transform: translate(-50%, -50%);
     }
 }
 
@@ -242,15 +224,16 @@
     animation-play-state: paused;
 }
 
+/* Kept within the 1% bleed of the cover size: at most ~4px of lift + ~1.5px of corner drift */
 @keyframes envelope-float {
 
     0%,
     100% {
-        transform: translateY(0) rotate(-.35deg);
+        transform: translateY(0) rotate(-.25deg);
     }
 
     50% {
-        transform: translateY(-7px) rotate(.35deg);
+        transform: translateY(-4px) rotate(.25deg);
     }
 }
 
@@ -397,18 +380,22 @@
     z-index: 4;
 }
 
+/* Below the seal + "Tap to open" pill (seal ends ~69%, pill ~75%). Ends ~92% — the pocket's
+   bottom ornaments in index.html are drawn below that line.
+   Type is sized by the envelope (cqw) but capped by the screen (vw): on tall phones the
+   envelope is up to ~1.6× the screen width, and every line must still fit on screen. */
 .envelope__inscription {
     position: absolute;
     left: 9%;
     right: 9%;
-    top: 71.5%;
+    top: 76.5%;
     text-align: center;
 }
 
 .envelope__caps {
     font-family: var(--font-caps);
     font-weight: 700;
-    font-size: 3.1cqw;
+    font-size: min(3.1cqw, 4.4vw);
     line-height: 1.5;
     letter-spacing: .36em;
     padding-left: .36em;
@@ -426,7 +413,7 @@
 }
 
 .envelope__caps--names {
-    font-size: 4.2cqw;
+    font-size: min(4.2cqw, 6vw);
     letter-spacing: .14em;
     padding-left: .14em;
 }
@@ -446,7 +433,7 @@
 .envelope__script {
     margin-top: 2.2cqw;
     font-family: var(--font-script);
-    font-size: 6.8cqw;
+    font-size: min(6.8cqw, 8.1vw);
     line-height: 1.15;
     color: #F4EAD2;
     /* letterpressed into the paper */
@@ -540,39 +527,32 @@
     }
 }
 
-/* ---------- Actions ---------- */
-.intro__actions {
-    position: relative;
-    z-index: 4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    padding: 10px 20px calc(env(safe-area-inset-bottom, 0px) + clamp(14px, 3dvh, 32px));
-    opacity: 0;
-    transition: opacity .8s ease .5s;
-}
-
-.intro.is-ready .intro__actions,
-.intro:not(.is-armed) .intro__actions {
-    opacity: 1;
-}
-
+/* ---------- "Tap to open" — on the envelope, tucked under the seal ----------
+   Lives inside .envelope so it is sized/positioned by the envelope (cqw / %) and fades and
+   floats with it. Frosted dark-olive pill, gold caps. The whole stage is tappable; this is the cue. */
 .intro__open {
-    min-height: 50px;
-    padding: 0 28px;
-    border: 1px solid rgba(230, 203, 140, .55);
+    position: absolute;
+    left: 50%;
+    top: 69.4%;
+    z-index: 8;
+    translate: -50% 0;
+    height: 7.6cqw;
+    padding: 0 5.5cqw;
+    border: 1px solid rgba(246, 233, 196, .45);
     border-radius: 999px;
     cursor: pointer;
+    white-space: nowrap;
     font-family: var(--font-caps);
-    font-size: .7rem;
+    font-size: 2.5cqw;
     font-weight: 600;
     letter-spacing: .28em;
     text-transform: uppercase;
     color: var(--gold-200);
-    background: linear-gradient(180deg, rgba(122, 31, 61, .45), rgba(42, 7, 21, .45));
-    box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .8), inset 0 1px 0 rgba(255, 255, 255, .08);
-    transition: opacity .4s ease, transform .4s var(--ease-out);
+    background: rgba(30, 36, 16, .5);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 24px -12px rgba(0, 0, 0, .7), inset 0 1px 0 rgba(255, 255, 255, .1);
+    transition: opacity .4s ease;
 }
 
 .intro__open-label {
@@ -585,40 +565,57 @@
     opacity: .72;
 }
 
+/* Breathes in and out like the prompt on the first invitation (01). Individual `scale` so it
+   never touches the `translate` doing the centring. Stops as soon as the guest taps (disabled). */
 .intro.is-ready .intro__open:not(:disabled) {
-    animation: hint-glow 2.8s ease-in-out infinite;
+    animation: hint-pulse 1.8s ease-in-out infinite;
 }
 
-@keyframes hint-glow {
+@keyframes hint-pulse {
 
     0%,
     100% {
-        box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .8), 0 0 0 0 rgba(240, 213, 150, 0);
+        scale: 1;
+        opacity: .82;
     }
 
     50% {
-        box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .8), 0 0 0 6px rgba(240, 213, 150, .12);
+        scale: 1.15;
+        opacity: 1;
     }
 }
 
+/* ---------- Skip — quiet, top-right corner (clear of the flap art) ---------- */
 .intro__skip {
-    min-height: 44px;
-    padding: 0 14px;
+    position: absolute;
+    top: calc(env(safe-area-inset-top, 0px) + 8px);
+    right: 8px;
+    z-index: 4;
+    min-height: 36px;
+    padding: 0 12px;
     border: 0;
     background: none;
     cursor: pointer;
     font-family: var(--font-caps);
-    font-size: .56rem;
+    font-size: .52rem;
     letter-spacing: .24em;
     text-transform: uppercase;
-    color: rgba(253, 248, 243, .55);
+    color: rgba(246, 233, 196, .7);
+    text-shadow: 0 1px 2px rgba(20, 26, 10, .55);
     text-decoration: underline;
-    text-decoration-color: rgba(253, 248, 243, .25);
-    text-underline-offset: 4px;
+    text-decoration-color: rgba(246, 233, 196, .3);
+    text-underline-offset: 3px;
+    opacity: 0;
+    transition: opacity .8s ease .5s;
 }
 
-.intro.is-opening .intro__top,
-.intro.is-opening .intro__actions {
+.intro.is-ready .intro__skip,
+.intro:not(.is-armed) .intro__skip {
+    opacity: 1;
+}
+
+.intro.is-opening .intro__open,
+.intro.is-opening .intro__skip {
     opacity: 0;
     transition: opacity .45s ease;
     pointer-events: none;
@@ -636,25 +633,4 @@
 
 .intro.is-closing {
     pointer-events: none;
-}
-
-/* ---------- Small / short screens ---------- */
-@media (max-height: 620px) {
-    .intro__top {
-        padding-top: calc(env(safe-area-inset-top, 0px) + 12px);
-    }
-
-    .envelope {
-        margin-top: 2dvh;
-    }
-}
-
-@media (min-width: 768px) {
-    .intro__eyebrow {
-        font-size: .82rem;
-    }
-
-    .intro__date {
-        font-size: .7rem;
-    }
 }
