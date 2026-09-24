@@ -12,21 +12,23 @@
         content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
-    <title>Chimezie &amp; Richard · Traditional Marriage · 29.12.2026</title>
+    <title>ChimDi'26</title>
     <meta name="description"
         content="Together with their families, Chimezie Ekwe and Richard Chidi Chinaka invite you to their Traditional Marriage Ceremony — December 29th 2026, 1pm, Udechukwu Memorial School Compound.">
     <!-- Matches the top of the closed envelope (js/intro.js swaps it to the paper tone once open) -->
-    <meta name="theme-color" content="#5D6939">
+    <meta name="theme-color" content="#686A3B">
     <meta name="color-scheme" content="light">
+    <meta name="apple-mobile-web-app-title" content="ChimDi'26">
 
     <!-- Social previews (WhatsApp/iMessage need an ABSOLUTE og:image URL once deployed) -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Chimezie &amp; Richard">
-    <meta property="og:title" content="Chimezie &amp; Richard · Traditional Marriage Ceremony">
+    <meta property="og:site_name" content="ChimDi'26">
+    <meta property="og:title" content="ChimDi'26">
     <meta property="og:description"
         content="December 29th 2026 · 1pm · Udechukwu Memorial School Compound. Your presence will make our day more special.">
     <meta property="og:image" content="https://chimezie-and-richard.vercel.app/assets/og-image.jpg">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ChimDi'26">
 
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
@@ -75,13 +77,6 @@
                 <stop offset=".75" stop-color="#A87F3D" />
                 <stop offset="1" stop-color="#E7C987" />
             </linearGradient>
-            <!-- foil gold tuned to read against cream paper (darker than #g-gold) -->
-            <linearGradient id="g-foil" gradientUnits="userSpaceOnUse" x1="8" y1="0" x2="92" y2="100">
-                <stop offset="0" stop-color="#A47F3C" />
-                <stop offset=".35" stop-color="#E2CB92" />
-                <stop offset=".62" stop-color="#AE8A44" />
-                <stop offset="1" stop-color="#CDB275" />
-            </linearGradient>
             <linearGradient id="g-wine-fold" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0" stop-color="#9A2A50" />
                 <stop offset=".45" stop-color="#6A1535" />
@@ -108,27 +103,6 @@
                 <stop offset=".45" stop-color="#6F7A3F" />
                 <stop offset="1" stop-color="#262C12" />
             </linearGradient>
-            <radialGradient id="g-seal" cx=".4" cy=".36" r=".72">
-                <stop offset="0" stop-color="#B23A63" />
-                <stop offset=".55" stop-color="#7A1F3D" />
-                <stop offset="1" stop-color="#420B20" />
-            </radialGradient>
-            <radialGradient id="g-seal-inner" cx=".5" cy=".6" r=".6">
-                <stop offset="0" stop-color="#7A1F3D" />
-                <stop offset="1" stop-color="#5A1330" />
-            </radialGradient>
-            <radialGradient id="g-seal-gloss" cx=".32" cy=".26" r=".42">
-                <stop offset="0" stop-color="#FFFFFF" stop-opacity=".16" />
-                <stop offset="1" stop-color="#FFFFFF" stop-opacity="0" />
-            </radialGradient>
-            <linearGradient id="g-env-paper" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#6C7644" />
-                <stop offset="1" stop-color="#4C5730" />
-            </linearGradient>
-            <linearGradient id="g-env-flap" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#5D6939" />
-                <stop offset="1" stop-color="#7A8551" />
-            </linearGradient>
             <linearGradient id="g-env-depth" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#1B0A10" stop-opacity="0" />
                 <stop offset=".7" stop-color="#1B0A10" stop-opacity=".45" />
@@ -144,62 +118,8 @@
                 <circle cx="36" cy="36" r="1.6" fill="#D4AF6A" opacity=".55" />
             </pattern>
 
-            <filter id="f-blur" x="-10%" y="-10%" width="120%" height="120%">
-                <feGaussianBlur stdDeviation="5" />
-            </filter>
-
-            <filter id="f-flap-shadow" x="-10%" y="-10%" width="120%" height="135%">
-                <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#3A0A1E" flood-opacity=".3" />
-            </filter>
-
             <!-- Petal (notched tip) used by the blossom -->
             <path id="shape-petal" d="M0 0C-15-9-22-33-10-45C-5-49-1-46 0-42C1-46 5-49 10-45C22-33 15-9 0 0Z" />
-
-            <!-- Gold-foil line art for the envelope cover (stroke-only, 100x100 box) -->
-            <g id="shape-foil-rose">
-                <path d="M18 36C12 26 16 14 28 10" />
-                <path d="M28 10C40 4 54 8 58 18" />
-                <path d="M58 18C60 28 54 38 44 42" />
-                <path d="M18 36C20 46 30 50 44 42" />
-                <path d="M26 28C28 18 38 14 48 18" />
-                <path d="M30 36C32 28 40 24 48 28" />
-                <path d="M18 36C14 34 12 30 13 26" />
-                <path d="M42 44C46 58 46 74 42 96" />
-                <path d="M58.0 26.0C70.4 22.1 73.5 7.5 74.7 6.1C73.5 7.5 59.7 13.1 58.0 26.0Z" />
-                <path d="M44.0 58.0C57.7 62.0 68.8 50.0 70.6 49.3C68.8 50.0 52.7 46.8 44.0 58.0Z" />
-                <path d="M44.5 72.0C36.1 61.8 21.3 65.3 19.5 64.8C21.3 65.3 31.9 76.2 44.5 72.0Z" />
-                <path d="M43.5 84.0C54.5 89.5 65.6 80.9 67.3 80.7C65.6 80.9 52.5 75.7 43.5 84.0Z" />
-            </g>
-
-            <g id="shape-foil-sprig">
-                <path d="M12 90Q44 58 88 14" />
-                <path d="M28.1 73.9C35.7 63.2 26.1 51.8 26.0 50.2C26.1 51.8 18.6 64.7 28.1 73.9Z" />
-                <path d="M28.1 73.9C37.3 83.4 50.2 75.9 51.8 76.0C50.2 75.9 38.8 66.3 28.1 73.9Z" />
-                <path d="M41.7 60.3C48.6 50.6 40.0 40.4 39.9 38.9C40.0 40.4 33.3 52.0 41.7 60.3Z" />
-                <path d="M41.7 60.3C50.0 68.7 61.6 62.0 63.1 62.1C61.6 62.0 51.4 53.4 41.7 60.3Z" />
-                <path d="M56.3 45.7C62.4 37.2 54.8 28.2 54.6 26.8C54.8 28.2 48.8 38.4 56.3 45.7Z" />
-                <path d="M56.3 45.7C63.6 53.2 73.8 47.2 75.2 47.4C73.8 47.2 64.8 39.6 56.3 45.7Z" />
-                <path d="M71.7 30.3C77.0 22.9 70.4 15.0 70.3 13.9C70.4 15.0 65.2 23.9 71.7 30.3Z" />
-                <path d="M71.7 30.3C78.1 36.8 87.0 31.6 88.1 31.7C87.0 31.6 79.1 25.0 71.7 30.3Z" />
-                <path d="M88.0 14.0C96.9 12.8 99.2 2.8 100.0 2.0C99.2 2.8 89.2 5.1 88.0 14.0Z" />
-            </g>
-
-            <g id="shape-foil-daisy">
-                <path d="M50.0 50.0C63.0 36.1 56.5 19.3 50.0 17.0C43.5 19.3 37.0 36.1 50.0 50.0Z" />
-                <path d="M50.0 50.0C68.5 54.3 79.8 40.3 78.6 33.5C73.3 29.0 55.5 31.8 50.0 50.0Z" />
-                <path d="M50.0 50.0C55.5 68.2 73.3 71.0 78.6 66.5C79.8 59.7 68.5 45.7 50.0 50.0Z" />
-                <path d="M50.0 50.0C37.0 63.9 43.5 80.7 50.0 83.0C56.5 80.7 63.0 63.9 50.0 50.0Z" />
-                <path d="M50.0 50.0C31.5 45.7 20.2 59.7 21.4 66.5C26.7 71.0 44.5 68.2 50.0 50.0Z" />
-                <path d="M50.0 50.0C44.5 31.8 26.7 29.0 21.4 33.5C20.2 40.3 31.5 54.3 50.0 50.0Z" />
-                <circle cx="50" cy="50" r="7" />
-                <circle cx="50" cy="50" r="2.8" fill="currentColor" />
-            </g>
-
-            <g id="shape-foil-dots">
-                <circle cx="24" cy="70" r="5" fill="currentColor" />
-                <circle cx="50" cy="48" r="6.5" fill="currentColor" />
-                <circle cx="76" cy="24" r="4" fill="currentColor" />
-            </g>
 
             <!-- Draped akwete-style fabric (shared by both fabric corners) -->
             <g id="shape-fabric">
@@ -434,66 +354,14 @@
                 <ellipse cx="60" cy="30" rx="46" ry="12" fill="#2A1810" stroke="url(#g-gold)" stroke-width="3" />
             </g>
         </symbol>
-
-        <!-- Wax seal (burgundy wax, gold monogram) -->
-        <symbol id="i-seal" viewBox="0 0 200 200">
-            <path
-                d="M188.3 95.5Q191.5 100.0 192.4 104.9Q193.2 109.8 190.2 114.2Q187.1 118.5 185.1 122.8Q183.1 127.0 182.1 131.6Q181.1 136.1 178.0 139.7Q175.0 143.3 171.8 146.6Q168.6 149.8 166.1 153.5Q163.6 157.2 160.4 160.4Q157.3 163.6 154.9 167.9Q152.5 172.3 150.0 177.2Q147.5 182.2 142.5 183.3Q137.5 184.3 132.1 183.1Q126.6 181.9 122.2 182.6Q117.7 183.3 113.3 184.0Q108.9 184.8 104.5 185.1Q100.0 185.4 95.4 186.6Q90.8 187.8 86.2 187.2Q81.6 186.7 77.2 185.0Q72.9 183.4 67.8 183.6Q62.7 183.8 58.0 182.4Q53.2 181.0 50.8 176.0Q48.4 171.0 46.2 166.6Q44.0 162.2 40.9 159.1Q37.8 156.0 34.7 152.9Q31.6 149.7 27.3 147.1Q22.9 144.5 19.1 141.1Q15.3 137.7 15.0 132.7Q14.7 127.7 14.3 123.0Q13.9 118.3 11.9 113.9Q9.9 109.5 10.6 104.7Q11.3 100.0 13.5 95.6Q15.8 91.1 16.7 86.8Q17.6 82.5 18.6 78.2Q19.6 73.9 19.9 69.2Q20.2 64.5 19.5 58.8Q18.9 53.2 21.6 49.1Q24.3 45.0 29.5 43.1Q34.8 41.3 38.5 38.6Q42.3 35.9 45.6 32.8Q48.9 29.7 53.1 27.9Q57.3 26.1 61.2 23.7Q65.0 21.3 69.0 19.2Q73.1 17.1 77.5 16.1Q82.0 15.2 86.2 12.4Q90.5 9.6 95.2 7.4Q100.0 5.2 104.7 7.7Q109.4 10.3 113.5 13.8Q117.6 17.2 121.8 18.6Q126.0 19.9 130.2 21.4Q134.3 22.9 138.9 23.9Q143.4 24.9 148.3 25.8Q153.3 26.7 156.6 30.1Q159.9 33.5 162.7 37.2Q165.5 41.0 169.8 43.6Q174.1 46.1 176.6 50.3Q179.0 54.4 178.7 59.7Q178.3 65.1 178.9 69.6Q179.5 74.2 180.7 78.4Q182.0 82.6 183.6 86.8Q185.2 91.0 188.3 95.5Z"
-                fill="url(#g-seal)" />
-            <circle cx="100" cy="100" r="66" fill="none" stroke="#3E0A1E" stroke-width="6" opacity=".45" />
-            <circle cx="100" cy="100" r="62" fill="url(#g-seal-inner)" />
-            <circle cx="100" cy="100" r="62.5" fill="none" stroke="#C35A80" stroke-width="1.4" opacity=".55" />
-            <circle cx="100" cy="100" r="54" fill="none" stroke="url(#g-gold)" stroke-width="1.6"
-                stroke-dasharray="1.5 4.2" opacity=".85" />
-            <text x="100" y="118.8" text-anchor="middle" font-family="'Great Vibes', cursive" font-size="50"
-                fill="#3E0A1E" opacity=".6">C&amp;R</text>
-            <text x="100" y="117" text-anchor="middle" font-family="'Great Vibes', cursive" font-size="50"
-                fill="url(#g-gold)">C&amp;R</text>
-            <ellipse cx="72" cy="58" rx="46" ry="30" fill="url(#g-seal-gloss)" transform="rotate(-28 72 58)" />
-        </symbol>
-
-        <!-- Embossed gold foil: each shape stamped 3x (shadow below, highlight above, gold on top) -->
-        <symbol id="foil-rose" viewBox="0 0 100 100" overflow="visible">
-            <g fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
-                <use href="#shape-foil-rose" color="#2F2A12" opacity=".5" transform="translate(0 1.7)" />
-                <use href="#shape-foil-rose" color="#F6E9C4" opacity=".72" transform="translate(0 -1.5)" />
-                <g stroke="url(#g-foil)">
-                    <use href="#shape-foil-rose" />
-                </g>
-            </g>
-        </symbol>
-        <symbol id="foil-sprig" viewBox="0 0 100 100" overflow="visible">
-            <g fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
-                <use href="#shape-foil-sprig" color="#2F2A12" opacity=".5" transform="translate(0 1.7)" />
-                <use href="#shape-foil-sprig" color="#F6E9C4" opacity=".72" transform="translate(0 -1.5)" />
-                <g stroke="url(#g-foil)">
-                    <use href="#shape-foil-sprig" />
-                </g>
-            </g>
-        </symbol>
-        <symbol id="foil-daisy" viewBox="0 0 100 100" overflow="visible">
-            <g fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
-                <use href="#shape-foil-daisy" color="#2F2A12" opacity=".5" transform="translate(0 1.7)" />
-                <use href="#shape-foil-daisy" color="#F6E9C4" opacity=".72" transform="translate(0 -1.5)" />
-                <g stroke="url(#g-foil)" color="#A87A33">
-                    <use href="#shape-foil-daisy" />
-                </g>
-            </g>
-        </symbol>
-        <symbol id="foil-dots" viewBox="0 0 100 100" overflow="visible">
-            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <use href="#shape-foil-dots" color="#2F2A12" opacity=".5" transform="translate(0 1.7)" />
-                <use href="#shape-foil-dots" color="#F6E9C4" opacity=".72" transform="translate(0 -1.5)" />
-                <use href="#shape-foil-dots" color="#BE9647" />
-            </g>
-        </symbol>
     </svg>
 
     <!-- =====================================================================
-         INTRO — code-built envelope with wax seal. The closed envelope fills
-         the whole screen (the backdrop only shows while it opens). Removed
-         from the DOM once opened. If JS never runs, css/intro.css fades it
-         out automatically.
+         INTRO — the 01 envelope art (olive paper, gold foil, gold wax seal)
+         cut into layers in assets/envelope/ so it can open with 02's
+         animation. The closed envelope fills the whole screen (the backdrop
+         only shows while it opens). Removed from the DOM once opened. If JS
+         never runs, css/intro.css fades it out automatically.
          ===================================================================== -->
     <div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-label">
         <p class="sr-only" id="intro-label">Invitation to the Traditional Marriage Ceremony of Chimezie Ekwe and
@@ -514,18 +382,21 @@
                 <div class="envelope__float" id="envelope-float" aria-hidden="true">
 
                     <!-- 1. Inside of the envelope (liner visible through the opening) -->
-                    <svg class="envelope__back" viewBox="0 0 500 700" preserveAspectRatio="none">
-                        <rect width="500" height="700" rx="12" fill="url(#p-liner)" />
-                        <rect width="500" height="700" rx="12" fill="url(#g-env-depth)" />
+                    <svg class="envelope__back" viewBox="0 0 500 750" preserveAspectRatio="none">
+                        <rect width="500" height="750" rx="12" fill="url(#p-liner)" />
+                        <rect width="500" height="750" rx="12" fill="url(#g-env-depth)" />
                     </svg>
 
-                    <!-- 2. Inner face of the flap (shown after the flap passes 90°) -->
+                    <!-- 2. Inner face of the flap (shown after the flap passes 90°). Same outline as
+                         assets/envelope/flap.webp mirrored (853 = art width, 606 = flap depth). -->
                     <div class="envelope__liner" id="envelope-liner">
-                        <svg viewBox="0 0 500 400" preserveAspectRatio="none">
-                            <path d="M0 388Q0 400 12 400H488Q500 400 500 388L264 12Q250-8 236 12Z" fill="#66713E" />
-                            <path d="M26 392H474L250 34Z" fill="url(#p-liner)" />
-                            <path d="M26 392H474L250 34Z" fill="none" stroke="#D4AF6A" stroke-width="2"
-                                opacity=".7" />
+                        <svg viewBox="0 0 853 606" preserveAspectRatio="none">
+                            <path d="M0 606V271.1L349.5 16.7C375.4-2.1 479.6-7.7 508.5 13.9L853 270.6V606Z"
+                                fill="#6B6E3D" />
+                            <path d="M22 598V282.3L362.5 34.5C380.2 21.6 475.3 16.6 495.4 31.5L831 281.6V598Z"
+                                fill="url(#p-liner)" />
+                            <path d="M22 598V282.3L362.5 34.5C380.2 21.6 475.3 16.6 495.4 31.5L831 281.6V598Z"
+                                fill="none" stroke="#D4AF6A" stroke-width="3" opacity=".7" />
                         </svg>
                         <span class="envelope__liner-shade" id="envelope-liner-shade"></span>
                     </div>
@@ -545,84 +416,46 @@
                         <span class="envelope__card-sheen" id="envelope-card-sheen"></span>
                     </div>
 
-                    <!-- 4. Front pocket with gold-foil inscription -->
+                    <!-- 4. Front pocket: names, "this invitation is exclusively for you", florals -->
                     <div class="envelope__pocket">
-                        <svg viewBox="0 0 500 700" preserveAspectRatio="none">
-                            <!-- soft shadow the pocket edge casts onto the card (drawn first, half covered) -->
-                            <path d="M0 4 250 384 500 4" fill="none" stroke="#2A0715" stroke-width="16"
-                                opacity=".16" filter="url(#f-blur)" />
-                            <path d="M0 12Q0 0 12 2L250 380 488 2Q500 0 500 12V688Q500 700 488 700H12Q0 700 0 688Z"
-                                fill="url(#g-env-paper)" />
-                            <path d="M4 6 250 382 496 6" fill="none" stroke="#9AA46A" stroke-width="2" opacity=".65" />
-                            <path d="M0 700 214 474Q250 440 286 474L500 700" fill="none" stroke="#283014"
-                                stroke-width="1.4" opacity=".3" />
-                            <path d="M0 698 214 472Q250 438 286 472L500 698" fill="none" stroke="#939D63"
-                                stroke-width="1.2" opacity=".5" />
-                            <rect x="16" y="16" width="468" height="668" rx="6" fill="none" stroke="url(#g-gold)"
-                                stroke-width="1.4" opacity=".5" />
-                            <!-- Embossed foil florals on the parts of the pocket seen while closed -->
-                            <use href="#foil-daisy" x="36" y="270" width="70" height="70" />
-                            <use href="#foil-daisy" x="394" y="270" width="70" height="70" />
-                            <use href="#foil-sprig" width="100" height="100" transform="translate(4 452) scale(.92)" />
-                            <use href="#foil-sprig" width="100" height="100"
-                                transform="translate(496 452) scale(-.92 .92)" />
-                            <!-- bottom row kept below the inscription (which ends ~92% down) -->
-                            <use href="#foil-daisy" x="22" y="646" width="52" height="52" />
-                            <use href="#foil-daisy" x="426" y="646" width="52" height="52" />
-                            <use href="#foil-dots" x="96" y="652" width="30" height="30" />
-                            <use href="#foil-dots" x="374" y="652" width="30" height="30" />
-                        </svg>
-                        <span class="paper-skin paper-skin--pocket" aria-hidden="true"></span>
-                        <div class="envelope__inscription">
-                            <p class="envelope__caps">Igbankwu</p>
-                            <p class="envelope__caps envelope__caps--names">Chimezie na Richard</p>
-                            <p class="envelope__script">this invitation is exclusively for you</p>
-                        </div>
+                        <img class="envelope__art" src="assets/envelope/pocket.webp" alt="" width="853" height="1280"
+                            fetchpriority="high" draggable="false">
+                        <!-- light sweeping across the gold names (masked by assets/envelope/names-foil.png) -->
+                        <span class="envelope__foil"></span>
                     </div>
+
+                    <!-- 4b. Shadow the closed flap casts on the pocket (fades as the flap lifts) -->
+                    <img class="envelope__art envelope__flap-shadow" id="envelope-flap-shadow"
+                        src="assets/envelope/flap-shadow.webp" alt="" width="853" height="1280" draggable="false">
 
                     <!-- 5. Outer flap (carries the top half of the seal) -->
                     <div class="envelope__flap" id="envelope-flap">
-                        <svg viewBox="0 0 500 700" preserveAspectRatio="none">
-                            <path d="M0 12Q0 0 12 0H488Q500 0 500 12L264 392Q250 410 236 392Z"
-                                fill="url(#g-env-flap)" filter="url(#f-flap-shadow)" />
-                            <!-- Embossed foil florals (kept inside the flap triangle) -->
-                            <use href="#foil-rose" x="96" y="26" width="118" height="118" />
-                            <use href="#foil-sprig" x="286" y="26" width="118" height="118" />
-                            <use href="#foil-daisy" x="150" y="190" width="62" height="62" />
-                            <use href="#foil-daisy" x="285" y="205" width="54" height="54" />
-                            <use href="#foil-dots" x="228" y="248" width="44" height="44" />
-                        </svg>
-                        <span class="paper-skin paper-skin--flap" aria-hidden="true"></span>
+                        <img class="envelope__art" src="assets/envelope/flap.webp" alt="" width="853" height="1280"
+                            fetchpriority="high" draggable="false">
                         <div class="seal seal--top" id="seal-top">
-                            <svg>
-                                <use href="#i-seal" />
-                            </svg>
+                            <img src="assets/envelope/seal.webp" alt="" width="298" height="288" draggable="false">
                         </div>
                     </div>
 
-                    <!-- 6. Bottom half of the seal + crack glint -->
+                    <!-- 6. Bottom half of the seal + crack glint (viewBox = the seal image, 298x288) -->
                     <div class="seal seal--bottom" id="seal-bottom">
-                        <svg>
-                            <use href="#i-seal" />
-                        </svg>
+                        <img src="assets/envelope/seal.webp" alt="" width="298" height="288" draggable="false">
                     </div>
                     <div class="seal seal--crack" id="seal-crack">
-                        <svg viewBox="0 0 200 200">
-                            <polyline points="8,106 30,96 52,108 74,94 96,106 118,92 140,105 162,95 192,103"
+                        <svg viewBox="0 0 298 288">
+                            <polyline points="18,141 45,130 77,147 110,127 143,144 176,124 209,143 241,128 272,136"
                                 pathLength="1" />
                         </svg>
                     </div>
                     <span class="seal-pulse" id="seal-pulse"></span>
                 </div>
 
-                <!-- Sits on the envelope just under the seal (the whole stage is tappable too) -->
+                <!-- Sits on the envelope between the seal and the names (the whole stage is tappable too) -->
                 <button class="intro__open" id="intro-open" type="button" disabled>
                     <span class="intro__open-label" id="intro-open-label">Preparing your invitation…</span>
                 </button>
             </div>
         </div>
-
-        <button class="intro__skip" id="intro-skip" type="button">Skip animation</button>
 
         <span class="intro__bloom" id="intro-bloom" aria-hidden="true"></span>
     </div>
@@ -1016,10 +849,10 @@
                 </div>
                 <p class="caps caps--olive" data-reveal>The Venue</p>
                 <h2 class="venue__name" id="venue-title" data-reveal>Udechukwu Memorial School Compound</h2>
-                <p class="venue__area" data-reveal>Mmaku · Awgu L.G.A · Enugu State</p>
+                <p class="venue__area" data-reveal>Iffite Mmaku · Awgu L.G.A · Enugu State</p>
                 <div class="btn-row" data-reveal>
                     <a class="btn btn--gold"
-                        href="https://www.google.com/maps/search/?api=1&amp;query=Udechukwu%20Memorial%20Primary%20School%2C%20Ifite%20Mmaku%2C%20Awgu%2C%20Enugu%20State%2C%20Nigeria"
+                        href="https://www.google.com/maps/search/?api=1&amp;query=Udechukwu%20Memorial%20School%20Compound%2C%20Iffite%20Mmaku%2C%20Awgu%2C%20Enugu%20State%2C%20Nigeria"
                         target="_blank" rel="noopener noreferrer">
                         <svg aria-hidden="true">
                             <use href="#i-pin" />
@@ -1061,7 +894,7 @@
                         </button>
                     </h3>
                     <div class="faq__a" id="faq-2" hidden>
-                        <p>Udechukwu Memorial School Compound, Mmaku, Awgu L.G.A, Enugu State.
+                        <p>Udechukwu Memorial School Compound, Iffite Mmaku, Awgu L.G.A, Enugu State.
                             <a href="#venue">Get directions</a>.
                         </p>
                     </div>

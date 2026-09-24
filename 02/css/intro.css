@@ -4,13 +4,18 @@
    Stage: the closed envelope covers the whole viewport on phones (portrait),
    like a printed envelope held up to the camera — the wine backdrop is only
    seen while it opens and the camera pulls back. Wide screens fit the height.
-   "Tap to open" / "Skip" float over the bottom strip of the envelope.
+   "Tap to open" floats on the envelope between the seal and the names.
+
+   Art: the 01 envelope (olive paper, gold foil, gold wax seal) with the 02
+   names, cut into layers in assets/envelope/ — every layer is the full
+   853×1280 art box (except the seal), so they all line up with `inset: 0`.
+   Positions below given as "(x, y)px" are in that 853×1280 art space.
 
    Layer stack inside .envelope__float (bottom → top):
-     1 back (liner inside)   2 liner (inner face of flap, shown after 90°)
-     3 card insert           4 front pocket + inscription
-     5 outer flap (+ top half of seal)   5 seal pulse ring
-     6 bottom half of seal   7 crack glint
+     1 back (wine liner inside)   2 liner (inner face of flap, shown after 90°)
+     3 card insert                4 front pocket (names + script) + foil sweep
+     4 flap shadow on the pocket  5 outer flap (+ top half of seal)
+     5 seal pulse ring            6 bottom half of seal   7 crack glint
 
    Safari note: no preserve-3d between siblings. Each rotating face owns its
    own `perspective()` inside `transform`, and the flap is two separate faces
@@ -128,14 +133,14 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    /* Cover the viewport (5:7 kept): as wide as the screen, or as tall as it — whichever is bigger.
-       102% rather than 100% so the idle float never lets the backdrop peek in at an edge.
+    /* Cover the viewport (853:1280 art kept): as wide as the screen, or as tall as it — whichever is
+       bigger. 102% rather than 100% so the idle float never lets the backdrop peek in at an edge.
        js/intro.js measures this box at open time and slides it down to make room for the rising card. */
-    width: max(102vw, calc(102vh * 5 / 7));
-    width: max(102vw, calc(102dvh * 5 / 7));
-    aspect-ratio: 5 / 7;
+    width: max(102vw, calc(102vh * 853 / 1280));
+    width: max(102vw, calc(102dvh * 853 / 1280));
+    aspect-ratio: 853 / 1280;
     /* Centred by hand: grid/flex `center` start-aligns an item wider than the screen in Safari,
-       which left the seal off-centre and the inscription cut off. (The camera uses the separate
+       which left the seal off-centre and the names cut off. (The camera uses the separate
        `translate` property, so it composes with this instead of fighting it.) */
     transform: translate(-50%, -50%);
     container-type: inline-size;
@@ -146,8 +151,8 @@
    fold, so fit the height instead and let the backdrop frame the envelope on both sides. */
 @media (min-aspect-ratio: 4/5) {
     .envelope {
-        width: calc(102vh * 5 / 7);
-        width: calc(102dvh * 5 / 7);
+        width: calc(102vh * 853 / 1280);
+        width: calc(102dvh * 853 / 1280);
     }
 }
 
@@ -193,27 +198,6 @@
     background: radial-gradient(ellipse at center, rgba(8, 0, 4, .6), transparent 70%);
 }
 
-/* Cotton-paper skin: weave, a soft light from the top-left, and a vignette.
-   Clipped to each piece so the texture stops exactly at the paper edge. */
-.paper-skin {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image:
-        var(--grain),
-        radial-gradient(ellipse 72% 52% at 26% 14%, rgba(255, 253, 232, .3), rgba(255, 253, 232, 0) 62%),
-        radial-gradient(ellipse 115% 88% at 50% 52%, rgba(16, 20, 6, 0) 40%, rgba(16, 20, 6, .34) 100%);
-    background-size: 90px 90px, auto, auto;
-}
-
-.paper-skin--flap {
-    clip-path: polygon(0 0, 100% 0, 50% 56%);
-}
-
-.paper-skin--pocket {
-    clip-path: polygon(0 0, 50% 54.3%, 100% 0, 100% 100%, 0 100%);
-}
-
 .envelope__float {
     position: absolute;
     inset: 0;
@@ -238,8 +222,7 @@
 }
 
 .envelope__back,
-.envelope__pocket>svg,
-.envelope__flap>svg,
+.envelope__art,
 .envelope__liner>svg {
     position: absolute;
     inset: 0;
@@ -247,28 +230,35 @@
     height: 100%;
 }
 
+.envelope__art {
+    display: block;
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
 .envelope__back {
     z-index: 1;
 }
 
-/* 2 — inner face of the flap */
+/* 2 — inner face of the flap: as deep as the flap (tip at y 606 of 1280 → 47.33%) */
 .envelope__liner {
     position: absolute;
     left: 0;
     bottom: 100%;
     z-index: 2;
     width: 100%;
-    height: 57.142857%;
+    height: 47.334%;
     transform-origin: 50% 100%;
     transform: perspective(1200px) rotateX(-90deg);
     opacity: 0;
 }
 
+/* Same outline as the liner path in index.html (the flap mirrored) */
 .envelope__liner-shade {
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, rgba(20, 6, 10, .55), rgba(20, 6, 10, .12));
-    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+    clip-path: polygon(0 100%, 0 44.7%, 41% 2.8%, 50% 0, 59.6% 2.3%, 100% 44.7%, 100% 100%);
 }
 
 /* 3 — card insert */
@@ -373,49 +363,29 @@
     transform: translateX(-130%);
 }
 
-/* 4 — front pocket */
+/* 4 — front pocket (names + "this invitation is exclusively for you" are part of the art) */
 .envelope__pocket {
     position: absolute;
     inset: 0;
     z-index: 4;
 }
 
-/* Below the seal + "Tap to open" pill (seal ends ~69%, pill ~75%). Ends ~92% — the pocket's
-   bottom ornaments in index.html are drawn below that line.
-   Type is sized by the envelope (cqw) but capped by the screen (vw): on tall phones the
-   envelope is up to ~1.6× the screen width, and every line must still fit on screen. */
-.envelope__inscription {
+/* Light sweeping across the gold names, masked to the letters.
+   Box = the names in the art: (184, 722)–(680, 817)px. */
+.envelope__foil {
     position: absolute;
-    left: 9%;
-    right: 9%;
-    top: 76.5%;
-    text-align: center;
-}
-
-.envelope__caps {
-    font-family: var(--font-caps);
-    font-weight: 700;
-    font-size: min(3.1cqw, 4.4vw);
-    line-height: 1.5;
-    letter-spacing: .36em;
-    padding-left: .36em;
-    text-transform: uppercase;
-    color: var(--gold-500);
-    background: linear-gradient(110deg, #C9AE72 0%, #C9AE72 38%, #F7EBC4 48%, #C9AE72 58%, #C9AE72 100%);
+    left: 21.571%;
+    top: 56.406%;
+    width: 58.148%;
+    height: 7.422%;
+    pointer-events: none;
+    background: linear-gradient(110deg, transparent 0%, transparent 38%, rgba(255, 246, 214, .85) 48%, transparent 58%, transparent 100%);
     background-size: 300% 100%;
     background-position: 100% 0;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    /* pressed-foil edge: dark below, light above */
-    filter: drop-shadow(0 1px 0 rgba(28, 32, 12, .6)) drop-shadow(0 -1px 0 rgba(246, 233, 196, .35));
+    -webkit-mask: url("../assets/envelope/names-foil.png") center / 100% 100% no-repeat;
+    mask: url("../assets/envelope/names-foil.png") center / 100% 100% no-repeat;
+    mix-blend-mode: soft-light;
     animation: foil-sweep 5.5s ease-in-out infinite;
-}
-
-.envelope__caps--names {
-    font-size: min(4.2cqw, 6vw);
-    letter-spacing: .14em;
-    padding-left: .14em;
 }
 
 @keyframes foil-sweep {
@@ -430,14 +400,9 @@
     }
 }
 
-.envelope__script {
-    margin-top: 2.2cqw;
-    font-family: var(--font-script);
-    font-size: min(6.8cqw, 8.1vw);
-    line-height: 1.15;
-    color: #F4EAD2;
-    /* letterpressed into the paper */
-    text-shadow: 0 1px 0 rgba(26, 30, 12, .55), 0 -1px 0 rgba(255, 252, 240, .18);
+/* 4b — the shadow the closed flap casts on the pocket (js/intro.js fades it as the flap lifts) */
+.envelope__flap-shadow {
+    z-index: 4;
 }
 
 /* 5 — outer flap */
@@ -449,30 +414,32 @@
     transform: perspective(1200px) rotateX(0deg);
 }
 
-/* Wax seal halves — aligned on the flap tip (50%, 57.14%) */
+/* Wax seal halves. Box = assets/envelope/seal.webp placed at (282, 361)px, 298×288px
+   (the image carries the seal's own soft shadow, so no CSS filter). The zigzag crack runs
+   through the middle of the wax, around y 485–508px. */
 .seal {
     position: absolute;
-    left: 33%;
-    top: 45%;
-    width: 34%;
-    aspect-ratio: 1;
+    left: 33.06%;
+    top: 28.203%;
+    width: 34.935%;
+    aspect-ratio: 298 / 288;
     pointer-events: none;
 }
 
-.seal>svg {
+.seal>img {
+    display: block;
     width: 100%;
     height: 100%;
-    overflow: visible;
-    filter: drop-shadow(0 1.3cqw 1.5cqw rgba(24, 4, 12, .55)) drop-shadow(0 .2cqw .3cqw rgba(24, 4, 12, .45));
+    -webkit-user-drag: none;
 }
 
 .seal--top {
-    clip-path: polygon(0 0, 100% 0, 100% 51.5%, 96% 51.5%, 81% 47.5%, 70% 52.5%, 59% 46%, 48% 53%, 37% 47%, 26% 54%, 15% 48%, 4% 53%, 0 53%);
+    clip-path: polygon(0 0, 100% 0, 100% 48.5%, 96% 48.5%, 81% 44.5%, 70% 49.5%, 59% 43%, 48% 50%, 37% 44%, 26% 51%, 15% 45%, 4% 50%, 0 50%);
 }
 
 .seal--bottom {
     z-index: 6;
-    clip-path: polygon(0 53%, 4% 53%, 15% 48%, 26% 54%, 37% 47%, 48% 53%, 59% 46%, 70% 52.5%, 81% 47.5%, 96% 51.5%, 100% 51.5%, 100% 110%, 0 110%);
+    clip-path: polygon(0 50%, 4% 50%, 15% 45%, 26% 51%, 37% 44%, 48% 50%, 59% 43%, 70% 49.5%, 81% 44.5%, 96% 48.5%, 100% 48.5%, 100% 100%, 0 100%);
 }
 
 .seal--crack {
@@ -487,8 +454,8 @@
 
 .seal--crack polyline {
     fill: none;
-    stroke: #FBE7B5;
-    stroke-width: 3.2;
+    stroke: #FFF4D6;
+    stroke-width: 4;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-dasharray: 1;
@@ -496,12 +463,13 @@
     opacity: 0;
 }
 
+/* Centred on the wax (427, 500)px; ~1.35× the seal's diameter */
 .seal-pulse {
     position: absolute;
-    left: 50%;
-    top: 57.142857%;
+    left: 50.12%;
+    top: 39.06%;
     z-index: 5;
-    width: 46%;
+    width: 41%;
     aspect-ratio: 1;
     border-radius: 50%;
     translate: -50% -50%;
@@ -527,13 +495,14 @@
     }
 }
 
-/* ---------- "Tap to open" — on the envelope, tucked under the seal ----------
+/* ---------- "Tap to open" — on the envelope, between the seal and the names ----------
    Lives inside .envelope so it is sized/positioned by the envelope (cqw / %) and fades and
-   floats with it. Frosted dark-olive pill, gold caps. The whole stage is tappable; this is the cue. */
+   floats with it. Frosted dark-olive pill, gold caps. The whole stage is tappable; this is the cue.
+   Centred in the gap between the seal (ends ~624px) and the names (start ~722px), like on 01. */
 .intro__open {
     position: absolute;
     left: 50%;
-    top: 69.4%;
+    top: 50.1%;
     z-index: 8;
     translate: -50% 0;
     height: 7.6cqw;
@@ -585,37 +554,7 @@
     }
 }
 
-/* ---------- Skip — quiet, top-right corner (clear of the flap art) ---------- */
-.intro__skip {
-    position: absolute;
-    top: calc(env(safe-area-inset-top, 0px) + 8px);
-    right: 8px;
-    z-index: 4;
-    min-height: 36px;
-    padding: 0 12px;
-    border: 0;
-    background: none;
-    cursor: pointer;
-    font-family: var(--font-caps);
-    font-size: .52rem;
-    letter-spacing: .24em;
-    text-transform: uppercase;
-    color: rgba(246, 233, 196, .7);
-    text-shadow: 0 1px 2px rgba(20, 26, 10, .55);
-    text-decoration: underline;
-    text-decoration-color: rgba(246, 233, 196, .3);
-    text-underline-offset: 3px;
-    opacity: 0;
-    transition: opacity .8s ease .5s;
-}
-
-.intro.is-ready .intro__skip,
-.intro:not(.is-armed) .intro__skip {
-    opacity: 1;
-}
-
-.intro.is-opening .intro__open,
-.intro.is-opening .intro__skip {
+.intro.is-opening .intro__open {
     opacity: 0;
     transition: opacity .45s ease;
     pointer-events: none;

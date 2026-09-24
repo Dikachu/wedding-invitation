@@ -22,7 +22,7 @@
         title: 'Traditional Marriage Ceremony — Chimezie & Richard',
         startUtc: '2026-12-29T12:00:00Z', // 1pm WAT (UTC+1)
         endUtc: '2026-12-29T17:00:00Z', // end time is not on the card — placeholder, confirm with the couple
-        location: 'Udechukwu Memorial School Compound, Mmaku, Awgu, Enugu State, Nigeria',
+        location: 'Udechukwu Memorial School Compound, Iffite Mmaku, Awgu, Enugu State, Nigeria',
         details: 'Together with their families, Chimezie Ekwe and Richard Chidi Chinaka invite you to their ' +
             'Traditional Marriage Ceremony. Your presence will make our day more special.',
     };

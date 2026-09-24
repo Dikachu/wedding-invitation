@@ -1,13 +1,14 @@
 /**
  * intro.js — the envelope opening experience.
  *
- * Flow:  loading → ready (tap to open) → opening timeline → reveal site → cleanup (overlay removed)
+ * Flow:  loading (fonts + envelope art) → ready (tap to open) → opening timeline → reveal site
+ *        → cleanup (overlay removed)
  *
  * Timeline (ms after the tap)                         what happens
  *   0      seal pressed (scale)                        music is silently unlocked (same gesture → autoplay-safe)
  *   260    gold crack glints across the seal           spark burst + tiny haptic tick
  *   640    bottom half of the seal drops away
- *   700    flap opens: outer face 0→90°, liner −90→0°  gold dust pours from the opening
+ *   700    flap opens: outer face 0→90°, liner −90→0°  gold dust pours from the opening, flap shadow fades
  *   850    envelope slides down (full size kept) to make room above it for the card
  *   1800   card rises out of the pocket (slow)
  *   3150   light sheen sweeps the card
@@ -17,15 +18,18 @@
  *   5400   overlay fades out — the home page appears, MUSIC STARTS here
  *   6350   overlay removed, scroll unlocked
  *
- * Robustness: every step is wrapped; any error jumps straight to the site. "Skip animation" and
- * prefers-reduced-motion use a short crossfade. If this file never runs, css/intro.css fades the
- * overlay out on its own after 9 s.
+ * Robustness: every step is wrapped; any error (or envelope art that fails to load) jumps straight to
+ * the site. prefers-reduced-motion uses a short crossfade. If this file never runs, css/intro.css
+ * fades the overlay out on its own after 9 s.
  */
 (function () {
     'use strict';
 
     const TAG = '✉️ [intro]';
     const FONT_TIMEOUT_MS = 2800;
+    /* The envelope is image art (assets/envelope/); show it only once decoded so it never fades in
+       half-drawn. On a very slow connection we stop waiting after this and show what has arrived. */
+    const ART_TIMEOUT_MS = 8000;
 
     /* While it opens the envelope keeps its full (screen-covering) size and only slides down until
        its top edge sits this far down the viewport — that gap is what the card rises into. */
@@ -75,6 +79,7 @@
         scene: byId('intro-scene'),
         envelope: byId('envelope'),
         flap: byId('envelope-flap'),
+        flapShadow: byId('envelope-flap-shadow'),
         liner: byId('envelope-liner'),
         linerShade: byId('envelope-liner-shade'),
         card: byId('envelope-card'),
@@ -84,7 +89,6 @@
         crack: document.querySelector('#seal-crack polyline'),
         openBtn: byId('intro-open'),
         openLabel: byId('intro-open-label'),
-        skipBtn: byId('intro-skip'),
         bloom: byId('intro-bloom'),
     };
 
@@ -156,15 +160,52 @@
         return result;
     }
 
+    /**
+     * Waits until every envelope image is decoded. Resolves 'loaded' | 'timeout', or rejects with the
+     * list of images that failed (the envelope would be missing pieces, so the caller skips the intro).
+     */
+    async function waitForArt() {
+        const images = Array.from(intro.querySelectorAll('img'));
+        const failed = [];
+        const decodes = images.map((img) => {
+            const ready = typeof img.decode === 'function'
+                ? img.decode()
+                : new Promise((resolve, reject) => {
+                    if (img.complete) return img.naturalWidth ? resolve() : reject(new Error('broken image'));
+                    img.addEventListener('load', resolve, { once: true });
+                    img.addEventListener('error', reject, { once: true });
+                });
+            return ready.catch(() => failed.push(img.getAttribute('src')));
+        });
+        const result = await Promise.race([
+            Promise.all(decodes).then(() => 'loaded'),
+            delay(ART_TIMEOUT_MS).then(() => 'timeout'),
+        ]);
+        if (failed.length) throw new Error(`envelope art failed to load: ${failed.join(', ')}`);
+        return result;
+    }
+
     async function prepare() {
         try {
-            const fonts = await waitForFonts();
-            if (fonts === 'timeout') console.warn(`${TAG} ⚠️ fonts still loading after ${FONT_TIMEOUT_MS}ms — continuing with fallbacks.`);
-            else console.info(`${TAG} 🔤 fonts ${fonts}`);
+            const [fonts, art] = await Promise.allSettled([waitForFonts(), waitForArt()]);
+
+            if (fonts.status === 'rejected') console.warn(`${TAG} ⚠️ font readiness check failed — continuing.`, fonts.reason);
+            else if (fonts.value === 'timeout') console.warn(`${TAG} ⚠️ fonts still loading after ${FONT_TIMEOUT_MS}ms — continuing with fallbacks.`);
+            else console.info(`${TAG} 🔤 fonts ${fonts.value}`);
+
+            if (art.status === 'rejected') {
+                console.error(`${TAG} ❌ ${art.reason.message} — showing the invitation without the envelope.`);
+                finish();
+                return;
+            }
+            if (art.value === 'timeout') console.warn(`${TAG} ⚠️ envelope art still loading after ${ART_TIMEOUT_MS}ms — showing it anyway.`);
+            else console.info(`${TAG} 🖼️ envelope art decoded`);
+
+            markReady();
         } catch (err) {
-            console.warn(`${TAG} ⚠️ font readiness check failed — continuing.`, err);
+            console.error(`${TAG} ❌ could not get the envelope ready — showing the invitation directly.`, err);
+            finish();
         }
-        markReady();
     }
 
     function markReady() {
@@ -183,7 +224,7 @@
         console.info(`${TAG} ✅ ready — waiting for the guest to open`);
     }
 
-    function open(mode) {
+    function open() {
         if (state !== 'ready') return;
         state = 'opening';
 
@@ -193,9 +234,9 @@
 
         intro.classList.add('is-opening');
         els.openBtn.disabled = true;
-        console.info(`${TAG} 💌 opening (${mode})`);
+        console.info(`${TAG} 💌 opening`);
 
-        if (mode === 'skip' || reducedMotion || !canAnimate) {
+        if (reducedMotion || !canAnimate) {
             quickReveal();
             return;
         }
@@ -282,6 +323,9 @@
         animate(els.linerShade, [
             { opacity: 1 }, { opacity: 1, offset: 0.5 }, { opacity: 0 },
         ], flapTiming);
+        // the shadow the closed flap cast on the pocket lifts away with it
+        animate(els.flapShadow, [{ opacity: 1 }, { opacity: 0 }],
+            { delay: T.flap, duration: T.flapDur * 0.5, easing: 'ease-out' });
 
         at(T.flap + 380, 'dust-pour', () => {
             const r = els.envelope.getBoundingClientRect();
@@ -339,13 +383,13 @@
         at(T.cleanup, 'cleanup', finish);
     }
 
-    /** Short, motion-light path for "Skip animation", reduced motion, or missing WAAPI. */
+    /** Short, motion-light path for reduced motion, missing WAAPI, or a timeline that failed to start. */
     function quickReveal() {
         timers.forEach(clearTimeout);
         timers.length = 0;
         fx().ambient(false);
         reveal();
-        startMusic(); // still inside the tap for the skip path, so it plays even without unlock()
+        startMusic(); // called from the tap itself, so it plays even without unlock()
 
         if (canAnimate) {
             const fade = intro.animate([{ opacity: 1 }, { opacity: 0 }], { duration: reducedMotion ? 350 : 650, easing: 'ease', fill: 'forwards' });
@@ -400,22 +444,11 @@
     /* ---------------- Events ---------------- */
     els.openBtn.addEventListener('click', (event) => {
         event.stopPropagation();
-        open('tap');
+        open();
     });
 
     // The whole stage is tappable (the envelope is the natural target on phones).
-    intro.addEventListener('click', () => open('tap'));
-
-    els.skipBtn.addEventListener('click', (event) => {
-        event.stopPropagation();
-        if (state === 'ready') open('skip');
-        else if (state === 'opening') quickReveal();
-        else if (state === 'loading') {
-            // Guest is impatient before fonts load — skip straight in (music is still gesture-started).
-            state = 'ready';
-            open('skip');
-        }
-    });
+    intro.addEventListener('click', () => open());
 
     // Never leave a guest stuck: if something throws before we are ready, fall back to the site.
     try {
