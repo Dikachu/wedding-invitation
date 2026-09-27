@@ -1,6 +1,6 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Chimezie and Richard//Traditional Marriage 2026//EN
+PRODID:-//Chimezie and Chidi//Traditional Marriage 2026//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
@@ -8,7 +8,7 @@ UID:traditional-marriage-chimezie-richard-20261229@invitation
 DTSTAMP:20260914T000000Z
 DTSTART:20261229T120000Z
 DTEND:20261229T170000Z
-SUMMARY:Traditional Marriage Ceremony — Chimezie & Richard
+SUMMARY:Traditional Marriage Ceremony — Chimezie & Chidi
 LOCATION:Udechukwu Memorial School Compound\, Iffite Mmaku\, Awgu\,
  Enugu State\, Nigeria
 DESCRIPTION:Together with their families\, Chimezie Ekwe and Richard Chidi 
@@ -18,7 +18,7 @@ STATUS:CONFIRMED
 TRANSP:OPAQUE
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Traditional Marriage Ceremony — Chimezie & Richard (tomorrow 
+DESCRIPTION:Traditional Marriage Ceremony — Chimezie & Chidi (tomorrow
  at 1pm)
 TRIGGER:-P1D
 END:VALARM

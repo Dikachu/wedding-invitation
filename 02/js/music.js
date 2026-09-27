@@ -1,15 +1,14 @@
 /**
- * music.js — background music controller.
+ * music.js — background music controller (no on-screen control: the music simply plays once the
+ * invitation opens).
  *
  * Exposes `window.Wedding.music` with:
  *   unlock()  — MUST be called synchronously inside a user gesture (the "open" tap). Silently
  *               starts-and-pauses the element so browsers that gate playback per element
  *               (iOS/Safari, in-app browsers) will accept a later play() outside any gesture.
- *   play()    — starts the track. Safe outside a gesture once unlock() has run; if it is ever
- *               called first, it still works when invoked inside a gesture.
+ *   play()    — starts the track. Safe outside a gesture once unlock() has run. If the browser
+ *               still blocks it, playback is retried on the guest's next tap anywhere on the page.
  *   pause()
- *   toggle()
- *   showToggle() — reveals the floating play/pause button.
  *
  * Notes
  * - The track has ~0.95 s of leading silence, so the first play starts at START_AT seconds.
@@ -25,37 +24,27 @@
     const TARGET_VOLUME = 0.6;
 
     const audio = document.getElementById('bg-music');
-    const toggleBtn = document.getElementById('music-toggle');
 
     window.Wedding = window.Wedding || {};
 
     if (!audio) {
         console.error(`${TAG} ❌ <audio id="bg-music"> not found — music disabled.`);
-        window.Wedding.music = { unlock() { }, play() { }, pause() { }, toggle() { }, showToggle() { } };
+        window.Wedding.music = { unlock() { }, play() { }, pause() { } };
         return;
     }
 
     let hasStarted = false;
     let isUnlocked = false;
     let pausedByVisibility = false;
+    let retryArmed = false;
 
     audio.volume = TARGET_VOLUME;
 
     audio.addEventListener('error', () => {
         const code = audio.error ? audio.error.code : 'unknown';
         console.error(`${TAG} ❌ could not load ${audio.currentSrc || audio.src} (MediaError code ${code}). Check that assets/music.mp3 exists and is served as audio/mpeg.`);
-        if (toggleBtn) toggleBtn.hidden = true;
     });
     audio.addEventListener('canplaythrough', () => console.info(`${TAG} ✅ buffered and ready`), { once: true });
-    audio.addEventListener('play', () => syncButton(true));
-    audio.addEventListener('pause', () => syncButton(false));
-
-    function syncButton(isPlaying) {
-        if (!toggleBtn) return;
-        toggleBtn.classList.toggle('is-playing', isPlaying);
-        toggleBtn.setAttribute('aria-pressed', String(isPlaying));
-        toggleBtn.setAttribute('aria-label', isPlaying ? 'Pause music' : 'Play music');
-    }
 
     /**
      * Pre-authorise playback from inside a user gesture without making a sound.
@@ -73,11 +62,26 @@
                 attempt.catch(() => { /* AbortError: interrupted by the pause() above — intended */ });
             }
             isUnlocked = true;
-            console.info(`${TAG} 🔓 unlocked by the guest's tap — will start when the invitation is revealed`);
+            console.info(`${TAG} 🔓 unlocked by the guest's tap — will start when the card rises`);
         } catch (err) {
             audio.muted = false;
-            console.warn(`${TAG} ⚠️ could not pre-unlock playback — will still try when revealed:`, err);
+            console.warn(`${TAG} ⚠️ could not pre-unlock playback — will still try when the card rises:`, err);
         }
+    }
+
+    /** Without a music button, a blocked start is retried on the guest's next tap/keypress. */
+    function retryOnNextGesture() {
+        if (retryArmed) return;
+        retryArmed = true;
+        const retry = () => {
+            document.removeEventListener('pointerdown', retry, true);
+            document.removeEventListener('keydown', retry, true);
+            retryArmed = false;
+            console.info(`${TAG} 👆 retrying playback on the guest's tap`);
+            play();
+        };
+        document.addEventListener('pointerdown', retry, true);
+        document.addEventListener('keydown', retry, true);
     }
 
     function play() {
@@ -94,8 +98,8 @@
                     .then(() => console.info(`${TAG} ▶️ playing`))
                     .catch((err) => {
                         // NotAllowedError = called outside a user gesture; AbortError = interrupted by pause().
-                        console.warn(`${TAG} ⚠️ play() was blocked or interrupted: ${err.name} — ${err.message}. The guest can start it with the music button.`);
-                        syncButton(false);
+                        console.warn(`${TAG} ⚠️ play() was blocked or interrupted: ${err.name} — ${err.message}. Will retry on the next tap.`);
+                        if (err.name === 'NotAllowedError') retryOnNextGesture();
                     });
             }
         } catch (err) {
@@ -106,25 +110,6 @@
     function pause() {
         audio.pause();
         console.info(`${TAG} ⏸️ paused`);
-    }
-
-    function toggle() {
-        if (audio.paused) play();
-        else pause();
-    }
-
-    function showToggle() {
-        if (!toggleBtn || audio.error) return;
-        toggleBtn.hidden = false;
-        // Next frame so the transition runs after display changes.
-        requestAnimationFrame(() => toggleBtn.classList.add('is-visible'));
-    }
-
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-            pausedByVisibility = false;
-            toggle();
-        });
     }
 
     document.addEventListener('visibilitychange', () => {
@@ -138,6 +123,6 @@
         }
     });
 
-    window.Wedding.music = { unlock, play, pause, toggle, showToggle };
+    window.Wedding.music = { unlock, play, pause };
     console.info(`${TAG} ✅ controller ready`);
 })();

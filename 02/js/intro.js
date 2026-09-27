@@ -10,12 +10,12 @@
  *   640    bottom half of the seal drops away
  *   700    flap opens: outer face 0→90°, liner −90→0°  gold dust pours from the opening, flap shadow fades
  *   850    envelope slides down (full size kept) to make room above it for the card
- *   1800   card rises out of the pocket (slow)
+ *   1800   card rises out of the pocket (slow)         MUSIC STARTS here
  *   3150   light sheen sweeps the card
  *   3900   camera pushes into the card (slow)
  *   4550   warm bloom fills the screen
  *   5200   site hero entrance starts underneath, petals fall
- *   5400   overlay fades out — the home page appears, MUSIC STARTS here
+ *   5400   overlay fades out — the home page appears
  *   6350   overlay removed, scroll unlocked
  *
  * Robustness: every step is wrapped; any error (or envelope art that fails to load) jumps straight to
@@ -64,7 +64,7 @@
     const main = document.getElementById('main');
     const htmlEl = document.documentElement;
 
-    const music = () => Wedding.music || { unlock() { }, play() { }, showToggle() { } };
+    const music = () => Wedding.music || { unlock() { }, play() { } };
     const fx = () => Wedding.fx || { burst() { }, emit() { }, ambient() { }, stop() { } };
     const enterHero = () => (Wedding.site ? Wedding.site.enterHero() : undefined);
 
@@ -229,7 +229,7 @@
         state = 'opening';
 
         // Must stay synchronous inside the gesture for iOS/Chrome autoplay rules. Nothing is heard
-        // yet — the music itself starts when the home page appears (startMusic at T.fade).
+        // yet — the music itself starts as the card rises (startMusic at T.rise).
         music().unlock();
 
         intro.classList.add('is-opening');
@@ -341,8 +341,9 @@
             { translate: `0 ${camera.shift}px` },
         ], cameraTiming);
 
-        // ...and the card rises out of the pocket
+        // ...and the card rises out of the pocket — the music starts with it
         animate(els.card, [{ transform: 'translateY(0)' }, { transform: `translateY(${(-camera.rise * 100).toFixed(1)}%)` }], riseTiming);
+        at(T.rise, 'music', startMusic);
 
         // 5 — sheen across the card
         animate(els.cardSheen, [{ transform: 'translateX(-130%)' }, { transform: 'translateX(130%)' }],
@@ -374,10 +375,7 @@
         });
 
         // 8 — the overlay fades and the home page comes through: this is when the music starts
-        at(T.fade, 'fade', () => {
-            intro.classList.add('is-closing');
-            startMusic();
-        });
+        at(T.fade, 'fade', () => intro.classList.add('is-closing'));
         animate(intro, [{ opacity: 1 }, { opacity: 0 }], { delay: T.fade, duration: T.fadeDur, easing: 'ease' });
 
         at(T.cleanup, 'cleanup', finish);
@@ -402,14 +400,13 @@
     function reveal() {
         setThemeColor('#F7EEE8');
         enterHero();
-        music().showToggle();
     }
 
-    /** Starts the track once, the moment the guest lands on the home page. */
+    /** Starts the track once — as the card rises out of the envelope (or on any shortcut path). */
     function startMusic() {
         if (musicStarted) return;
         musicStarted = true;
-        console.info(`${TAG} 🎵 home page in view — starting the music`);
+        console.info(`${TAG} 🎵 card rising — starting the music`);
         music().play();
     }
 

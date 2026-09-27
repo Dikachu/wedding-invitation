@@ -10,7 +10,7 @@
  *     Google Calendar (pre-filled event page) · Apple Calendar (.ics prompt) · Outlook (pre-filled) ·
  *     Other apps (downloads the .ics file, e.g. Samsung Calendar).
  *
- * Single source of truth: EVENT below. assets/chimezie-richard-traditional-marriage.ics must match it.
+ * Single source of truth: EVENT below. assets/chimezie-chidi-traditional-marriage.ics must match it.
  * Progressive enhancement: without JS (or without <dialog>) the trigger is a plain link to the .ics.
  */
 (function () {
@@ -19,7 +19,7 @@
     const TAG = '📅 [calendar]';
 
     const EVENT = {
-        title: 'Traditional Marriage Ceremony — Chimezie & Richard',
+        title: 'Traditional Marriage Ceremony — Chimezie & Chidi',
         startUtc: '2026-12-29T12:00:00Z', // 1pm WAT (UTC+1)
         endUtc: '2026-12-29T17:00:00Z', // end time is not on the card — placeholder, confirm with the couple
         location: 'Udechukwu Memorial School Compound, Iffite Mmaku, Awgu, Enugu State, Nigeria',
