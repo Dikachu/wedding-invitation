@@ -374,7 +374,7 @@
             fx().burst({ x: window.innerWidth / 2, y: window.innerHeight * 0.42, count: 26, type: 'dust' });
         });
 
-        // 8 — the overlay fades and the home page comes through: this is when the music starts
+        // 8 — the overlay fades and the home page comes through (the music started with the card rise)
         at(T.fade, 'fade', () => intro.classList.add('is-closing'));
         animate(intro, [{ opacity: 1 }, { opacity: 0 }], { delay: T.fade, duration: T.fadeDur, easing: 'ease' });
 
