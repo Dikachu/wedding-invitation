@@ -1,0 +1,27 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chidimma and Abuchi//Traditional Marriage 2026//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:traditional-marriage-chidimma-abuchi-20261212@invitation
+DTSTAMP:20261109T000000Z
+DTSTART:20261212T090000Z
+DTEND:20261212T150000Z
+SUMMARY:Traditional Marriage Ceremony — Chidimma & Abuchi
+LOCATION:Late Ikechukwu Ejibendu Compound\, Aborji\, Oba\, Idemili South\, 
+ Anambra State\, Nigeria
+DESCRIPTION:The families of Late Sir Ikechukwu Ejibendu and Ugwuosi Edwin (
+ Ozor Onyenamacha) cordially invite you to the traditional marriage of thei
+ r children\, Nr. Chidimma Ejibendu and Barr. Robinson Abuchi Ugwu. Enquiri
+ es: 0803 486 9550.
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Traditional Marriage Ceremony — Chidimma & Abuchi (tomorrow a
+ t 10am)
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

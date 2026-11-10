@@ -1,0 +1,5 @@
+/* Loaded only when JavaScript is disabled: skip the intro, show the invitation. */
+.intro,
+.fx-canvas {
+    display: none !important;
+}

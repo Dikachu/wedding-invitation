@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <!--
+        Security: strict CSP (no inline scripts/styles). Works when opened via file:// in Chromium too.
+        Google Fonts is the only third-party origin. Inline `style=""` attributes are intentionally not used.
+    -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <title>ChiBuchi'26</title>
+    <meta name="description"
+        content="The families of Late Sir Ikechukwu Ejibendu and Ugwuosi Edwin (Ozor Onyenamacha) invite you to the traditional marriage of Nr. Chidimma Ejibendu and Barr. Robinson Abuchi Ugwu — Saturday 12 December 2026, 10am, Aborji, Oba, Anambra State.">
+    <!-- Matches the top of the closed envelope (js/intro.js swaps it to the hero's crimson once open) -->
+    <meta name="theme-color" content="#861320">
+    <meta name="color-scheme" content="light">
+    <meta name="apple-mobile-web-app-title" content="ChiBuchi'26">
+
+    <!-- Social previews (WhatsApp/iMessage need an ABSOLUTE og:image URL) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ChiBuchi'26">
+    <meta property="og:title" content="ChiBuchi'26">
+    <meta property="og:description"
+        content="Saturday 12 December 2026 · 10am · Aborji, Oba, Anambra State. This invitation is exclusively for you.">
+    <meta property="og:url" content="https://chidimma-and-abuchi.vercel.app/">
+    <meta property="og:image" content="https://chidimma-and-abuchi.vercel.app/assets/og-card.jpg">
+    <meta property="og:image:width" content="853">
+    <meta property="og:image:height" content="1280">
+    <meta property="og:image:alt" content="Crimson envelope with a gold C&amp;A wax seal: Igbankwu Chidimma na Abuchi">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ChiBuchi'26">
+    <meta name="twitter:image" content="https://chidimma-and-abuchi.vercel.app/assets/og-card.jpg">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Great+Vibes&amp;display=swap">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/intro.css">
+    <noscript>
+        <link rel="stylesheet" href="css/noscript.css">
+    </noscript>
+
+    <!-- Classic deferred scripts (ES modules are blocked on file:// in Chromium). Order matters. -->
+    <script src="js/music.js" defer></script>
+    <script src="js/fx.js" defer></script>
+    <script src="js/site.js" defer></script>
+    <script src="js/calendar.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/intro.js" defer></script>
+</head>
+
+<body>
+
+    <!-- =====================================================================
+         SVG LIBRARY — gradients, patterns and reusable art symbols drawn from
+         the printed card: ichaka + drum crest, gold key corner, gold fleur,
+         red velvet corners, coral bead strands. Kept out of `display:none`
+         so gradients resolve in every browser.
+         ===================================================================== -->
+    <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <radialGradient id="g-coral" cx=".36" cy=".3" r=".78">
+                <stop offset="0" stop-color="#F9A88A" />
+                <stop offset=".45" stop-color="#DC5F3E" />
+                <stop offset="1" stop-color="#9C301C" />
+            </radialGradient>
+            <linearGradient id="g-brass" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#6E4F1F" />
+                <stop offset=".45" stop-color="#EBD08E" />
+                <stop offset=".7" stop-color="#B38A45" />
+                <stop offset="1" stop-color="#5E4219" />
+            </linearGradient>
+            <linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#F8E6B0" />
+                <stop offset=".45" stop-color="#D6AE5C" />
+                <stop offset=".75" stop-color="#A87F38" />
+                <stop offset="1" stop-color="#EBCB86" />
+            </linearGradient>
+            <linearGradient id="g-velvet" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#B41C31" />
+                <stop offset=".55" stop-color="#8A1322" />
+                <stop offset="1" stop-color="#560915" />
+            </linearGradient>
+            <linearGradient id="g-velvet-sheen" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#FFB3A6" stop-opacity="0" />
+                <stop offset=".5" stop-color="#FFB3A6" stop-opacity=".2" />
+                <stop offset="1" stop-color="#FFB3A6" stop-opacity="0" />
+            </linearGradient>
+            <linearGradient id="g-env-depth" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#120206" stop-opacity="0" />
+                <stop offset=".7" stop-color="#120206" stop-opacity=".5" />
+            </linearGradient>
+
+            <!-- Red velvet (assets/img/velvet.webp, a real fabric photo tinted to the envelope crimson) -->
+            <pattern id="p-velvet" patternUnits="userSpaceOnUse" width="320" height="320">
+                <image href="assets/img/velvet.webp" width="320" height="320" preserveAspectRatio="xMidYMid slice" />
+            </pattern>
+
+            <!-- Envelope liner: deep crimson with a gold diamond lattice -->
+            <pattern id="p-liner" patternUnits="userSpaceOnUse" width="36" height="36">
+                <rect width="36" height="36" fill="#5C0B16" />
+                <path d="M18 5 31 18 18 31 5 18Z" fill="none" stroke="#D9B266" stroke-width="1" opacity=".5" />
+                <path d="M18 12 24 18 18 24 12 18Z" fill="#D9B266" opacity=".3" />
+                <circle cx="0" cy="0" r="1.6" fill="#D9B266" opacity=".55" />
+                <circle cx="36" cy="0" r="1.6" fill="#D9B266" opacity=".55" />
+                <circle cx="0" cy="36" r="1.6" fill="#D9B266" opacity=".55" />
+                <circle cx="36" cy="36" r="1.6" fill="#D9B266" opacity=".55" />
+            </pattern>
+
+            <!-- Red velvet corner outline (anchored top-left; rotated for the other corner) -->
+            <path id="shape-velvet" d="M0 0H300C252 26 176 40 124 92C74 142 44 198 0 262Z" />
+        </defs>
+
+        <!-- Crest from the top of the card: drum between two ichaka, with sparkles -->
+        <symbol id="i-ichaka" viewBox="0 0 200 64">
+            <g fill="currentColor">
+                <path d="M24 13.5 26.3 19.7 32.5 22 26.3 24.3 24 30.5 21.7 24.3 15.5 22 21.7 19.7Z" />
+                <path d="M176 13.5 178.3 19.7 184.5 22 178.3 24.3 176 30.5 173.7 24.3 167.5 22 173.7 19.7Z" />
+            </g>
+            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <!-- left ichaka -->
+                <circle cx="62" cy="24" r="11" fill="currentColor" fill-opacity=".16" stroke-width="1.8" />
+                <path d="M51.6 21Q62 27 72.4 21M51.6 27.6Q62 33.6 72.4 27.6M57 13.6Q53 24 57 34.4M67 13.6Q71 24 67 34.4"
+                    stroke-width=".9" />
+                <path d="M54.4 32.2 42.6 47" stroke-width="3.2" />
+                <circle cx="41" cy="49" r="2.4" fill="currentColor" stroke="none" />
+                <!-- right ichaka -->
+                <circle cx="138" cy="24" r="11" fill="currentColor" fill-opacity=".16" stroke-width="1.8" />
+                <path d="M127.6 21Q138 27 148.4 21M127.6 27.6Q138 33.6 148.4 27.6M133 13.6Q129 24 133 34.4M143 13.6Q147 24 143 34.4"
+                    stroke-width=".9" />
+                <path d="M145.6 32.2 157.4 47" stroke-width="3.2" />
+                <circle cx="159" cy="49" r="2.4" fill="currentColor" stroke="none" />
+                <!-- drum -->
+                <path d="M85 11C86 26 90 38 93 46H107C110 38 114 26 115 11" fill="currentColor" fill-opacity=".16"
+                    stroke-width="1.8" />
+                <ellipse cx="100" cy="11" rx="15" ry="4" stroke-width="1.8" />
+                <path d="M87 24Q100 28.5 113 24M90.6 37Q100 40.5 109.4 37" stroke-width="1.1" />
+                <path d="M92 15 96 45M100 15.5V46M108 15 104 45" stroke-width=".9" opacity=".7" />
+                <path d="M94 46 92 53H108L106 46" stroke-width="1.8" />
+            </g>
+        </symbol>
+
+        <!-- Gold key (meander) corner, like the card's top-right (anchored top-right) -->
+        <symbol id="i-meander" viewBox="0 0 120 120">
+            <g fill="none" stroke="currentColor" stroke-linecap="square">
+                <path d="M0 4H116V120" stroke-width="2.4" />
+                <path d="M0 10.5H109.5V120" stroke-width="1" />
+                <path d="M103 17V56H64V24H96V50H70V30H90V44H76V36H84" stroke-width="2.2" />
+            </g>
+        </symbol>
+
+        <!-- Gold fleur with scrolls (bottom of the card) -->
+        <symbol id="i-fleur" viewBox="0 0 200 40">
+            <g fill="currentColor">
+                <path d="M100 2C105.5 9 106 17 100 25C94 17 94.5 9 100 2Z" />
+                <path d="M100 25C93 19 84 19 82 26C86 24 91 24.5 98 28Z" />
+                <path d="M100 25C107 19 116 19 118 26C114 24 109 24.5 102 28Z" />
+                <rect x="92" y="27.5" width="16" height="3" rx="1.5" />
+                <path d="M100 30.5 96.5 37H103.5Z" />
+                <circle cx="4" cy="30" r="2" />
+                <circle cx="196" cy="30" r="2" />
+            </g>
+            <g fill="none" stroke="currentColor" stroke-linecap="round">
+                <path d="M90 29C78 29 72 22 64 24C57 26 58 34 64 33C68 32.5 67 28 64 28" stroke-width="1.6" />
+                <path d="M110 29C122 29 128 22 136 24C143 26 142 34 136 33C132 32.5 133 28 136 28" stroke-width="1.6" />
+                <path d="M57 30H8M143 30H192" stroke-width="1" />
+            </g>
+        </symbol>
+
+        <!-- Small four-point sparkle (dividers) -->
+        <symbol id="i-sparkle" viewBox="0 0 24 24">
+            <path d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z" fill="currentColor" />
+        </symbol>
+
+        <!-- Icons ------------------------------------------------------------ -->
+        <symbol id="i-calendar" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                <rect x="3" y="5" width="18" height="16" rx="2.2" />
+                <path d="M3 10h18M8 3v4M16 3v4" />
+            </g>
+            <g fill="currentColor">
+                <circle cx="8" cy="14" r="1" />
+                <circle cx="12" cy="14" r="1" />
+                <circle cx="16" cy="14" r="1" />
+                <circle cx="8" cy="17.6" r="1" />
+                <circle cx="12" cy="17.6" r="1" />
+            </g>
+        </symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+                <path d="M12 21.5s-7-6.3-7-11.8a7 7 0 0 1 14 0c0 5.5-7 11.8-7 11.8Z" />
+                <circle cx="12" cy="9.7" r="2.6" />
+            </g>
+        </symbol>
+        <symbol id="i-phone" viewBox="0 0 24 24">
+            <path d="M7.1 3.5h2.6l1.5 4-2.1 1.5a11.5 11.5 0 0 0 5.9 5.9l1.5-2.1 4 1.5v2.6a2 2 0 0 1-2.2 2A16 16 0 0 1 5.1 5.7a2 2 0 0 1 2-2.2Z"
+                fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+            <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24">
+            <path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" />
+        </symbol>
+        <symbol id="i-download" viewBox="0 0 24 24">
+            <path d="M12 4v11m-5-5 5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+        <symbol id="i-chevron-down" viewBox="0 0 24 24">
+            <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </symbol>
+
+        <!-- Red velvet corner with its gold edge (anchored top-left) -->
+        <symbol id="art-velvet" viewBox="0 0 300 300">
+            <use href="#shape-velvet" fill="url(#g-velvet)" />
+            <use href="#shape-velvet" fill="url(#p-velvet)" opacity=".85" />
+            <path d="M0 0H190C150 30 96 62 0 150Z" fill="url(#g-velvet-sheen)" />
+            <path d="M300 0C252 26 176 40 124 92C74 142 44 198 0 262" fill="none" stroke="url(#g-gold)"
+                stroke-width="5" />
+            <path d="M300 12C256 38 184 52 134 102C86 150 56 206 12 274" fill="none" stroke="url(#g-gold)"
+                stroke-width="1.3" opacity=".9" />
+        </symbol>
+
+        <!-- Coral bead strands with brass spacers (anchored bottom-left) -->
+        <symbol id="art-beads" viewBox="0 0 320 320">
+            <g>
+                <circle cx="-6.0" cy="96.0" r="6.2" fill="url(#g-coral)" />
+                <circle cx="-1.4" cy="108.8" r="6.2" fill="url(#g-coral)" />
+                <circle cx="3.7" cy="121.5" r="6.2" fill="url(#g-coral)" />
+                <circle cx="9.2" cy="133.9" r="6.2" fill="url(#g-coral)" />
+                <circle cx="15.2" cy="146.2" r="6.2" fill="url(#g-coral)" />
+                <circle cx="21.6" cy="158.2" r="6.2" fill="url(#g-coral)" />
+                <rect x="25.0" y="166.2" width="7" height="7.6" rx="1.6" transform="rotate(58 28.5 170.0)"
+                    fill="url(#g-brass)" />
+                <circle cx="35.7" cy="181.6" r="6.2" fill="url(#g-coral)" />
+                <circle cx="43.4" cy="192.8" r="6.2" fill="url(#g-coral)" />
+                <circle cx="51.6" cy="203.8" r="6.2" fill="url(#g-coral)" />
+                <circle cx="60.1" cy="214.4" r="6.2" fill="url(#g-coral)" />
+                <circle cx="69.0" cy="224.7" r="6.2" fill="url(#g-coral)" />
+                <rect x="74.8" y="230.9" width="7" height="7.6" rx="1.6" transform="rotate(45 78.3 234.7)"
+                    fill="url(#g-brass)" />
+                <circle cx="87.9" cy="244.4" r="6.2" fill="url(#g-coral)" />
+                <circle cx="97.9" cy="253.7" r="6.2" fill="url(#g-coral)" />
+                <circle cx="108.2" cy="262.7" r="6.2" fill="url(#g-coral)" />
+                <circle cx="118.8" cy="271.3" r="6.2" fill="url(#g-coral)" />
+                <circle cx="129.6" cy="279.5" r="6.2" fill="url(#g-coral)" />
+                <rect x="137.2" y="283.6" width="7" height="7.6" rx="1.6" transform="rotate(34 140.7 287.4)"
+                    fill="url(#g-brass)" />
+                <circle cx="152.1" cy="295.0" r="6.2" fill="url(#g-coral)" />
+                <circle cx="163.7" cy="302.2" r="6.2" fill="url(#g-coral)" />
+            </g>
+            <g>
+                <circle cx="-6.0" cy="168.0" r="4.6" fill="url(#g-coral)" />
+                <circle cx="-1.9" cy="177.4" r="4.6" fill="url(#g-coral)" />
+                <circle cx="2.5" cy="186.6" r="4.6" fill="url(#g-coral)" />
+                <circle cx="7.2" cy="195.7" r="4.6" fill="url(#g-coral)" />
+                <circle cx="12.1" cy="204.7" r="4.6" fill="url(#g-coral)" />
+                <circle cx="17.4" cy="213.5" r="4.6" fill="url(#g-coral)" />
+                <rect x="20.2" y="219.2" width="5.4" height="5.8" rx="1.6" transform="rotate(55 22.9 222.1)"
+                    fill="url(#g-brass)" />
+                <circle cx="28.7" cy="230.5" r="4.6" fill="url(#g-coral)" />
+                <circle cx="34.8" cy="238.7" r="4.6" fill="url(#g-coral)" />
+                <circle cx="41.2" cy="246.7" r="4.6" fill="url(#g-coral)" />
+                <circle cx="47.8" cy="254.4" r="4.6" fill="url(#g-coral)" />
+                <circle cx="54.8" cy="261.9" r="4.6" fill="url(#g-coral)" />
+                <rect x="59.4" y="266.2" width="5.4" height="5.8" rx="1.6" transform="rotate(42 62.1 269.1)"
+                    fill="url(#g-brass)" />
+                <circle cx="69.6" cy="276.0" r="4.6" fill="url(#g-coral)" />
+                <circle cx="77.4" cy="282.5" r="4.6" fill="url(#g-coral)" />
+                <circle cx="85.5" cy="288.8" r="4.6" fill="url(#g-coral)" />
+                <circle cx="93.8" cy="294.7" r="4.6" fill="url(#g-coral)" />
+                <circle cx="102.4" cy="300.3" r="4.6" fill="url(#g-coral)" />
+            </g>
+        </symbol>
+    </svg>
+
+    <!-- =====================================================================
+         INTRO — crimson envelope (02's envelope art recoloured: crimson paper,
+         gold foil, gold C&A wax seal) cut into layers in assets/envelope/ so it
+         opens with 02's animation. Removed from the DOM once opened. If JS
+         never runs, css/intro.css fades it out automatically.
+         ===================================================================== -->
+    <div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-label">
+        <p class="sr-only" id="intro-label">Invitation to the traditional marriage of Nr. Chidimma Ejibendu and
+            Barr. Robinson Abuchi Ugwu. Press the button to open.</p>
+
+        <div class="intro__backdrop" aria-hidden="true">
+            <span class="intro__glow"></span>
+            <svg class="intro__corner intro__corner--tr">
+                <use href="#i-meander" />
+            </svg>
+            <svg class="intro__corner intro__corner--bl">
+                <use href="#i-meander" />
+            </svg>
+        </div>
+
+        <div class="intro__scene" id="intro-scene">
+            <div class="envelope" id="envelope">
+                <div class="envelope__float" id="envelope-float" aria-hidden="true">
+
+                    <!-- 1. Inside of the envelope (liner visible through the opening) -->
+                    <svg class="envelope__back" viewBox="0 0 500 750" preserveAspectRatio="none">
+                        <rect width="500" height="750" rx="12" fill="url(#p-liner)" />
+                        <rect width="500" height="750" rx="12" fill="url(#g-env-depth)" />
+                    </svg>
+
+                    <!-- 2. Inner face of the flap (shown after the flap passes 90°). Same outline as
+                         assets/envelope/flap.webp mirrored (853 = art width, 606 = flap depth). -->
+                    <div class="envelope__liner" id="envelope-liner">
+                        <svg viewBox="0 0 853 606" preserveAspectRatio="none">
+                            <path d="M0 606V271.1L349.5 16.7C375.4-2.1 479.6-7.7 508.5 13.9L853 270.6V606Z"
+                                fill="#8A1422" />
+                            <path d="M22 598V282.3L362.5 34.5C380.2 21.6 475.3 16.6 495.4 31.5L831 281.6V598Z"
+                                fill="url(#p-liner)" />
+                            <path d="M22 598V282.3L362.5 34.5C380.2 21.6 475.3 16.6 495.4 31.5L831 281.6V598Z"
+                                fill="none" stroke="#D9B266" stroke-width="3" opacity=".75" />
+                        </svg>
+                        <span class="envelope__liner-shade" id="envelope-liner-shade"></span>
+                    </div>
+
+                    <!-- 3. The invitation card tucked inside (a miniature of the printed card) -->
+                    <div class="envelope__card" id="envelope-card">
+                        <svg class="mini-card__velvet mini-card__velvet--tl">
+                            <use href="#art-velvet" />
+                        </svg>
+                        <svg class="mini-card__velvet mini-card__velvet--br">
+                            <use href="#art-velvet" />
+                        </svg>
+                        <div class="mini-card">
+                            <svg class="mini-card__crest">
+                                <use href="#i-ichaka" />
+                            </svg>
+                            <p class="mini-card__caps">Igba Nkwu</p>
+                            <p class="mini-card__name">Chidimma</p>
+                            <p class="mini-card__and">and</p>
+                            <p class="mini-card__name">Abuchi</p>
+                            <p class="mini-card__date">12 · 12 · 2026</p>
+                        </div>
+                        <span class="envelope__card-sheen" id="envelope-card-sheen"></span>
+                    </div>
+
+                    <!-- 4. Front pocket: IGBANKWU CHIDIMMA NA ABUCHI + "this invitation is exclusively for you" -->
+                    <div class="envelope__pocket">
+                        <img class="envelope__art" src="assets/envelope/pocket.webp" alt="" width="853" height="1280"
+                            fetchpriority="high" draggable="false">
+                        <!-- light sweeping across the gold names (masked by assets/envelope/names-foil.png) -->
+                        <span class="envelope__foil"></span>
+                    </div>
+
+                    <!-- 4b. Shadow the closed flap casts on the pocket (fades as the flap lifts) -->
+                    <img class="envelope__art envelope__flap-shadow" id="envelope-flap-shadow"
+                        src="assets/envelope/flap-shadow.webp" alt="" width="853" height="1280" draggable="false">
+
+                    <!-- 5. Outer flap (carries the top half of the seal) -->
+                    <div class="envelope__flap" id="envelope-flap">
+                        <img class="envelope__art" src="assets/envelope/flap.webp" alt="" width="853" height="1280"
+                            fetchpriority="high" draggable="false">
+                        <div class="seal seal--top" id="seal-top">
+                            <img src="assets/envelope/seal.webp" alt="" width="298" height="288" draggable="false">
+                        </div>
+                    </div>
+
+                    <!-- 6. Bottom half of the seal + crack glint (viewBox = the seal image, 298x288) -->
+                    <div class="seal seal--bottom" id="seal-bottom">
+                        <img src="assets/envelope/seal.webp" alt="" width="298" height="288" draggable="false">
+                    </div>
+                    <div class="seal seal--crack" id="seal-crack">
+                        <svg viewBox="0 0 298 288">
+                            <polyline points="18,141 45,130 77,147 110,127 143,144 176,124 209,143 241,128 272,136"
+                                pathLength="1" />
+                        </svg>
+                    </div>
+                    <span class="seal-pulse" id="seal-pulse"></span>
+                </div>
+
+                <!-- Sits on the envelope between the seal and the names (the whole stage is tappable too) -->
+                <button class="intro__open" id="intro-open" type="button" disabled>
+                    <span class="intro__open-label" id="intro-open-label">Preparing your invitation…</span>
+                </button>
+            </div>
+        </div>
+
+        <span class="intro__bloom" id="intro-bloom" aria-hidden="true"></span>
+    </div>
+
+    <!-- Card-inspired side bands framing the whole site (crimson with a gold rule) -->
+    <div class="frame" aria-hidden="true">
+        <span class="frame__band frame__band--left"></span>
+        <span class="frame__band frame__band--right"></span>
+    </div>
+
+    <!-- ===== NAV (revealed once the invitation is open) ===== -->
+    <header class="site-nav" id="site-nav" hidden>
+        <a class="site-nav__mark" href="#top" aria-label="Back to top">
+            <span class="script">C</span><span class="site-nav__amp">&amp;</span><span class="script">A</span>
+        </a>
+        <nav class="site-nav__links" aria-label="Sections">
+            <a href="#invitation">Invitation</a>
+            <a href="#story">Story</a>
+            <a href="#ceremony">Ceremony</a>
+            <a href="#dress-code">Dress Code</a>
+            <a href="#save-the-date">Save the Date</a>
+            <a href="#venue">Venue</a>
+            <a href="#faqs">FAQs</a>
+        </nav>
+        <button class="site-nav__toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu"
+            aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <dialog class="nav-menu" id="nav-menu" aria-label="Sections">
+        <div class="nav-menu__panel">
+            <button class="nav-menu__close" id="nav-close" type="button" aria-label="Close menu">
+                <svg aria-hidden="true">
+                    <use href="#i-close" />
+                </svg>
+            </button>
+            <svg class="nav-menu__crest" aria-hidden="true">
+                <use href="#i-ichaka" />
+            </svg>
+            <nav class="nav-menu__list" aria-label="Sections">
+                <a href="#invitation">Invitation</a>
+                <a href="#story">Our Story</a>
+                <a href="#ceremony">The Ceremony</a>
+                <a href="#dress-code">Dress Code</a>
+                <a href="#save-the-date">Save the Date</a>
+                <a href="#venue">Venue</a>
+                <a href="#faqs">Questions</a>
+            </nav>
+            <p class="nav-menu__date">12 · 12 · 2026</p>
+        </div>
+    </dialog>
+
+    <main id="main">
+
+        <!-- ===== HERO (photo: coral beads on red silk) ===== -->
+        <section class="hero" id="top" aria-labelledby="hero-title">
+            <div class="hero__art" aria-hidden="true">
+                <svg class="hero__corner hero__corner--tr">
+                    <use href="#i-meander" />
+                </svg>
+                <svg class="hero__corner hero__corner--bl">
+                    <use href="#i-meander" />
+                </svg>
+            </div>
+
+            <div class="hero__content">
+                <p class="caps hero__eyebrow" data-hero>Igba Nkwu · Traditional Marriage</p>
+
+                <h1 class="hero__names" id="hero-title">
+                    <span class="script hero__name" data-hero data-write>Chidimma</span>
+                    <span class="and-divider hero__and" data-hero>
+                        <span class="and-divider__line"></span>
+                        <span class="and-divider__badge">and</span>
+                        <span class="and-divider__line and-divider__line--flip"></span>
+                    </span>
+                    <span class="script hero__name" data-hero data-write>Abuchi</span>
+                </h1>
+
+                <svg class="hero__crest" data-hero aria-hidden="true">
+                    <use href="#i-ichaka" />
+                </svg>
+
+                <p class="hero__date" data-hero>
+                    <span class="hero__date-main">Saturday, 12 December 2026</span>
+                    <span class="hero__date-sub">10am · Aborji, Oba</span>
+                </p>
+
+                <a class="hero__cue" href="#invitation" data-hero>
+                    <span>Read the invitation</span>
+                    <svg aria-hidden="true">
+                        <use href="#i-chevron-down" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== INVITATION (the printed card, verbatim — venue LGA/State corrected) ===== -->
+        <section class="section invitation" id="invitation" aria-labelledby="invitation-title">
+            <article class="paper-card" data-reveal>
+                <svg class="paper-card__velvet paper-card__velvet--tl" aria-hidden="true">
+                    <use href="#art-velvet" />
+                </svg>
+                <svg class="paper-card__velvet paper-card__velvet--br" aria-hidden="true">
+                    <use href="#art-velvet" />
+                </svg>
+                <svg class="paper-card__key" aria-hidden="true">
+                    <use href="#i-meander" />
+                </svg>
+                <svg class="paper-card__beads" aria-hidden="true">
+                    <use href="#art-beads" />
+                </svg>
+                <span class="paper-card__sheen" aria-hidden="true"></span>
+
+                <div class="paper-card__inner">
+                    <svg class="paper-card__crest" aria-hidden="true">
+                        <use href="#i-ichaka" />
+                    </svg>
+
+                    <h2 class="sr-only" id="invitation-title">The invitation</h2>
+                    <p class="card-italic">The families of</p>
+
+                    <div class="family">
+                        <p class="family__name">Late Sir Ikechukwu Ejibendu</p>
+                        <p class="family__home">of Aborji, Oba&nbsp;· Idemili&nbsp;South&nbsp;L.G.A&nbsp;· Anambra&nbsp;State</p>
+                    </div>
+
+                    <p class="card-and" aria-hidden="true"><span>And</span></p>
+                    <p class="sr-only">and</p>
+
+                    <div class="family">
+                        <p class="family__name">Ugwuosi Edwin</p>
+                        <p class="family__title">(Ozor Onyenamacha)</p>
+                        <p class="family__home">of Ochima&nbsp;· Igbo&nbsp;Etiti&nbsp;L.G.A&nbsp;· Enugu&nbsp;State</p>
+                    </div>
+
+                    <p class="card-invite">
+                        <span class="card-invite__lead">Cordially invite you</span>
+                        <span>to the traditional marriage ceremony of their children</span>
+                    </p>
+
+                    <p class="script couple__name">Nr. Chidimma Ejibendu</p>
+                    <p class="card-and card-and--lines" aria-hidden="true"><span>And</span></p>
+                    <p class="sr-only">and</p>
+                    <p class="script couple__name">Barr. Robinson Abuchi Ugwu</p>
+
+                    <dl class="details">
+                        <div class="details__item">
+                            <dt>
+                                <span class="details__icon" aria-hidden="true"><svg>
+                                        <use href="#i-calendar" />
+                                    </svg></span>
+                                <span>Date</span>
+                            </dt>
+                            <dd>Saturday, 12th December 2026<span class="details__sub">10am</span></dd>
+                        </div>
+                        <div class="details__item">
+                            <dt>
+                                <span class="details__icon" aria-hidden="true"><svg>
+                                        <use href="#i-pin" />
+                                    </svg></span>
+                                <span>Venue</span>
+                            </dt>
+                            <dd>At Late Ikechukwu Ejibendu Compound, Aborji, Oba, Idemili&nbsp;South&nbsp;L.G.A,
+                                Anambra&nbsp;State.</dd>
+                        </div>
+                        <div class="details__item">
+                            <dt>
+                                <span class="details__icon" aria-hidden="true"><svg>
+                                        <use href="#i-phone" />
+                                    </svg></span>
+                                <span>Phone</span>
+                            </dt>
+                            <dd><a href="tel:+2348034869550">0803 486 9550</a></dd>
+                        </div>
+                    </dl>
+
+                    <svg class="paper-card__fleur" aria-hidden="true">
+                        <use href="#i-fleur" />
+                    </svg>
+                </div>
+            </article>
+        </section>
+
+        <!-- ===== OUR STORY — two homes, one family ===== -->
+        <section class="section story" id="story" aria-labelledby="story-title">
+            <p class="caps caps--gold" data-reveal>Our Story</p>
+            <h2 class="script section-script section-script--light" id="story-title" data-reveal>Two homes, one family
+            </h2>
+
+            <div class="journey" data-reveal>
+                <div class="journey__place">
+                    <svg class="journey__pin" aria-hidden="true">
+                        <use href="#i-pin" />
+                    </svg>
+                    <p class="journey__name">Chidimma</p>
+                    <p class="journey__home">Aborji, Oba<br>Idemili&nbsp;South&nbsp;L.G.A&nbsp;· Anambra&nbsp;State</p>
+                </div>
+
+                <div class="journey__join" aria-hidden="true">
+                    <span class="journey__line"></span>
+                    <svg class="journey__spark">
+                        <use href="#i-sparkle" />
+                    </svg>
+                    <span class="journey__line"></span>
+                </div>
+
+                <div class="journey__place">
+                    <svg class="journey__pin" aria-hidden="true">
+                        <use href="#i-pin" />
+                    </svg>
+                    <p class="journey__name">Abuchi</p>
+                    <p class="journey__home">Ochima<br>Igbo&nbsp;Etiti&nbsp;L.G.A&nbsp;· Enugu&nbsp;State</p>
+                </div>
+            </div>
+
+            <p class="story__closing" data-reveal>On the 12th of December, two families become one.</p>
+        </section>
+
+        <!-- ===== THE CEREMONY ===== -->
+        <section class="section ceremony" id="ceremony" aria-labelledby="ceremony-title">
+            <p class="caps caps--red" data-reveal>The Ceremony</p>
+            <h2 class="script section-script" id="ceremony-title" data-reveal>Igba Nkwu</h2>
+            <p class="ceremony__lead" data-reveal>The wine carrying · from 10am</p>
+
+            <ol class="rites">
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">I</span>
+                    <div class="rite__body">
+                        <h3>Arrival &amp; Welcome</h3>
+                        <p>Guests are received and seated.</p>
+                    </div>
+                </li>
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">II</span>
+                    <div class="rite__body">
+                        <h3>Breaking of Kola <span class="rite__igbo">Iwa ọjị</span></h3>
+                        <p>The elders bless the gathering.</p>
+                    </div>
+                </li>
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">III</span>
+                    <div class="rite__body">
+                        <h3>Introduction of Families</h3>
+                        <p>Both families are formally presented.</p>
+                    </div>
+                </li>
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">IV</span>
+                    <div class="rite__body">
+                        <h3>Presentation of Wine &amp; Gifts</h3>
+                        <p>The customary items are brought forward.</p>
+                    </div>
+                </li>
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">V</span>
+                    <div class="rite__body">
+                        <h3>The Bride's Entrance</h3>
+                        <p>Chidimma is led in by her maidens.</p>
+                    </div>
+                </li>
+                <li class="rite rite--moment" data-reveal>
+                    <span class="rite__num" aria-hidden="true">VI</span>
+                    <div class="rite__body">
+                        <h3>The Wine Carrying <span class="rite__igbo">Igba Nkwu</span></h3>
+                        <p>She searches for Abuchi, and kneels to offer him the palm wine.</p>
+                    </div>
+                </li>
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">VII</span>
+                    <div class="rite__body">
+                        <h3>Blessing of the Couple</h3>
+                        <p>Elders pray over the new union.</p>
+                    </div>
+                </li>
+                <li class="rite" data-reveal>
+                    <span class="rite__num" aria-hidden="true">VIII</span>
+                    <div class="rite__body">
+                        <h3>Feasting &amp; Celebration</h3>
+                        <p>Music, dancing and a shared meal.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <!-- ===== DRESS CODE (real fabric swatches) ===== -->
+        <section class="section dress" id="dress-code" aria-labelledby="dress-title">
+            <p class="caps caps--red" data-reveal>Dress Code</p>
+            <h2 class="script section-script" id="dress-title" data-reveal>Wear our colours</h2>
+
+            <div class="swatches" data-reveal>
+                <figure class="swatch">
+                    <span class="swatch__dot swatch__dot--red"></span>
+                    <figcaption class="swatch__name">Royal Red</figcaption>
+                </figure>
+                <figure class="swatch">
+                    <span class="swatch__dot swatch__dot--gold"></span>
+                    <figcaption class="swatch__name">Gold</figcaption>
+                </figure>
+                <figure class="swatch">
+                    <span class="swatch__dot swatch__dot--ivory"></span>
+                    <figcaption class="swatch__name">Ivory</figcaption>
+                </figure>
+            </div>
+
+            <p class="dress__note" data-reveal>Traditional attire, warmly encouraged.</p>
+        </section>
+
+        <!-- ===== SAVE THE DATE ===== -->
+        <section class="section save-date" id="save-the-date" aria-labelledby="save-date-title">
+            <p class="caps caps--gold" data-reveal>Counting down to</p>
+            <h2 class="script section-script section-script--light" id="save-date-title" data-reveal>Save the Date</h2>
+
+            <div class="date-lockup" data-reveal>
+                <span class="date-lockup__side">Saturday</span>
+                <span class="date-lockup__day">12</span>
+                <span class="date-lockup__side">December</span>
+            </div>
+            <p class="date-lockup__year" data-reveal>2026 · 10am</p>
+
+            <div class="countdown" id="countdown" role="timer" aria-label="Time remaining until the ceremony"
+                data-reveal>
+                <div class="countdown__item"><span class="countdown__num" data-unit="days">--</span><span
+                        class="countdown__label">Days</span></div>
+                <div class="countdown__item"><span class="countdown__num" data-unit="hours">--</span><span
+                        class="countdown__label">Hours</span></div>
+                <div class="countdown__item"><span class="countdown__num" data-unit="minutes">--</span><span
+                        class="countdown__label">Minutes</span></div>
+                <div class="countdown__item"><span class="countdown__num" data-unit="seconds">--</span><span
+                        class="countdown__label">Seconds</span></div>
+            </div>
+            <p class="countdown__done" id="countdown-done" hidden></p>
+
+            <div class="btn-row" data-reveal>
+                <!-- Without JS this falls back to the .ics file; js/calendar.js turns it into a calendar chooser -->
+                <a class="btn btn--gold" id="add-to-calendar" href="assets/chidimma-abuchi-traditional-marriage.ics"
+                    aria-haspopup="dialog" aria-controls="calendar-sheet">
+                    <svg aria-hidden="true">
+                        <use href="#i-calendar" />
+                    </svg>
+                    <span>Add to Calendar</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== VENUE ===== -->
+        <section class="section venue" id="venue" aria-labelledby="venue-title">
+            <div class="venue__inner">
+                <div class="venue__pin" data-reveal aria-hidden="true">
+                    <span class="venue__ring"></span>
+                    <span class="venue__ring venue__ring--2"></span>
+                    <svg>
+                        <use href="#i-pin" />
+                    </svg>
+                </div>
+                <p class="caps caps--red" data-reveal>The Venue</p>
+                <h2 class="venue__name" id="venue-title" data-reveal>Late Ikechukwu Ejibendu Compound</h2>
+                <p class="venue__area" data-reveal>Aborji, Oba&nbsp;· Idemili&nbsp;South&nbsp;L.G.A&nbsp;· Anambra&nbsp;State</p>
+                <div class="btn-row" data-reveal>
+                    <a class="btn btn--red"
+                        href="https://www.google.com/maps/search/?api=1&amp;query=Aborji%2C%20Oba%2C%20Idemili%20South%2C%20Anambra%20State%2C%20Nigeria"
+                        target="_blank" rel="noopener noreferrer">
+                        <svg aria-hidden="true">
+                            <use href="#i-pin" />
+                        </svg>
+                        <span>Get Directions</span>
+                    </a>
+                    <a class="btn btn--outline" href="tel:+2348034869550">
+                        <svg aria-hidden="true">
+                            <use href="#i-phone" />
+                        </svg>
+                        <span>Call 0803 486 9550</span>
+                    </a>
+                </div>
+                <p class="venue__note" data-reveal>Directions open in Google Maps</p>
+            </div>
+        </section>
+
+        <!-- ===== QUESTIONS ===== -->
+        <section class="section faqs" id="faqs" aria-labelledby="faqs-title">
+            <p class="caps caps--red" data-reveal>Questions</p>
+            <h2 class="script section-script" id="faqs-title" data-reveal>Good to know</h2>
+
+            <div class="faq-list">
+                <div class="faq" data-reveal>
+                    <h3>
+                        <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-1">
+                            <span>What time should I arrive?</span>
+                            <svg class="faq__chevron" aria-hidden="true">
+                                <use href="#i-chevron-down" />
+                            </svg>
+                        </button>
+                    </h3>
+                    <div class="faq__a" id="faq-1" hidden>
+                        <p>Proceedings begin at 10am. Do come a little earlier so you are seated in good time.</p>
+                    </div>
+                </div>
+
+                <div class="faq" data-reveal>
+                    <h3>
+                        <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-2">
+                            <span>Where exactly is the venue?</span>
+                            <svg class="faq__chevron" aria-hidden="true">
+                                <use href="#i-chevron-down" />
+                            </svg>
+                        </button>
+                    </h3>
+                    <div class="faq__a" id="faq-2" hidden>
+                        <p>Late Ikechukwu Ejibendu Compound, Aborji, Oba, Idemili&nbsp;South&nbsp;L.G.A, Anambra&nbsp;State.
+                            <a href="#venue">Get directions</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq" data-reveal>
+                    <h3>
+                        <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-3">
+                            <span>What should I wear?</span>
+                            <svg class="faq__chevron" aria-hidden="true">
+                                <use href="#i-chevron-down" />
+                            </svg>
+                        </button>
+                    </h3>
+                    <div class="faq__a" id="faq-3" hidden>
+                        <p>Traditional attire in our colours: royal red, gold and ivory. <a href="#dress-code">See the
+                                dress code</a>.</p>
+                    </div>
+                </div>
+
+                <div class="faq" data-reveal>
+                    <h3>
+                        <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-4">
+                            <span>Who can I call for directions?</span>
+                            <svg class="faq__chevron" aria-hidden="true">
+                                <use href="#i-chevron-down" />
+                            </svg>
+                        </button>
+                    </h3>
+                    <div class="faq__a" id="faq-4" hidden>
+                        <p>Call <a href="tel:+2348034869550">0803 486 9550</a> and you will be guided in.</p>
+                    </div>
+                </div>
+
+                <div class="faq" data-reveal>
+                    <h3>
+                        <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-5">
+                            <span>What happens after the rites?</span>
+                            <svg class="faq__chevron" aria-hidden="true">
+                                <use href="#i-chevron-down" />
+                            </svg>
+                        </button>
+                    </h3>
+                    <div class="faq__a" id="faq-5" hidden>
+                        <p>The wine carrying is followed by feasting, music and dancing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CLOSING ===== -->
+        <footer class="section closing" aria-label="Closing note">
+            <svg class="closing__corner closing__corner--tr" aria-hidden="true">
+                <use href="#i-meander" />
+            </svg>
+            <svg class="closing__corner closing__corner--bl" aria-hidden="true">
+                <use href="#i-meander" />
+            </svg>
+            <svg class="closing__crest" data-reveal aria-hidden="true">
+                <use href="#i-ichaka" />
+            </svg>
+            <p class="closing__line" data-reveal>We look forward to celebrating with you</p>
+            <p class="script closing__names" data-reveal>Chidimma <span class="closing__amp">&amp;</span> Abuchi</p>
+            <p class="closing__date" data-reveal>12 · 12 · 2026</p>
+            <svg class="closing__fleur" data-reveal aria-hidden="true">
+                <use href="#i-fleur" />
+            </svg>
+            <p class="closing__credit">Photos via <a href="https://www.pexels.com" target="_blank"
+                    rel="noopener noreferrer">Pexels</a></p>
+        </footer>
+    </main>
+
+    <!-- =====================================================================
+         CALENDAR CHOOSER — opened by #add-to-calendar (js/calendar.js).
+         Google/Outlook hrefs are generated from one EVENT config in JS.
+         The .ics file in assets/ must stay in sync with that config.
+         ===================================================================== -->
+    <dialog class="cal-sheet" id="calendar-sheet" aria-labelledby="calendar-sheet-title">
+        <div class="cal-sheet__panel">
+            <span class="cal-sheet__grab" aria-hidden="true"></span>
+            <p class="caps caps--red">Save the date</p>
+            <h2 class="script cal-sheet__title" id="calendar-sheet-title">Add to your calendar</h2>
+            <p class="cal-sheet__event">Saturday, 12 December 2026 · 10am</p>
+
+            <ul class="cal-sheet__list" id="calendar-options">
+                <li data-calendar="google">
+                    <a class="cal-option" data-calendar-link="google" href="https://calendar.google.com/calendar"
+                        target="_blank" rel="noopener noreferrer">
+                        <span class="cal-option__tile cal-option__tile--red" aria-hidden="true">G</span>
+                        <span class="cal-option__text">
+                            <span class="cal-option__name">Google Calendar</span>
+                            <span class="cal-option__hint">Android phones or any browser</span>
+                        </span>
+                        <span class="cal-option__tag">Best for this device</span>
+                        <svg class="cal-option__arrow" aria-hidden="true">
+                            <use href="#i-arrow" />
+                        </svg>
+                    </a>
+                </li>
+                <li data-calendar="apple">
+                    <a class="cal-option" data-calendar-link="apple"
+                        href="assets/chidimma-abuchi-traditional-marriage.ics">
+                        <span class="cal-option__tile cal-option__tile--wine" aria-hidden="true">
+                            <svg>
+                                <use href="#i-calendar" />
+                            </svg>
+                        </span>
+                        <span class="cal-option__text">
+                            <span class="cal-option__name">Apple Calendar</span>
+                            <span class="cal-option__hint">iPhone, iPad or Mac</span>
+                        </span>
+                        <span class="cal-option__tag">Best for this device</span>
+                        <svg class="cal-option__arrow" aria-hidden="true">
+                            <use href="#i-arrow" />
+                        </svg>
+                    </a>
+                </li>
+                <li data-calendar="outlook">
+                    <a class="cal-option" data-calendar-link="outlook" href="https://outlook.live.com/calendar/"
+                        target="_blank" rel="noopener noreferrer">
+                        <span class="cal-option__tile cal-option__tile--gold" aria-hidden="true">O</span>
+                        <span class="cal-option__text">
+                            <span class="cal-option__name">Outlook</span>
+                            <span class="cal-option__hint">Outlook.com or Hotmail</span>
+                        </span>
+                        <span class="cal-option__tag">Best for this device</span>
+                        <svg class="cal-option__arrow" aria-hidden="true">
+                            <use href="#i-arrow" />
+                        </svg>
+                    </a>
+                </li>
+                <li data-calendar="file">
+                    <a class="cal-option" data-calendar-link="file"
+                        href="assets/chidimma-abuchi-traditional-marriage.ics"
+                        download="chidimma-abuchi-traditional-marriage.ics">
+                        <span class="cal-option__tile cal-option__tile--coral" aria-hidden="true">
+                            <svg>
+                                <use href="#i-download" />
+                            </svg>
+                        </span>
+                        <span class="cal-option__text">
+                            <span class="cal-option__name">Other calendar app</span>
+                            <span class="cal-option__hint">Samsung Calendar &amp; others (.ics file)</span>
+                        </span>
+                        <span class="cal-option__tag">Best for this device</span>
+                        <svg class="cal-option__arrow" aria-hidden="true">
+                            <use href="#i-arrow" />
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+
+            <button class="cal-sheet__close" id="calendar-sheet-close" type="button">Close</button>
+        </div>
+    </dialog>
+
+    <audio id="bg-music" src="assets/music.mp3" preload="auto" loop></audio>
+
+    <!-- Gold dust & petals (above the intro, never intercepts taps) -->
+    <canvas class="fx-canvas" id="fx-canvas" aria-hidden="true"></canvas>
+</body>
+
+</html>

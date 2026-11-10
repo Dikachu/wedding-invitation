@@ -1,0 +1,4 @@
+# Local secrets — this repository is public. The Pexels API key in .env is only
+# used locally to download photos; it must never be committed or served.
+.env
+.env.*
