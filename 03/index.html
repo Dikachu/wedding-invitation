@@ -866,8 +866,6 @@
             <svg class="closing__fleur" data-reveal aria-hidden="true">
                 <use href="#i-fleur" />
             </svg>
-            <p class="closing__credit">Photos via <a href="https://www.pexels.com" target="_blank"
-                    rel="noopener noreferrer">Pexels</a></p>
         </footer>
     </main>
 
@@ -954,6 +952,11 @@
             <button class="cal-sheet__close" id="calendar-sheet-close" type="button">Close</button>
         </div>
     </dialog>
+
+    <!-- Floating play/pause control (revealed by js/music.js once the invitation is open) -->
+    <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false" aria-label="Play music" hidden>
+        <span class="music-toggle__bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    </button>
 
     <audio id="bg-music" src="assets/music.mp3" preload="auto" loop></audio>
 
